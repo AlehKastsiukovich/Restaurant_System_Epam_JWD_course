@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -16,7 +18,6 @@ public class ConnectionPool {
 
     private static final int CONNECTION_POOL_CAPACITY = 10;
     private static final String DATABASE_PROPERTIES_FILE_NAME = "database.properties";
-    private static final String DATABASE_PROPERTIES_DRIVER = "db.driver";
     private static final String DATABASE_PROPERTIES_USER = "db.user";
     private static final String DATABASE_PROPERTIES_PASSWORD = "db.password";
     private static final String DATABASE_PROPERTIES_URL = "db.url";
@@ -29,6 +30,7 @@ public class ConnectionPool {
         availableConnections = new LinkedBlockingQueue<>();
         usedConnections = new ArrayList<>();
         dbProperties = new Properties();
+        initializeConnectionPool();
     }
 
     private static class ConnectionPollHolder {
@@ -39,14 +41,20 @@ public class ConnectionPool {
         return ConnectionPollHolder.INSTANCE;
     }
 
-    public void buildConnectionPool() {
+    public void initializeConnectionPool() {
         try {
             dbProperties.load(new FileInputStream(new File(getClass()
                     .getClassLoader()
                     .getResource(DATABASE_PROPERTIES_FILE_NAME).getPath())));
 
-        } catch (IOException e) {
-            e.printStackTrace();
+            String user = dbProperties.getProperty(DATABASE_PROPERTIES_USER);
+            String password = dbProperties.getProperty(DATABASE_PROPERTIES_PASSWORD);
+            String databaseUrl = dbProperties.getProperty(DATABASE_PROPERTIES_URL);
+
+            fillAvailableConnections(databaseUrl, user, password);
+
+        } catch (SQLException | IOException e) {
+            logger.error(e);
         }
     }
 
@@ -56,22 +64,56 @@ public class ConnectionPool {
             connection = availableConnections.take();
             usedConnections.add(connection);
         } catch (InterruptedException e) {
-            logger.warn(e);
+            logger.warn("Can't get this connection", e);
         }
 
         return connection;
     }
 
-    public void releaseConnection(Connection connection) {
+    public void retrieveConnection(Connection connection) {
         if (connection != null) {
             try {
-                if (availableConnections != null)
-                    usedConnections.remove(connection);
-                availableConnections.put(connection);
+                if (usedConnections.remove(connection)) {
+                    availableConnections.put(connection);
+                } else {
+                    logger.warn("Connection doesn't remove from used connections!");
+                }
             } catch (InterruptedException e) {
                 logger.error(e);
             }
+        } else {
+            logger.warn("Enter connection parameter is null!");
         }
     }
 
+    public void closeAllPoolConnections() {
+        closeAvailableConnections();
+        closeUsedConnections();
+    }
+
+    public void closeAvailableConnections() {
+        try {
+            while (!availableConnections.isEmpty()) {
+                availableConnections.take().close();
+            }
+        } catch (SQLException | InterruptedException e) {
+            logger.error("Can't close available connections", e);
+        }
+    }
+
+    public void closeUsedConnections() {
+        try {
+            for (Connection connection : usedConnections) {
+                connection.close();
+            }
+        } catch (SQLException e) {
+            logger.error("Cant't close used connections", e);
+        }
+    }
+
+    private void fillAvailableConnections(String url, String user, String password) throws SQLException {
+        for (int i = 0; i < CONNECTION_POOL_CAPACITY; i++) {
+            availableConnections.add(new ProxyConnection(DriverManager.getConnection(url, user, password)));
+        }
+    }
 }
