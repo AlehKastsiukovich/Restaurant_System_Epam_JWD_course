@@ -30,7 +30,7 @@ public class ConnectionPool {
         availableConnections = new LinkedBlockingQueue<>();
         usedConnections = new ArrayList<>();
         dbProperties = new Properties();
-        initializeConnectionPool(); //throw runtime
+        initializeConnectionPool();
     }
 
     private static class ConnectionPollHolder {
