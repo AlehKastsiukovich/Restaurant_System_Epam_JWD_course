@@ -30,7 +30,7 @@ public class ConnectionPool {
         availableConnections = new LinkedBlockingQueue<>();
         usedConnections = new ArrayList<>();
         dbProperties = new Properties();
-        initializeConnectionPool();
+        initializeConnectionPool(); //throw runtime
     }
 
     private static class ConnectionPollHolder {
@@ -71,18 +71,12 @@ public class ConnectionPool {
     }
 
     public void retrieveConnection(Connection connection) {
-        if (connection != null) {
+        if (connection != null && usedConnections.remove(connection)) {
             try {
-                if (usedConnections.remove(connection)) {
-                    availableConnections.put(connection);
-                } else {
-                    logger.warn("Connection doesn't remove from used connections!");
-                }
+                availableConnections.put(connection);
             } catch (InterruptedException e) {
                 logger.error(e);
             }
-        } else {
-            logger.warn("Enter connection parameter is null!");
         }
     }
 
