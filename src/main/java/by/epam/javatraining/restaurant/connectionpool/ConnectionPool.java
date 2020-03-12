@@ -1,5 +1,6 @@
 package by.epam.javatraining.restaurant.connectionpool;
 
+import com.mysql.cj.jdbc.Driver;
 import org.apache.log4j.Logger;
 import java.io.File;
 import java.io.FileInputStream;
@@ -30,7 +31,6 @@ public class ConnectionPool {
         availableConnections = new LinkedBlockingQueue<>();
         usedConnections = new ArrayList<>();
         dbProperties = new Properties();
-        initializeConnectionPool();
     }
 
     private static class ConnectionPollHolder {
@@ -51,6 +51,8 @@ public class ConnectionPool {
             String password = dbProperties.getProperty(DATABASE_PROPERTIES_PASSWORD);
             String databaseUrl = dbProperties.getProperty(DATABASE_PROPERTIES_URL);
 
+            DriverManager.registerDriver(new Driver());
+
             fillAvailableConnections(databaseUrl, user, password);
 
         } catch (SQLException | IOException e) {
@@ -64,7 +66,7 @@ public class ConnectionPool {
             connection = availableConnections.take();
             usedConnections.add(connection);
         } catch (InterruptedException e) {
-            logger.warn("Can't get this connection", e);
+            logger.warn("Can't get connection", e);
         }
 
         return connection;
@@ -75,7 +77,7 @@ public class ConnectionPool {
             try {
                 availableConnections.put(connection);
             } catch (InterruptedException e) {
-                logger.error(e);
+                logger.error("Can't retrieve", e);
             }
         }
     }
@@ -85,7 +87,7 @@ public class ConnectionPool {
         closeUsedConnections();
     }
 
-    public void closeAvailableConnections() {
+    private void closeAvailableConnections() {
         try {
             while (!availableConnections.isEmpty()) {
                 availableConnections.take().close();
@@ -95,10 +97,11 @@ public class ConnectionPool {
         }
     }
 
-    public void closeUsedConnections() {
+    private void closeUsedConnections() {
         try {
             for (Connection connection : usedConnections) {
-                connection.close();
+                ProxyConnection proxyConnection = (ProxyConnection) connection;
+                proxyConnection.forceClose();
             }
         } catch (SQLException e) {
             logger.error("Cant't close used connections", e);
