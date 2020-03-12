@@ -3,7 +3,7 @@ package by.epam.javatraining.restaurant.entity;
 import java.util.Objects;
 
 public class User {
-    private int id;
+    private int userId;
     private String login;
     private String password;
     private String email;
@@ -16,12 +16,12 @@ public class User {
 
     }
 
-    public int getId() {
-        return id;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getLogin() {
@@ -83,7 +83,7 @@ public class User {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 31 * hash + id;
+        hash = 31 * hash + userId;
         hash = 31 * hash + (login == null ? 0 : login.hashCode());
         hash = 31 * hash + (password == null ? 0 : password.hashCode());
         hash = 31 * hash + (email == null ? 0 : email.hashCode());
@@ -100,7 +100,7 @@ public class User {
         if (this == object) return true;
         if (object == null || getClass() != object.getClass()) return false;
         User user = (User) object;
-        return id == user.id &&
+        return userId == user.userId &&
                 Objects.equals(login, user.login) &&
                 Objects.equals(password, user.password) &&
                 Objects.equals(email, user.email) &&
@@ -113,7 +113,7 @@ public class User {
     @Override
     public String toString() {
         return "User[" +
-                "id =" + id +
+                "id =" + userId +
                 ", login = " + login +
                 ", password = " + password +
                 ", email = " + email +

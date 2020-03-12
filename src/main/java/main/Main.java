@@ -1,8 +1,6 @@
 package main;
 
-import by.epam.javatraining.restaurant.connectionpool.ConnectionPool;
 import by.epam.javatraining.restaurant.entity.User;
-import com.mysql.cj.jdbc.Driver;
 
 import java.sql.*;
 
@@ -16,12 +14,12 @@ public class Main {
         User user = new User();
         User user2 = new User();
 
-        user.setId(1);
+        user.setUserId(1);
         user.setLogin("kaffka");
         user.setPassword("pass");
         user.setEmail("3");
 
-        user2.setId(1);
+        user2.setUserId(1);
         user2.setLogin("kaffka");
         user2.setPassword("pass");
         user.setEmail("4");
