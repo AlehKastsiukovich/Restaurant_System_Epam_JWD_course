@@ -51,7 +51,7 @@ public class ConnectionPool {
             String password = dbProperties.getProperty(DATABASE_PROPERTIES_PASSWORD);
             String databaseUrl = dbProperties.getProperty(DATABASE_PROPERTIES_URL);
 
-            DriverManager.registerDriver(new Driver());
+            //DriverManager.registerDriver(new Driver());
 
             fillAvailableConnections(databaseUrl, user, password);
 
