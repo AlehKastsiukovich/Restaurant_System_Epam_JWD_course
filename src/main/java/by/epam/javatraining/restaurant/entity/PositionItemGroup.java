@@ -46,6 +46,6 @@ public class PositionItemGroup {
 
     @Override
     public String toString() {
-        return "ItemGroup[" + " id =" + groupId + ", login = " + groupName + ']';
+        return "ItemGroup[" + " id =" + groupId + ", groupName = " + groupName + ']';
     }
 }
