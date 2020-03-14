@@ -35,14 +35,14 @@ public class UserDAO implements ModelDAO<User, String> {
 
             while (resultSet.next()) {
                 Role role = new Role();
-                user.setUserId(resultSet.getInt("user_id"));
-                user.setLogin(resultSet.getString("login"));
-                user.setPassword(resultSet.getString("password"));
-                user.setEmail(resultSet.getString("email"));
-                user.setPhoneNumber(resultSet.getString("phone_number"));
-                user.setFirstName(resultSet.getString("first_name"));
-                user.setLastName(resultSet.getString("last_name"));
-                role.setRoleId(resultSet.getInt("role_id"));
+                user.setUserId(resultSet.getInt(DBFields.DB_USER_ID.getValue()));
+                user.setLogin(resultSet.getString(DBFields.DB_USER_LOGIN.getValue()));
+                user.setPassword(resultSet.getString(DBFields.DB_USER_PASSWORD.getValue()));
+                user.setEmail(resultSet.getString(DBFields.DB_USER_EMAIL.getValue()));
+                user.setPhoneNumber(resultSet.getString(DBFields.DB_USER_PHONE_NUMBER.getValue()));
+                user.setFirstName(resultSet.getString(DBFields.DB_USER_FIRST_NAME.getValue()));
+                user.setLastName(resultSet.getString(DBFields.DB_USER_LAST_NAME.getValue()));
+                role.setRoleId(resultSet.getInt(DBFields.DB_USER_ROLE_ID.getValue()));
                 user.setRole(role);
             }
 
