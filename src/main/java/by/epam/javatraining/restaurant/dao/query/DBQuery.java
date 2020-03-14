@@ -5,7 +5,9 @@ public enum DBQuery {
             + " on user.role_id = r.id"
             + " where user.login = ?"),
     GET_ALL_USERS("select * from user inner join user_role r"
-            + " on user.role_id = r.id");
+            + " on user.role_id = r.id"),
+    DELETE_USER("delete from user where user_id = (?) and login = (?) "
+            + "and password = (?)");
 
     private String value;
 

@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface ModelDAO <T, Key> {
 
-    void create(T t);
+    void create(T t) throws DAOException;
 
     T read(Key key) throws DAOException;
 
