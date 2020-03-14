@@ -13,14 +13,16 @@ public class Main {
 
     public static void main(String[] args) throws SQLException, InterruptedException {
         ModelDAO<User, String> dao = new UserDAO();
-        User user = null;
+        List<User> list = null;
         try {
-            user = dao.read("kent");
+            list = dao.getAll();
         } catch (DAOException e) {
             e.printStackTrace();
         }
 
-        System.out.println(user.toString());
+        for (User user : list) {
+            System.out.println(user);
+        }
 //        ConnectionPool pool = ConnectionPool.getInstance();
 //        pool.initializeConnectionPool();
 
