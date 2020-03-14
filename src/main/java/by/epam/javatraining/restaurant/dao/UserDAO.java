@@ -19,32 +19,6 @@ public class UserDAO implements ModelDAO<User, String> {
     private final static  int SECOND_PREPARED_STATEMENT_PARAMETER = 2;
     private final static  int THIRD_PREPARED_STATEMENT_PARAMETER = 3;
 
-    private String query = "insert into user (user_id, login, password, email, "
-            + "phone_number, first_name, last_name, role_id) value ((?), (?), (?), (?), (?), (?), (?), (?))";
-
-    @Override
-    public void create(User user) throws DAOException {
-        ConnectionPool pool = ConnectionPool.getInstance();
-        pool.initializeConnectionPool();
-        Connection connection = pool.getConnection();
-
-        try (PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setInt(1, user.getUserId());
-            statement.setString(2, user.getLogin());
-            statement.setString(3, user.getPassword());
-            statement.setString(4, user.getEmail());
-            statement.setString(5, user.getPhoneNumber());
-            statement.setString(6, user.getFirstName());
-            statement.setString(7, user.getLastName());
-            statement.setInt(8, user.getRole().getRoleId());
-            statement.executeUpdate();
-
-        } catch (SQLException e) {
-            LOGGER.error(e);
-            throw new DAOException(e);
-        }
-    }
-
     @Override
     public User read(String login) throws DAOException {
         User user = null;
@@ -69,8 +43,46 @@ public class UserDAO implements ModelDAO<User, String> {
     }
 
     @Override
-    public void update(User user) {
+    public void create(User user) throws DAOException {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        pool.initializeConnectionPool();
+        Connection connection = pool.getConnection();
 
+        try (PreparedStatement statement = connection.prepareStatement(DBQuery.CREATE_USER.getValue())) {
+            statement.setInt(1, user.getUserId());
+            statement.setString(2, user.getLogin());
+            statement.setString(3, user.getPassword());
+            statement.setString(4, user.getEmail());
+            statement.setString(5, user.getPhoneNumber());
+            statement.setString(6, user.getFirstName());
+            statement.setString(7, user.getLastName());
+            statement.setInt(8, user.getRole().getRoleId());
+            statement.executeUpdate();
+
+        } catch (SQLException e) {
+            LOGGER.error(e);
+            throw new DAOException(e);
+        }
+    }
+
+    @Override
+    public void update(User user) throws DAOException {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        pool.initializeConnectionPool();
+        Connection connection = pool.getConnection();
+
+        try (PreparedStatement statement = connection.prepareStatement(DBQuery.UPDATE_USER.getValue())) {
+            statement.setString(1, user.getPassword());
+            statement.setString(2, user.getEmail());
+            statement.setString(3, user.getPhoneNumber());
+            statement.setInt(4, user.getUserId());
+            statement.setString(5, user.getLogin());
+            statement.executeUpdate();
+
+        } catch (SQLException e) {
+            LOGGER.error(e);
+            throw new DAOException(e);
+        }
     }
 
     @Override
@@ -78,7 +90,6 @@ public class UserDAO implements ModelDAO<User, String> {
         ConnectionPool pool = ConnectionPool.getInstance();
         pool.initializeConnectionPool();
         Connection connection = pool.getConnection();
-        pool.initializeConnectionPool();
 
         try (PreparedStatement statement = connection.prepareStatement(DBQuery.DELETE_USER.getValue())) {
             statement.setInt(FIRST_PREPARED_STATEMENT_PARAMETER, user.getUserId());

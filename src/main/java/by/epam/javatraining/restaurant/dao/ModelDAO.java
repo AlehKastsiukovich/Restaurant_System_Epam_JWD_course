@@ -9,7 +9,7 @@ public interface ModelDAO <T, Key> {
 
     T read(Key key) throws DAOException;
 
-    void update(T t);
+    void update(T t) throws DAOException;
 
     void delete(T t) throws DAOException;
 
