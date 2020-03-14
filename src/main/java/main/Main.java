@@ -13,6 +13,18 @@ public class Main {
 
     public static void main(String[] args) throws SQLException, InterruptedException {
         ModelDAO<User, String> dao = new UserDAO();
+
+        User user = new User();
+        user.setUserId(4);
+        user.setLogin("kaffka3");
+        user.setPassword("kaffka1236");
+
+        try {
+            dao.delete(user);
+        } catch (DAOException e) {
+            e.printStackTrace();
+        }
+
         List<User> list = null;
         try {
             list = dao.getAll();
@@ -20,29 +32,8 @@ public class Main {
             e.printStackTrace();
         }
 
-        for (User user : list) {
-            System.out.println(user);
+        for (User user1 : list) {
+            System.out.println(user1);
         }
-//        ConnectionPool pool = ConnectionPool.getInstance();
-//        pool.initializeConnectionPool();
-
-//
-//        Connection connection = pool.getConnection();
-//
-//        String query = "select * from restaurant_user";
-//        PreparedStatement statement = connection.prepareStatement(query);
-//        ResultSet resultSet = statement.executeQuery();
-//
-//        List<User> list = new ArrayList<>();
-//
-//        while (resultSet.next()) {
-//            User user = new User();
-//            user.setUserId(resultSet.getInt("user_id"));
-//            list.add(user);
-//        }
-//
-//        for (User user : list) {
-//            System.out.println(user.toString());
-//        }
     }
 }

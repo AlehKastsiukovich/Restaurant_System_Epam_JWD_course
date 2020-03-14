@@ -11,7 +11,7 @@ public interface ModelDAO <T, Key> {
 
     void update(T t);
 
-    void delete(T t);
+    void delete(T t) throws DAOException;
 
     List<T> getAll() throws DAOException;
 }

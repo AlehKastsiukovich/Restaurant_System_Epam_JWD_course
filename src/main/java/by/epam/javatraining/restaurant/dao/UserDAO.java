@@ -15,10 +15,11 @@ import java.util.List;
 
 public class UserDAO implements ModelDAO<User, String> {
     private final static Logger LOGGER = Logger.getLogger(UserDAO.class);
-
     private final static  int FIRST_PREPARED_STATEMENT_PARAMETER = 1;
+    private final static  int SECOND_PREPARED_STATEMENT_PARAMETER = 2;
+    private final static  int THIRD_PREPARED_STATEMENT_PARAMETER = 3;
 
-    private final ConnectionPool pool = ConnectionPool.getInstance();
+    private String query = "delete from user where user_id = (?) and login = (?) and password = (?)";
 
     @Override
     public void create(User user) {
@@ -28,6 +29,7 @@ public class UserDAO implements ModelDAO<User, String> {
     @Override
     public User read(String login) throws DAOException {
         User user = null;
+        ConnectionPool pool = ConnectionPool.getInstance();
         pool.initializeConnectionPool();
         Connection connection = pool.getConnection();
 
@@ -53,14 +55,27 @@ public class UserDAO implements ModelDAO<User, String> {
     }
 
     @Override
-    public void delete(User user) {
+    public void delete(User user) throws DAOException {
+        ConnectionPool pool = ConnectionPool.getInstance();
+        pool.initializeConnectionPool();
+        Connection connection = pool.getConnection();
+        pool.initializeConnectionPool();
 
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setInt(FIRST_PREPARED_STATEMENT_PARAMETER, user.getUserId());
+            statement.setString(SECOND_PREPARED_STATEMENT_PARAMETER, user.getLogin());
+            statement.setString(THIRD_PREPARED_STATEMENT_PARAMETER, user.getPassword());
+            statement.executeUpdate();
+
+        } catch (SQLException e) {
+            LOGGER.error(e);
+            throw new DAOException(e);
+        }
     }
 
     @Override
     public List<User> getAll() throws DAOException {
-       List<User> userList = new ArrayList<>();
-
+        List<User> userList = new ArrayList<>();
         ConnectionPool pool = ConnectionPool.getInstance();
         pool.initializeConnectionPool();
         Connection connection = pool.getConnection();
