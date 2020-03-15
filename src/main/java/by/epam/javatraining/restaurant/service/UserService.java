@@ -5,7 +5,7 @@ import by.epam.javatraining.restaurant.exception.ServiceException;
 
 public interface UserService {
 
-    void signIn(String login, String password) throws ServiceException;
+    User signIn(String login, String password) throws ServiceException;
 
     void signOut(User user);
 

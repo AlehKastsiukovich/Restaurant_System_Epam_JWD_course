@@ -1,6 +1,7 @@
-package by.epam.javatraining.restaurant.dao;
+package by.epam.javatraining.restaurant.dao.user;
 
 import by.epam.javatraining.restaurant.connectionpool.ConnectionPool;
+import by.epam.javatraining.restaurant.dao.DBFields;
 import by.epam.javatraining.restaurant.dao.query.DBQuery;
 import by.epam.javatraining.restaurant.entity.Role;
 import by.epam.javatraining.restaurant.entity.User;
