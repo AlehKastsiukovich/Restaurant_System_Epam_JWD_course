@@ -13,8 +13,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDAO implements ModelDAO<User, String> {
-    private final static Logger LOGGER = Logger.getLogger(UserDAO.class);
+public class MySQLUserDAO implements ModelDAO<User, String> {
+    private final static Logger LOGGER = Logger.getLogger(MySQLUserDAO.class);
     private final static  int FIRST_PREPARED_STATEMENT_PARAMETER = 1;
     private final static  int SECOND_PREPARED_STATEMENT_PARAMETER = 2;
     private final static  int THIRD_PREPARED_STATEMENT_PARAMETER = 3;
