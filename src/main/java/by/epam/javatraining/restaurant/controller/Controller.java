@@ -11,12 +11,8 @@ public class Controller extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //PrintWriter writer = response.getWriter();
         String login = request.getParameter("login");
         String password = request.getParameter("password");
-        //writer.println(login);
-        //writer.println(password);
-        //writer.close();
 
         if (login.equals("kaffka")) {
             request.getRequestDispatcher("/adminpage.jsp").forward(request, response);
