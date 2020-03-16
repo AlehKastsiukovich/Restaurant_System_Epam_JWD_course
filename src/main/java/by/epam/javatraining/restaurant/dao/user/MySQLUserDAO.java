@@ -16,7 +16,7 @@ import java.util.List;
 
 public class MySQLUserDAO implements UserDAO {
     private final static Logger LOGGER = Logger.getLogger(MySQLUserDAO.class);
-    
+
     @Override
     public User read(String login) throws DAOException {
         User user = null;
