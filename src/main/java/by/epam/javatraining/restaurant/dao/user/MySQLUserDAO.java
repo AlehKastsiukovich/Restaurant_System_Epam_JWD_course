@@ -16,10 +16,7 @@ import java.util.List;
 
 public class MySQLUserDAO implements UserDAO {
     private final static Logger LOGGER = Logger.getLogger(MySQLUserDAO.class);
-    private final static  int FIRST_PREPARED_STATEMENT_PARAMETER = 1;
-    private final static  int SECOND_PREPARED_STATEMENT_PARAMETER = 2;
-    private final static  int THIRD_PREPARED_STATEMENT_PARAMETER = 3;
-
+    
     @Override
     public User read(String login) throws DAOException {
         User user = null;
@@ -28,7 +25,7 @@ public class MySQLUserDAO implements UserDAO {
         Connection connection = pool.getConnection();
 
         try (PreparedStatement statement = connection.prepareStatement(DBQuery.READ_USER_BY_LOGIN_QUERY.getValue())) {
-            statement.setString(FIRST_PREPARED_STATEMENT_PARAMETER, login);
+            statement.setString(1, login);
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
@@ -93,9 +90,9 @@ public class MySQLUserDAO implements UserDAO {
         Connection connection = pool.getConnection();
 
         try (PreparedStatement statement = connection.prepareStatement(DBQuery.DELETE_USER.getValue())) {
-            statement.setInt(FIRST_PREPARED_STATEMENT_PARAMETER, user.getUserId());
-            statement.setString(SECOND_PREPARED_STATEMENT_PARAMETER, user.getLogin());
-            statement.setString(THIRD_PREPARED_STATEMENT_PARAMETER, user.getPassword());
+            statement.setInt(1, user.getUserId());
+            statement.setString(2, user.getLogin());
+            statement.setString(3, user.getPassword());
             statement.executeUpdate();
 
         } catch (SQLException e) {
