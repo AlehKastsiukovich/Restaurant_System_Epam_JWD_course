@@ -37,7 +37,12 @@ public class RestaurantUserService implements UserService {
     }
 
     @Override
-    public void registration(User user) {
-
+    public void registration(User user) throws ServiceException {
+        try {
+            dao.create(user);
+        } catch (DAOException e) {
+            LOGGER.error(e);
+            throw new ServiceException(e);
+        }
     }
 }

@@ -9,5 +9,7 @@ public interface UserService {
 
     void signOut(User user);
 
-    void registration(User user);
+    void registration(User user) throws ServiceException;
+
+
 }
