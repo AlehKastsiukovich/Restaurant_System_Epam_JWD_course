@@ -20,9 +20,7 @@ public class MySQLUserDAO implements UserDAO {
     @Override
     public User read(String login) throws DAOException {
         User user = null;
-        ConnectionPool pool = ConnectionPool.getInstance();
-        pool.initializeConnectionPool();
-        Connection connection = pool.getConnection();
+        Connection connection = ConnectionPool.getInstance().getConnection();
 
         try (PreparedStatement statement = connection.prepareStatement(DBQuery.READ_USER_BY_LOGIN_QUERY.getValue())) {
             statement.setString(1, login);
@@ -42,9 +40,7 @@ public class MySQLUserDAO implements UserDAO {
 
     @Override
     public void create(User user) throws DAOException {
-        ConnectionPool pool = ConnectionPool.getInstance();
-        pool.initializeConnectionPool();
-        Connection connection = pool.getConnection();
+        Connection connection = ConnectionPool.getInstance().getConnection();
 
         try (PreparedStatement statement = connection.prepareStatement(DBQuery.CREATE_USER.getValue())) {
             statement.setInt(1, user.getUserId());
@@ -65,9 +61,7 @@ public class MySQLUserDAO implements UserDAO {
 
     @Override
     public void update(User user) throws DAOException {
-        ConnectionPool pool = ConnectionPool.getInstance();
-        pool.initializeConnectionPool();
-        Connection connection = pool.getConnection();
+        Connection connection = ConnectionPool.getInstance().getConnection();
 
         try (PreparedStatement statement = connection.prepareStatement(DBQuery.UPDATE_USER.getValue())) {
             statement.setString(1, user.getPassword());
@@ -85,9 +79,7 @@ public class MySQLUserDAO implements UserDAO {
 
     @Override
     public void delete(User user) throws DAOException {
-        ConnectionPool pool = ConnectionPool.getInstance();
-        pool.initializeConnectionPool();
-        Connection connection = pool.getConnection();
+        Connection connection = ConnectionPool.getInstance().getConnection();
 
         try (PreparedStatement statement = connection.prepareStatement(DBQuery.DELETE_USER.getValue())) {
             statement.setInt(1, user.getUserId());
@@ -104,9 +96,7 @@ public class MySQLUserDAO implements UserDAO {
     @Override
     public List<User> getAll() throws DAOException {
         List<User> userList = new ArrayList<>();
-        ConnectionPool pool = ConnectionPool.getInstance();
-        pool.initializeConnectionPool();
-        Connection connection = pool.getConnection();
+        Connection connection = ConnectionPool.getInstance().getConnection();
 
         try (PreparedStatement statement = connection.prepareStatement(DBQuery.GET_ALL_USERS.getValue())) {
             ResultSet resultSet = statement.executeQuery();
