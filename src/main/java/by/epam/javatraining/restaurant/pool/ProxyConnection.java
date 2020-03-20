@@ -1,4 +1,4 @@
-package by.epam.javatraining.restaurant.connectionpool;
+package by.epam.javatraining.restaurant.pool;
 
 import java.sql.*;
 import java.util.Map;

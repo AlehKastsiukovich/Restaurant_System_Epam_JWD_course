@@ -1,12 +1,14 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: AlehKastsiukovich
-  Date: 3/15/2020
-  Time: 7:34 PM
-  To change this template use File | Settings | File Templates.
---%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="s" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<c:set var="language" value="${not empty param.language ? param.language : not empty language ? language : pageContext.request.locale}" scope="session" />
+<%@ page isELIgnored="false" %>
+
+<fmt:setLocale value="${language}" />
+<fmt:setBundle basename="text" />
+
+<html lang="${language}">
 <head>
     <title>Register page</title>
 </head>
@@ -14,27 +16,27 @@
 <form action="Register">
     <table>
         <tr>
-            <td>Login:</td>
+            <td><fmt:message key="label.login" />:</td>
             <td><input type="text" name="login"></td>
         </tr>
         <tr>
-            <td>Name: </td>
+            <td><fmt:message key="label.name" />: </td>
             <td><input type="text" name="name"></td>
         </tr>
         <tr>
-            <td>Phone number:</td>
+            <td><fmt:message key = "label.phoneNumber" />:</td>
             <td><input type="text" name="login"></td>
         </tr>
         <tr>
-            <td>Password:</td>
+            <td><fmt:message key="label.password" />:</td>
             <td><input type="password" name="password"></td>
         </tr>
         <tr>
-            <td>Re-Password:</td>
+            <td><fmt:message key="label.password" />:</td>
             <td><input type="password" name="password_repeat"></td>
         </tr>
         <tr>
-            <td><input type="submit" name="submit" value="Register"></td>
+            <td><input type="submit" name="submit" value= "<fmt:message key="label.register" />"/></td>
         </tr>
     </table>
 </form>

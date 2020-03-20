@@ -7,8 +7,8 @@ import by.epam.javatraining.restaurant.exception.ServiceException;
 import by.epam.javatraining.restaurant.factory.MySQLDAOFactory;
 import org.apache.log4j.Logger;
 
-public class RestaurantUserService implements UserService {
-    private final static Logger LOGGER = Logger.getLogger(RestaurantUserService.class);
+public class UserServiceImpl implements UserService {
+    private final static Logger LOGGER = Logger.getLogger(UserServiceImpl.class);
 
     private UserDAO dao = MySQLDAOFactory.INSTANCE.getUserDAO();
 

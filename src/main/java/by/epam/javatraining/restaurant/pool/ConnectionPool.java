@@ -1,6 +1,5 @@
-package by.epam.javatraining.restaurant.connectionpool;
+package by.epam.javatraining.restaurant.pool;
 
-import com.mysql.cj.jdbc.Driver;
 import org.apache.log4j.Logger;
 import java.io.File;
 import java.io.FileInputStream;
@@ -10,6 +9,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Properties;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -43,9 +43,9 @@ public class ConnectionPool {
 
     public void initializeConnectionPool() {
         try {
-            dbProperties.load(new FileInputStream(new File(getClass()
+            dbProperties.load(new FileInputStream(new File(Objects.requireNonNull(getClass()
                     .getClassLoader()
-                    .getResource(DATABASE_PROPERTIES_FILE_NAME).getPath())));
+                    .getResource(DATABASE_PROPERTIES_FILE_NAME)).getPath())));
 
             String user = dbProperties.getProperty(DATABASE_PROPERTIES_USER);
             String password = dbProperties.getProperty(DATABASE_PROPERTIES_PASSWORD);

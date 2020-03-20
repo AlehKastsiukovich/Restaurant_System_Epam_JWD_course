@@ -66,6 +66,23 @@
             <version>${mysql-connector-java.version}</version>
         </dependency>
 
+<!--        &lt;!&ndash; taglibs-standard-spec-*.jar &ndash;&gt;-->
+<!--        &lt;!&ndash; http://mvnrepository.com/artifact/org.apache.taglibs/taglibs-standard-spec &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.apache.taglibs</groupId>-->
+<!--            <artifactId>taglibs-standard-spec</artifactId>-->
+<!--            <version>1.2.5</version>-->
+<!--        </dependency>-->
+
+<!--        &lt;!&ndash; taglibs-standard-impl-*.jar &ndash;&gt;-->
+<!--        &lt;!&ndash; http://mvnrepository.com/artifact/org.apache.taglibs/taglibs-standard-impl &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.apache.taglibs</groupId>-->
+<!--            <artifactId>taglibs-standard-impl</artifactId>-->
+<!--            <version>1.2.5</version>-->
+<!--        </dependency>-->
+
+
     </dependencies>
 
 </project>
