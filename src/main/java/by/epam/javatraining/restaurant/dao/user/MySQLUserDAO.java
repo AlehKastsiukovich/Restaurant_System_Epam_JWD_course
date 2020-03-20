@@ -1,9 +1,9 @@
 package by.epam.javatraining.restaurant.dao.user;
 
+import by.epam.javatraining.restaurant.builder.UserBuilder;
 import by.epam.javatraining.restaurant.pool.ConnectionPool;
 import by.epam.javatraining.restaurant.dao.DBFields;
 import by.epam.javatraining.restaurant.dao.query.DBQuery;
-import by.epam.javatraining.restaurant.entity.Role;
 import by.epam.javatraining.restaurant.entity.User;
 import by.epam.javatraining.restaurant.exception.DAOException;
 import org.apache.log4j.Logger;
@@ -115,18 +115,14 @@ public class MySQLUserDAO implements UserDAO {
     }
 
     private User buildUser(ResultSet resultSet) throws SQLException {
-        User user = new User();
-        Role role = new Role();
-
-        user.setUserId(resultSet.getInt(DBFields.DB_USER_ID.getValue()));
-        user.setLogin(resultSet.getString(DBFields.DB_USER_LOGIN.getValue()));
-        user.setPassword(resultSet.getString(DBFields.DB_USER_PASSWORD.getValue()));
-        user.setEmail(resultSet.getString(DBFields.DB_USER_EMAIL.getValue()));
-        user.setPhoneNumber(resultSet.getString(DBFields.DB_USER_PHONE_NUMBER.getValue()));
-        user.setFirstName(resultSet.getString(DBFields.DB_USER_FIRST_NAME.getValue()));
-        user.setLastName(resultSet.getString(DBFields.DB_USER_LAST_NAME.getValue()));
-        role.setRoleId(resultSet.getInt(DBFields.DB_USER_ROLE_ID.getValue()));
-        user.setRole(role);
+        User user = new UserBuilder()
+                .buildLogin(resultSet.getString(DBFields.DB_USER_LOGIN.getValue()))
+                .buildPassword(resultSet.getString(DBFields.DB_USER_PASSWORD.getValue()))
+                .buildEmail(resultSet.getString(DBFields.DB_USER_EMAIL.getValue()))
+                .buildPhoneNumber(resultSet.getString(DBFields.DB_USER_PHONE_NUMBER.getValue()))
+                .buildFirstName(resultSet.getString(DBFields.DB_USER_FIRST_NAME.getValue()))
+                .buildLastName(DBFields.DB_USER_LAST_NAME.getValue())
+                .build();
 
         return user;
     }
