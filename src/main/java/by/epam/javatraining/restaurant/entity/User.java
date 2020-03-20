@@ -1,5 +1,7 @@
 package by.epam.javatraining.restaurant.entity;
 
+import by.epam.javatraining.restaurant.builder.UserBuilder;
+
 import java.util.Objects;
 
 public class User {
@@ -13,6 +15,18 @@ public class User {
     private Role role;
 
     public User() {
+    }
+
+    public User(UserBuilder builder) {
+        if (builder != null) {
+            login = builder.getLogin();
+            password = builder.getPassword();
+            email = builder.getEmail();
+            phoneNumber = builder.getPhoneNumber();
+            firstName = builder.getFirstName();
+            lastName = builder.getLastName();
+            role = builder.getRole();
+        }
     }
 
     public int getUserId() {
