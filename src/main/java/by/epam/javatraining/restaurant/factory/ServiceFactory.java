@@ -12,7 +12,7 @@ public enum ServiceFactory {
 
     private final UserService service = new UserServiceImpl();
 
-    public UserService getService() {
+    public UserService getUserService() {
         return service;
     }
 }
