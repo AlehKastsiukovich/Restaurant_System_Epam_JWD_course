@@ -6,7 +6,6 @@ import by.epam.javatraining.restaurant.dao.DBFields;
 import by.epam.javatraining.restaurant.dao.query.DBQuery;
 import by.epam.javatraining.restaurant.entity.User;
 import by.epam.javatraining.restaurant.exception.DAOException;
-import org.apache.log4j.Logger;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MySQLUserDAO implements UserDAO {
-    private final static Logger LOGGER = Logger.getLogger(MySQLUserDAO.class);
 
     @Override
     public User read(String login) throws DAOException {
@@ -31,7 +29,7 @@ public class MySQLUserDAO implements UserDAO {
             }
 
         } catch (SQLException e) {
-            LOGGER.error(e);
+            //LOGGER.error(e);
             throw new DAOException(e);
         }
 
@@ -54,7 +52,7 @@ public class MySQLUserDAO implements UserDAO {
             statement.executeUpdate();
 
         } catch (SQLException e) {
-            LOGGER.error(e);
+            //LOGGER.error(e);
             throw new DAOException(e);
         }
     }
@@ -72,7 +70,7 @@ public class MySQLUserDAO implements UserDAO {
             statement.executeUpdate();
 
         } catch (SQLException e) {
-            LOGGER.error(e);
+            //LOGGER.error(e);
             throw new DAOException(e);
         }
     }
@@ -88,7 +86,7 @@ public class MySQLUserDAO implements UserDAO {
             statement.executeUpdate();
 
         } catch (SQLException e) {
-            LOGGER.error(e);
+            //LOGGER.error(e);
             throw new DAOException(e);
         }
     }
@@ -107,7 +105,7 @@ public class MySQLUserDAO implements UserDAO {
             }
 
         } catch (SQLException e) {
-            LOGGER.error(e);
+            //LOGGER.error(e);
             throw new DAOException(e);
         }
 

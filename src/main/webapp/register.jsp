@@ -13,26 +13,34 @@
     <title>Register page</title>
 </head>
 <body>
-<form action="Register">
+<form action="/controller" method="post">
     <table>
         <tr>
             <td><fmt:message key="label.login" />:</td>
             <td><input type="text" name="login"></td>
         </tr>
         <tr>
-            <td><fmt:message key="label.name" />: </td>
-            <td><input type="text" name="name"></td>
+            <td><fmt:message key="label.firstName" />:</td>
+            <td><input type="text" name="firstName"></td>
+        </tr>
+        <tr>
+            <td><fmt:message key="label.lastName" />:</td>
+            <td><input type="text" name="lastName"></td>
+        </tr>
+        <tr>
+            <td><fmt:message key="label.email" />: </td>
+            <td><input type="text" name="email"></td>
         </tr>
         <tr>
             <td><fmt:message key = "label.phoneNumber" />:</td>
-            <td><input type="text" name="login"></td>
+            <td><input type="text" name="phoneNumber"></td>
         </tr>
         <tr>
             <td><fmt:message key="label.password" />:</td>
             <td><input type="password" name="password"></td>
         </tr>
         <tr>
-            <td><fmt:message key="label.password" />:</td>
+            <td><fmt:message key="label.confirmPassword" />:</td>
             <td><input type="password" name="password_repeat"></td>
         </tr>
         <tr>

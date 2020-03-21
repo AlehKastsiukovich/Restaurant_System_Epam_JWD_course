@@ -20,7 +20,7 @@
         <option value="en" ${language == 'en' ? 'selected' : ''}>English</option>
       </select>
     </form>
-      <form action="" method="get">
+      <form action="/controller" method="get">
         <table>
           <tr>
             <td><fmt:message key="label.login" />: </td>

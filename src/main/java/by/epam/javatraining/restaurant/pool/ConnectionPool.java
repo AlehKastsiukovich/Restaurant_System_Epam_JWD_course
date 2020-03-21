@@ -1,21 +1,20 @@
 package by.epam.javatraining.restaurant.pool;
 
+import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Properties;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 public class ConnectionPool {
-    private static final Logger logger = Logger.getLogger(ConnectionPool.class);
+    private static final Logger LOGGER = LogManager.getLogger(ConnectionPool.class);
 
     private static final int CONNECTION_POOL_CAPACITY = 10;
     private static final String DATABASE_PROPERTIES_FILE_NAME = "database.properties";
@@ -43,20 +42,17 @@ public class ConnectionPool {
 
     public void initializeConnectionPool() {
         try {
-            dbProperties.load(new FileInputStream(new File(Objects.requireNonNull(getClass()
-                    .getClassLoader()
-                    .getResource(DATABASE_PROPERTIES_FILE_NAME)).getPath())));
+            InputStream inputStream = getClass().getClassLoader().getResourceAsStream(DATABASE_PROPERTIES_FILE_NAME);
+            dbProperties.load(inputStream);
 
             String user = dbProperties.getProperty(DATABASE_PROPERTIES_USER);
             String password = dbProperties.getProperty(DATABASE_PROPERTIES_PASSWORD);
             String databaseUrl = dbProperties.getProperty(DATABASE_PROPERTIES_URL);
 
-            //DriverManager.registerDriver(new Driver());
-
             fillAvailableConnections(databaseUrl, user, password);
 
         } catch (SQLException | IOException e) {
-            logger.error(e);
+            LOGGER.error(e);
         }
     }
 
@@ -66,7 +62,7 @@ public class ConnectionPool {
             connection = availableConnections.take();
             usedConnections.add(connection);
         } catch (InterruptedException e) {
-            logger.warn("Can't get connection", e);
+            LOGGER.warn("Can't get connection", e);
         }
 
         return connection;
@@ -77,7 +73,7 @@ public class ConnectionPool {
             try {
                 availableConnections.put(connection);
             } catch (InterruptedException e) {
-                logger.error("Can't retrieve", e);
+                LOGGER.error("Can't retrieve", e);
             }
         }
     }
@@ -93,7 +89,7 @@ public class ConnectionPool {
                 availableConnections.take().close();
             }
         } catch (SQLException | InterruptedException e) {
-            logger.error("Can't close available connections", e);
+            LOGGER.error("Can't close available connections", e);
         }
     }
 
@@ -104,7 +100,7 @@ public class ConnectionPool {
                 proxyConnection.forceClose();
             }
         } catch (SQLException e) {
-            logger.error("Cant't close used connections", e);
+            LOGGER.error("Cant't close used connections", e);
         }
     }
 
