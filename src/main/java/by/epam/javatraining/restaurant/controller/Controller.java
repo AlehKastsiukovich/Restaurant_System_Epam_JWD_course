@@ -22,14 +22,4 @@ public class Controller extends HttpServlet {
         String page = command.execute(request, response);
         request.getRequestDispatcher(page).forward(request, response);
     }
-
-//    @Override
-//    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-//            throws ServletException, IOException {
-//        HttpSession session = request.getSession();
-//        Locale locale = new Locale("en", "US");
-//        session.setAttribute("language", locale);
-//        response.setLocale(locale);
-//        request.getRequestDispatcher("/index.jsp").forward(request, response);
-//    }
 }

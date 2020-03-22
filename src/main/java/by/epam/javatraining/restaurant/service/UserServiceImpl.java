@@ -12,7 +12,7 @@ import java.util.List;
 
 public class UserServiceImpl implements UserService {
     private static final Logger LOGGER = LogManager.getLogger(UserServiceImpl.class);
-    private static final String DATABASE_CONNECTING_ISSUES_MESSAGE = "Issues with connecting to database!";
+    private static final String SERVICE_ISSUES_MESSAGE = "Service data issues!";
 
     private UserDAO dao = MySQLDAOFactory.INSTANCE.getUserDAO();
 
@@ -23,7 +23,7 @@ public class UserServiceImpl implements UserService {
         try {
             user = dao.read(login);
         } catch (DAOException e) {
-            LOGGER.error(DATABASE_CONNECTING_ISSUES_MESSAGE, e);
+            LOGGER.error(SERVICE_ISSUES_MESSAGE, e);
             throw new ServiceException(e);
         }
 
@@ -50,7 +50,7 @@ public class UserServiceImpl implements UserService {
         try {
             dao.create(user);
         } catch (DAOException e) {
-            LOGGER.error(DATABASE_CONNECTING_ISSUES_MESSAGE, e);
+            LOGGER.error(SERVICE_ISSUES_MESSAGE, e);
             throw new ServiceException(e);
         }
     }
@@ -62,7 +62,7 @@ public class UserServiceImpl implements UserService {
         try {
             userList = dao.getAll();
         } catch (DAOException e) {
-            LOGGER.error(DATABASE_CONNECTING_ISSUES_MESSAGE, e);
+            LOGGER.error(SERVICE_ISSUES_MESSAGE, e);
             throw new ServiceException(e);
         }
 
@@ -79,7 +79,7 @@ public class UserServiceImpl implements UserService {
         try {
             dao.delete(user);
         } catch (DAOException e) {
-            LOGGER.error(DATABASE_CONNECTING_ISSUES_MESSAGE, e);
+            LOGGER.error(SERVICE_ISSUES_MESSAGE, e);
             throw new ServiceException(e);
         }
     }

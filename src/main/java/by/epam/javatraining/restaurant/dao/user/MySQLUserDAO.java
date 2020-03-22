@@ -17,6 +17,7 @@ import java.util.List;
 
 public class MySQLUserDAO implements UserDAO {
     private static final Logger LOGGER = LogManager.getLogger(MySQLUserDAO.class);
+    private static final String DAO_ISSUES_MESSAGE = "Issues with connecting to database!";
 
     @Override
     public User read(String login) throws DAOException {
@@ -32,7 +33,7 @@ public class MySQLUserDAO implements UserDAO {
             }
 
         } catch (SQLException e) {
-            LOGGER.error(e);
+            LOGGER.error(DAO_ISSUES_MESSAGE, e);
             throw new DAOException(e);
         }
 
@@ -54,7 +55,7 @@ public class MySQLUserDAO implements UserDAO {
             statement.executeUpdate();
 
         } catch (SQLException e) {
-            LOGGER.error(e);
+            LOGGER.error(DAO_ISSUES_MESSAGE, e);
             throw new DAOException(e);
         }
     }
@@ -72,7 +73,7 @@ public class MySQLUserDAO implements UserDAO {
             statement.executeUpdate();
 
         } catch (SQLException e) {
-            LOGGER.error(e);
+            LOGGER.error(DAO_ISSUES_MESSAGE, e);
             throw new DAOException(e);
         }
     }
@@ -87,7 +88,7 @@ public class MySQLUserDAO implements UserDAO {
             statement.executeUpdate();
 
         } catch (SQLException e) {
-            LOGGER.error(e);
+            LOGGER.error(DAO_ISSUES_MESSAGE, e);
             throw new DAOException(e);
         }
     }
@@ -106,7 +107,7 @@ public class MySQLUserDAO implements UserDAO {
             }
 
         } catch (SQLException e) {
-            LOGGER.error(e);
+            LOGGER.error(DAO_ISSUES_MESSAGE, e);
             throw new DAOException(e);
         }
 
