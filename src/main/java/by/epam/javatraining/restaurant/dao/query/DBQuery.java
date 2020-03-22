@@ -8,8 +8,8 @@ public enum DBQuery {
             + " on user.role_id = r.id"),
     DELETE_USER("delete from user where user_id = (?) and login = (?) "
             + "and password = (?)"),
-    CREATE_USER("insert into user (user_id, login, password, email, "
-            + "phone_number, first_name, last_name, role_id) value ((?), (?), (?), (?), (?), (?), (?), (?))"),
+    CREATE_USER("insert into user (login, password, email, "
+            + "phone_number, first_name, last_name, role_id) value ((?), (?), (?), (?), (?), (?), (?))"),
     UPDATE_USER("update user set password = (?), email = (?), phone_number = (?) "
             + "where user_id = (?) and login = (?)");
 

@@ -6,6 +6,8 @@ import by.epam.javatraining.restaurant.dao.DBFields;
 import by.epam.javatraining.restaurant.dao.query.DBQuery;
 import by.epam.javatraining.restaurant.entity.User;
 import by.epam.javatraining.restaurant.exception.DAOException;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,22 +16,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MySQLUserDAO implements UserDAO {
+    private static final Logger LOGGER = LogManager.getLogger(MySQLUserDAO.class);
 
     @Override
     public User read(String login) throws DAOException {
         User user = null;
-        Connection connection = ConnectionPool.getInstance().getConnection();
 
-        try (PreparedStatement statement = connection.prepareStatement(DBQuery.READ_USER_BY_LOGIN_QUERY.getValue())) {
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(DBQuery.READ_USER_BY_LOGIN_QUERY.getValue())) {
+
             statement.setString(1, login);
             ResultSet resultSet = statement.executeQuery();
-
             while (resultSet.next()) {
                 user = buildUser(resultSet);
             }
 
         } catch (SQLException e) {
-            //LOGGER.error(e);
+            LOGGER.error(e);
             throw new DAOException(e);
         }
 
@@ -38,30 +41,29 @@ public class MySQLUserDAO implements UserDAO {
 
     @Override
     public void create(User user) throws DAOException {
-        Connection connection = ConnectionPool.getInstance().getConnection();
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(DBQuery.CREATE_USER.getValue())) {
 
-        try (PreparedStatement statement = connection.prepareStatement(DBQuery.CREATE_USER.getValue())) {
-            statement.setInt(1, user.getUserId());
-            statement.setString(2, user.getLogin());
-            statement.setString(3, user.getPassword());
-            statement.setString(4, user.getEmail());
-            statement.setString(5, user.getPhoneNumber());
-            statement.setString(6, user.getFirstName());
-            statement.setString(7, user.getLastName());
-            statement.setInt(8, user.getRole().getRoleId());
+            statement.setString(1, user.getLogin());
+            statement.setString(2, user.getPassword());
+            statement.setString(3, user.getEmail());
+            statement.setString(4, user.getPhoneNumber());
+            statement.setString(5, user.getFirstName());
+            statement.setString(6, user.getLastName());
+            statement.setInt(7, user.getRole().getRoleId());
             statement.executeUpdate();
 
         } catch (SQLException e) {
-            //LOGGER.error(e);
+            LOGGER.error(e);
             throw new DAOException(e);
         }
     }
 
     @Override
     public void update(User user) throws DAOException {
-        Connection connection = ConnectionPool.getInstance().getConnection();
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(DBQuery.UPDATE_USER.getValue())) {
 
-        try (PreparedStatement statement = connection.prepareStatement(DBQuery.UPDATE_USER.getValue())) {
             statement.setString(1, user.getPassword());
             statement.setString(2, user.getEmail());
             statement.setString(3, user.getPhoneNumber());
@@ -70,7 +72,7 @@ public class MySQLUserDAO implements UserDAO {
             statement.executeUpdate();
 
         } catch (SQLException e) {
-            //LOGGER.error(e);
+            LOGGER.error(e);
             throw new DAOException(e);
         }
     }
@@ -86,7 +88,7 @@ public class MySQLUserDAO implements UserDAO {
             statement.executeUpdate();
 
         } catch (SQLException e) {
-            //LOGGER.error(e);
+            LOGGER.error(e);
             throw new DAOException(e);
         }
     }
@@ -94,18 +96,18 @@ public class MySQLUserDAO implements UserDAO {
     @Override
     public List<User> getAll() throws DAOException {
         List<User> userList = new ArrayList<>();
-        Connection connection = ConnectionPool.getInstance().getConnection();
 
-        try (PreparedStatement statement = connection.prepareStatement(DBQuery.GET_ALL_USERS.getValue())) {
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(DBQuery.GET_ALL_USERS.getValue())) {
+
             ResultSet resultSet = statement.executeQuery();
-
             while (resultSet.next()) {
                 User user = buildUser(resultSet);
                 userList.add(user);
             }
 
         } catch (SQLException e) {
-            //LOGGER.error(e);
+            LOGGER.error(e);
             throw new DAOException(e);
         }
 

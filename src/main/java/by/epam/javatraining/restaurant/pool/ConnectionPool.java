@@ -21,6 +21,7 @@ public class ConnectionPool {
     private static final String DATABASE_PROPERTIES_USER = "db.user";
     private static final String DATABASE_PROPERTIES_PASSWORD = "db.password";
     private static final String DATABASE_PROPERTIES_URL = "db.url";
+    private static final String DATABASE_PROPERTIES_DRIVER = "db.driver";
 
     private final BlockingQueue<Connection> availableConnections;
     private final List<Connection> usedConnections;
@@ -48,10 +49,13 @@ public class ConnectionPool {
             String user = dbProperties.getProperty(DATABASE_PROPERTIES_USER);
             String password = dbProperties.getProperty(DATABASE_PROPERTIES_PASSWORD);
             String databaseUrl = dbProperties.getProperty(DATABASE_PROPERTIES_URL);
+            String driver = dbProperties.getProperty(DATABASE_PROPERTIES_DRIVER);
+
+            Class.forName(driver);
 
             fillAvailableConnections(databaseUrl, user, password);
 
-        } catch (SQLException | IOException e) {
+        } catch (SQLException | IOException | ClassNotFoundException e) {
             LOGGER.error(e);
         }
     }

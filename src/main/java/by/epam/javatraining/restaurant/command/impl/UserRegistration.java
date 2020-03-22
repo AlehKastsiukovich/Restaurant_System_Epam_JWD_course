@@ -7,7 +7,6 @@ import by.epam.javatraining.restaurant.entity.User;
 import by.epam.javatraining.restaurant.exception.ServiceException;
 import by.epam.javatraining.restaurant.factory.ServiceFactory;
 import by.epam.javatraining.restaurant.service.UserService;
-import by.epam.javatraining.restaurant.service.UserServiceImpl;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;

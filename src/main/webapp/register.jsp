@@ -13,38 +13,44 @@
     <title>Register page</title>
 </head>
 <body>
+
+<script>
+    <%@include file="/js/confirm_password.js"%>
+</script>
+
 <form action="/controller" method="post">
     <table>
         <tr>
-            <td><fmt:message key="label.login" />:</td>
-            <td><input type="text" name="login"></td>
+            <td><fmt:message key="label.login"/>:</td>
+            <td><input type="text" name="login" required></td>
         </tr>
         <tr>
-            <td><fmt:message key="label.firstName" />:</td>
+            <td><fmt:message key="label.firstName"/>:</td>
             <td><input type="text" name="firstName"></td>
         </tr>
         <tr>
-            <td><fmt:message key="label.lastName" />:</td>
+            <td><fmt:message key="label.lastName"/>:</td>
             <td><input type="text" name="lastName"></td>
         </tr>
         <tr>
-            <td><fmt:message key="label.email" />: </td>
-            <td><input type="text" name="email"></td>
+            <td><fmt:message key="label.email"/>:</td>
+            <td><input type="text" name="email" required></td>
         </tr>
         <tr>
-            <td><fmt:message key = "label.phoneNumber" />:</td>
-            <td><input type="text" name="phoneNumber"></td>
+            <td><fmt:message key="label.phoneNumber"/>:</td>
+            <td><input type="text" name="phoneNumber" required></td>
         </tr>
         <tr>
-            <td><fmt:message key="label.password" />:</td>
-            <td><input type="password" name="password"></td>
+            <td><fmt:message key="label.password"/>:</td>
+            <td><input type="password" name="password" id="password" onkeyup='check()' required></td>
         </tr>
         <tr>
-            <td><fmt:message key="label.confirmPassword" />:</td>
-            <td><input type="password" name="password_repeat"></td>
+            <td><fmt:message key="label.confirmPassword"/>:</td>
+            <td><input type="password" name="password_repeat" id="confirm_password" onkeyup='check();' required></td>
+            <td><span id='message'></span></td>
         </tr>
         <tr>
-            <td><input type="submit" name="submit" value= "<fmt:message key="label.register" />"/></td>
+            <td><input type="submit" name="submit" value="<fmt:message key="label.register"/>" id="submit"/></td>
         </tr>
     </table>
 </form>
