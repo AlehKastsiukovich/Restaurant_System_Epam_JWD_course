@@ -2,6 +2,7 @@ package by.epam.javatraining.restaurant.service;
 
 import by.epam.javatraining.restaurant.entity.User;
 import by.epam.javatraining.restaurant.exception.ServiceException;
+import java.util.List;
 
 public interface UserService {
 
@@ -9,5 +10,9 @@ public interface UserService {
 
     void signOut(User user);
 
-    void registration(User user) throws ServiceException;
+    void registerUser(User user) throws ServiceException;
+
+    List<User> getAllUsers() throws ServiceException;
+
+    void deleteUser(User user) throws ServiceException;
 }

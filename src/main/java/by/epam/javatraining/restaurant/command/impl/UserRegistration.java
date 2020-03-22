@@ -21,7 +21,7 @@ public class UserRegistration implements Command {
 
         UserService service = ServiceFactory.INSTANCE.getUserService();
         try {
-            service.registration(user);
+            service.registerUser(user);
         } catch (ServiceException e) {
             LOGGER.error(e);
         }
@@ -30,7 +30,7 @@ public class UserRegistration implements Command {
     }
 
     private User createUserFromRegistrationForm(HttpServletRequest request) {
-        User user = new UserBuilder()
+        return new UserBuilder()
                 .buildLogin(request.getParameter("login"))
                 .buildFirstName(request.getParameter("firstName"))
                 .buildLastName(request.getParameter("lastName"))
@@ -38,7 +38,5 @@ public class UserRegistration implements Command {
                 .buildPhoneNumber(request.getParameter("phoneNumber"))
                 .buildPassword(request.getParameter("password"))
                 .build();
-
-        return user;
     }
 }

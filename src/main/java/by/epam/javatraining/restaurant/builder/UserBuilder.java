@@ -6,6 +6,7 @@ import by.epam.javatraining.restaurant.entity.User;
 public class UserBuilder {
     private static final int DEFAULT_USER_ROLE_ID = 2;
 
+    private int id;
     private String login;
     private String password;
     private String email;
@@ -17,6 +18,11 @@ public class UserBuilder {
     public UserBuilder() {
         role = new Role();
         role.setRoleId(DEFAULT_USER_ROLE_ID);
+    }
+
+    public UserBuilder buildId(int id) {
+        this.id = id;
+        return this;
     }
 
     public UserBuilder buildLogin(String login) {
@@ -80,4 +86,6 @@ public class UserBuilder {
     public Role getRole() {
         return role;
     }
+
+    public Integer getId() { return id; }
 }

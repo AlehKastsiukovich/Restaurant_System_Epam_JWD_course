@@ -19,6 +19,7 @@ public class User {
 
     public User(UserBuilder builder) {
         if (builder != null) {
+            userId = builder.getId();
             login = builder.getLogin();
             password = builder.getPassword();
             email = builder.getEmail();

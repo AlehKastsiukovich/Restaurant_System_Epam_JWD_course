@@ -79,9 +79,8 @@ public class MySQLUserDAO implements UserDAO {
 
     @Override
     public void delete(User user) throws DAOException {
-        Connection connection = ConnectionPool.getInstance().getConnection();
-
-        try (PreparedStatement statement = connection.prepareStatement(DBQuery.DELETE_USER.getValue())) {
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(DBQuery.DELETE_USER.getValue())) {
             statement.setInt(1, user.getUserId());
             statement.setString(2, user.getLogin());
             statement.setString(3, user.getPassword());
@@ -115,7 +114,9 @@ public class MySQLUserDAO implements UserDAO {
     }
 
     private User buildUser(ResultSet resultSet) throws SQLException {
-        User user = new UserBuilder()
+
+        return new UserBuilder()
+                .buildId(resultSet.getInt(DBFields.DB_USER_ID.getValue()))
                 .buildLogin(resultSet.getString(DBFields.DB_USER_LOGIN.getValue()))
                 .buildPassword(resultSet.getString(DBFields.DB_USER_PASSWORD.getValue()))
                 .buildEmail(resultSet.getString(DBFields.DB_USER_EMAIL.getValue()))
@@ -123,7 +124,5 @@ public class MySQLUserDAO implements UserDAO {
                 .buildFirstName(resultSet.getString(DBFields.DB_USER_FIRST_NAME.getValue()))
                 .buildLastName(DBFields.DB_USER_LAST_NAME.getValue())
                 .build();
-
-        return user;
     }
 }

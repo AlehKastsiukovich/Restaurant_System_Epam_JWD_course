@@ -16,28 +16,40 @@ import by.epam.javatraining.restaurant.validator.UserValidator;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 
 
 public class Runner {
 
     public static void main(String[] args) throws SQLException {
-//        ConnectionPool pool = ConnectionPool.getInstance();
-//        pool.initializeConnectionPool();
+        ConnectionPool pool = ConnectionPool.getInstance();
+        pool.initializeConnectionPool();
+//
+//        UserService service = ServiceFactory.INSTANCE.getUserService();
+//        User user = new UserBuilder()
+//                .buildLogin("Name")
+//                .buildPassword("kaffka123")
+//                .buildPhoneNumber("+375292999615")
+//                .buildEmail("hello228@gmail.com")
+//                .buildFirstName("Ян")
+//                .buildLastName("He-HE")
+//                .build();
+//
+//        System.out.println(user.toString());
+//
+//        User user2 = null;
+//
+//        System.out.println(UserValidator.INSTANCE.validateUser(user));
 
-        UserService service = ServiceFactory.INSTANCE.getUserService();
-        User user = new UserBuilder()
-                .buildLogin("Name")
-                .buildPassword("kaffka123")
-                .buildPhoneNumber("+375292999615")
-                .buildEmail("hello228@gmail.com")
-                .buildFirstName("Ян")
-                .buildLastName("He-HE")
-                .build();
+        UserDAO dao = new MySQLUserDAO();
+        User user = null;
+        List<User> list = null;
+        try {
+            list =  dao.getAll();
+        } catch (DAOException e) {
+            e.printStackTrace();
+        }
 
-        System.out.println(user.toString());
-
-        User user2 = null;
-
-        System.out.println(UserValidator.INSTANCE.validateUser(user));
+        System.out.println(list.toString());
     }
 }
