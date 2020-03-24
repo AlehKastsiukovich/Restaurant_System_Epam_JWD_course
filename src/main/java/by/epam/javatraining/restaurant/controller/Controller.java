@@ -13,8 +13,7 @@ public class Controller extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        ConnectionPool pool = ConnectionPool.getInstance();
-        pool.initializeConnectionPool();
+       ConnectionPool.getInstance().initializeConnectionPool();
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

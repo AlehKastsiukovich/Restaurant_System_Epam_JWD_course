@@ -3,7 +3,7 @@ package by.epam.javatraining.restaurant.dao;
 import by.epam.javatraining.restaurant.exception.DAOException;
 import java.util.List;
 
-public interface ModelDAO <T, Key> {
+public interface ModelDAO <T> {
 
     void create(T t) throws DAOException;
 
@@ -11,7 +11,7 @@ public interface ModelDAO <T, Key> {
 
     void delete(T t) throws DAOException;
 
-    T read(Key key) throws DAOException;
+    T readById(int id) throws DAOException;
 
     List<T> getAll() throws DAOException;
 }

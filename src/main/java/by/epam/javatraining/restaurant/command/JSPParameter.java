@@ -1,7 +1,13 @@
 package by.epam.javatraining.restaurant.command;
 
 public enum JSPParameter {
-    COMMAND("command");
+    COMMAND("command"),
+    LOGIN("login"),
+    PASSWORD("password"),
+    FIRST_NAME("firstName"),
+    LAST_NAME("lastName"),
+    PHONE_NUMBER("phoneNumber"),
+    EMAIL("email");
 
     private String value;
 

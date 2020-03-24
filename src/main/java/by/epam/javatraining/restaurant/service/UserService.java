@@ -15,4 +15,10 @@ public interface UserService {
     List<User> getAllUsers() throws ServiceException;
 
     void deleteUser(User user) throws ServiceException;
+
+    User getUserByLogin(String login);
+
+    User getUserByEmail(String login);
+
+    User getUserById(int id);
 }

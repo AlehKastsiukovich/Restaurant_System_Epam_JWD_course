@@ -34,11 +34,11 @@
         </tr>
         <tr>
             <td><fmt:message key="label.email"/>:</td>
-            <td><input type="text" name="email" required></td>
+            <td><input type="email" pattern="^([a-z0-9_\.-]+)@([a-z0-9_\.-]+)\.([a-z\.]{2,6})$" name="email" required></td>
         </tr>
         <tr>
             <td><fmt:message key="label.phoneNumber"/>:</td>
-            <td><input type="text" name="phoneNumber" required></td>
+            <td><input type="text" pattern="^\+375(17|29|33|44)[0-9]{7}$" name="phoneNumber" required></td>
         </tr>
         <tr>
             <td><fmt:message key="label.password"/>:</td>

@@ -12,23 +12,15 @@ import java.util.List;
 
 public class UserServiceImpl implements UserService {
     private static final Logger LOGGER = LogManager.getLogger(UserServiceImpl.class);
-    private static final String SERVICE_ISSUES_MESSAGE = "Service data issues!";
 
     private UserDAO dao = MySQLDAOFactory.INSTANCE.getUserDAO();
 
     @Override
     public User signIn(String login, String password) throws ServiceException {
-        User user = null;
+        User user;
+        user = getUserByLogin(login);
 
-        try {
-            user = dao.read(login);
-        } catch (DAOException e) {
-            LOGGER.error(SERVICE_ISSUES_MESSAGE, e);
-            throw new ServiceException(e);
-        }
-
-        if (!(user != null && login.equals(user.getLogin()) && password.equals(user.getPassword()))) {
-            LOGGER.warn("Wrong password or this user does not exist!");
+        if (!(isUserExist(user) && password.equals(user.getPassword()))) {
             throw new ServiceException();
         }
 
@@ -50,7 +42,7 @@ public class UserServiceImpl implements UserService {
         try {
             dao.create(user);
         } catch (DAOException e) {
-            LOGGER.error(SERVICE_ISSUES_MESSAGE, e);
+            LOGGER.error(e);
             throw new ServiceException(e);
         }
     }
@@ -62,7 +54,7 @@ public class UserServiceImpl implements UserService {
         try {
             userList = dao.getAll();
         } catch (DAOException e) {
-            LOGGER.error(SERVICE_ISSUES_MESSAGE, e);
+            LOGGER.error(e);
             throw new ServiceException(e);
         }
 
@@ -79,8 +71,31 @@ public class UserServiceImpl implements UserService {
         try {
             dao.delete(user);
         } catch (DAOException e) {
-            LOGGER.error(SERVICE_ISSUES_MESSAGE, e);
+            LOGGER.error(e);
             throw new ServiceException(e);
         }
+    }
+
+    public User getUserByLogin(String login) throws ServiceException {
+        User user;
+
+        try {
+            user = dao.readById(login);
+        } catch (DAOException e) {
+            LOGGER.error(e);
+            throw new ServiceException(e);
+        }
+
+        return user;
+    }
+
+    @Override
+    public User getUserByEmail(String login) {
+        return null;
+    }
+
+    @Override
+    public User getUserById(int id) {
+        return null;
     }
 }

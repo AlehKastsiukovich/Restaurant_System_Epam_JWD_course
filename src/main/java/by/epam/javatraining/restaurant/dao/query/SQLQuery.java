@@ -1,9 +1,15 @@
 package by.epam.javatraining.restaurant.dao.query;
 
-public enum DBQuery {
+public enum SQLQuery {
     READ_USER_BY_LOGIN_QUERY("select * from user inner join user_role r"
             + " on user.role_id = r.id"
             + " where user.login = ?"),
+    READ_USER_BY_ID("select * from user inner join user_role r"
+            + " on user.role_id = r.id"
+            + " where user.user_id = ?"),
+    READ_USER_BY_EMAIL("select * from user inner join user_role r"
+            + " on user_role_id = r.id"
+            + " where user.email = ?"),
     GET_ALL_USERS("select * from user inner join user_role r"
             + " on user.role_id = r.id"),
     DELETE_USER("delete from user where user_id = (?) and login = (?) "
@@ -15,7 +21,7 @@ public enum DBQuery {
 
     private String value;
 
-    DBQuery(String value) {
+    SQLQuery(String value) {
         this.value = value;
     }
 
