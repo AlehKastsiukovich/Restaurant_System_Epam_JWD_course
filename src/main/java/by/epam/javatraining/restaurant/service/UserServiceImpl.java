@@ -17,11 +17,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User signIn(String login, String password) throws ServiceException {
-        User user;
-        user = getUserByLogin(login);
+        User user = null;
 
-        if (!(isUserExist(user) && password.equals(user.getPassword()))) {
-            throw new ServiceException();
+        if (UserValidator.INSTANCE.validateLogin(login) && UserValidator.INSTANCE.validatePassword(password)) {
+            user = getUserByLogin(login);
+
+            if (user == null || !password.equals(user.getPassword())) {
+                throw new ServiceException();
+            }
         }
 
         return user;
@@ -36,6 +39,16 @@ public class UserServiceImpl implements UserService {
     public void registerUser(User user) throws ServiceException {
         if (!UserValidator.INSTANCE.validateUser(user)) {
             LOGGER.warn("User parameters set incorrectly");
+            throw new ServiceException();
+        }
+
+        if (isLoginExist(user.getLogin())) {
+            LOGGER.warn("Login is Used");
+            throw new ServiceException();
+        }
+
+        if (isEmailExist(user.getEmail())) {
+            LOGGER.warn("Email is used");
             throw new ServiceException();
         }
 
@@ -80,7 +93,7 @@ public class UserServiceImpl implements UserService {
         User user;
 
         try {
-            user = dao.readById(login);
+            user = dao.readByLogin(login);
         } catch (DAOException e) {
             LOGGER.error(e);
             throw new ServiceException(e);
@@ -90,12 +103,56 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserByEmail(String login) {
-        return null;
+    public User getUserByEmail(String email) throws ServiceException {
+        User user;
+
+        try {
+            user = dao.readByEmail(email);
+        } catch (DAOException e) {
+            LOGGER.error(e);
+            throw new ServiceException(e);
+        }
+
+        return user;
     }
 
     @Override
-    public User getUserById(int id) {
-        return null;
+    public User getUserById(int id) throws ServiceException {
+        User user;
+
+        try {
+            user = dao.readById(id);
+        } catch (DAOException e) {
+            LOGGER.error(e);
+            throw new ServiceException(e);
+        }
+
+        return user;
+    }
+
+    private boolean isLoginExist(String login) throws ServiceException {
+        User user;
+
+        try {
+            user = dao.readByLogin(login);
+        } catch (DAOException e) {
+            LOGGER.warn(e);
+            throw new ServiceException(e);
+        }
+
+        return user != null;
+    }
+
+    private boolean isEmailExist(String email) throws ServiceException {
+        User user;
+
+        try {
+            user = dao.readByEmail(email);
+        } catch (DAOException e) {
+            LOGGER.warn(e);
+            throw new ServiceException(e);
+        }
+
+        return user != null;
     }
 }

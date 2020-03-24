@@ -1,6 +1,7 @@
 package by.epam.javatraining.restaurant.validator;
 
 import by.epam.javatraining.restaurant.entity.User;
+import org.omg.CORBA.PUBLIC_MEMBER;
 
 public enum UserValidator {
 
@@ -21,5 +22,13 @@ public enum UserValidator {
                 && user.getPhoneNumber().matches(PHONE_NUMBER_PATTERN)
                 && (user.getFirstName() == null || user.getFirstName().matches(FIRST_NAME_PATTERN))
                 && (user.getLastName() == null || user.getLastName().matches(LAST_NAME_PATTERN));
+    }
+
+    public boolean validateLogin(String login) {
+        return login != null && login.matches(LOGIN_PATTERN);
+    }
+
+    public boolean validatePassword(String password) {
+        return password != null && password.matches(PASSWORD_PATTERN);
     }
 }

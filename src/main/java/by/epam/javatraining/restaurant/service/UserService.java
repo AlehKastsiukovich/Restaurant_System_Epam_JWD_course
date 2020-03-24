@@ -16,9 +16,9 @@ public interface UserService {
 
     void deleteUser(User user) throws ServiceException;
 
-    User getUserByLogin(String login);
+    User getUserByLogin(String login) throws ServiceException;
 
-    User getUserByEmail(String login);
+    User getUserByEmail(String login) throws ServiceException;
 
-    User getUserById(int id);
+    User getUserById(int id) throws ServiceException;
 }
