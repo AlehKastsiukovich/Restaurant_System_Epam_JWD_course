@@ -17,7 +17,12 @@ public enum SQLQuery {
     CREATE_USER("insert into user (login, password, email, "
             + "phone_number, first_name, last_name, role_id) value ((?), (?), (?), (?), (?), (?), (?))"),
     UPDATE_USER("update user set password = (?), email = (?), phone_number = (?) "
-            + "where user_id = (?) and login = (?)");
+            + "where user_id = (?) and login = (?)"),
+    CREATE_ADDRESS("insert into delivery_address (street, build, apartment)"
+           + " values (?, ?, ?)"),
+    CREATE_ORDER("insert into `order` (order_date, customer_id, total_price,"
+            + " order_status, id_delivery_address) values (?, ?, ?, ?, (select delivery_address_id"
+            + " from delivery_address where street = (?) and build = (?) and apartment = (?)))");
 
     private String value;
 
