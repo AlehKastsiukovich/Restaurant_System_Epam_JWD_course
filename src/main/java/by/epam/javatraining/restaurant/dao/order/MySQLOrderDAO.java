@@ -6,17 +6,15 @@ import by.epam.javatraining.restaurant.exception.DAOException;
 import by.epam.javatraining.restaurant.pool.ConnectionPool;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class MySQLOrderDAO implements OrderDAO {
     private static final Logger LOGGER = LogManager.getLogger(MySQLOrderDAO.class);
 
-    private static final String query = "update `order` set total_price = (?), order_status = (?)" +
-            " where order_id = (?)";
+    private static final String query = "select * from `order` inner join delivery_address da on `order`.id_delivery_address = da.delivery_address_id";
 
     @Override
     public void create(Order order) throws DAOException {
@@ -68,7 +66,23 @@ public class MySQLOrderDAO implements OrderDAO {
 
     @Override
     public List<Order> getAll() throws DAOException {
-        return null;
+        List<Order> orderList = new ArrayList<>();
+
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+        PreparedStatement statement = connection.prepareStatement(query)) {
+
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+
+            }
+
+
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return orderList;
     }
 
     private void createAddress(Order order) throws DAOException {
@@ -84,5 +98,11 @@ public class MySQLOrderDAO implements OrderDAO {
             LOGGER.error(e);
             throw new DAOException(e);
         }
+    }
+
+    private Order buildOrder(ResultSet resultSet) {
+        Order order = new Order();
+
+        return order;
     }
 }

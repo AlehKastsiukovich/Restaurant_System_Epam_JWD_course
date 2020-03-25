@@ -1,5 +1,7 @@
 package by.epam.javatraining.restaurant.entity;
 
+import by.epam.javatraining.restaurant.builder.OrderBuilder;
+
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Objects;
@@ -13,6 +15,15 @@ public class Order {
     private BigDecimal totalPrice;
 
     public Order() {
+    }
+
+    public Order(OrderBuilder builder) {
+        this.orderId = builder.getOrderId();
+        this.customerId = builder.getCustomerId();
+        this.orderStatusId = builder.getOrderStatusId();
+        this.orderDate = builder.getOrderDate();
+        this.deliveryAddress = builder.getDeliveryAddress();
+        this.totalPrice = builder.getTotalPrice();
     }
 
     public int getOrderId() {
