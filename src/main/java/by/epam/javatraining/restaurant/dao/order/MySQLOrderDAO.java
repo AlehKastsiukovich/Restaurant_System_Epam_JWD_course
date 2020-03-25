@@ -1,5 +1,7 @@
 package by.epam.javatraining.restaurant.dao.order;
 
+import by.epam.javatraining.restaurant.builder.OrderBuilder;
+import by.epam.javatraining.restaurant.dao.DBFields;
 import by.epam.javatraining.restaurant.dao.query.SQLQuery;
 import by.epam.javatraining.restaurant.entity.Order;
 import by.epam.javatraining.restaurant.exception.DAOException;
@@ -69,17 +71,17 @@ public class MySQLOrderDAO implements OrderDAO {
         List<Order> orderList = new ArrayList<>();
 
         try (Connection connection = ConnectionPool.getInstance().getConnection();
-        PreparedStatement statement = connection.prepareStatement(query)) {
+             PreparedStatement statement = connection.prepareStatement(query)) {
 
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-
+                Order order = buildOrder(resultSet);
+                orderList.add(order);
             }
 
-
-
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGGER.error(e);
+            throw new DAOException(e);
         }
 
         return orderList;
@@ -100,9 +102,13 @@ public class MySQLOrderDAO implements OrderDAO {
         }
     }
 
-    private Order buildOrder(ResultSet resultSet) {
-        Order order = new Order();
-
-        return order;
+    private Order buildOrder(ResultSet resultSet) throws SQLException {
+        return new OrderBuilder()
+                .buildOrderId(resultSet.getInt(DBFields.DB_ORDER_ID.getValue()))
+                .buildOrderDate(resultSet.getDate(DBFields.DB_ORDER_DATE.getValue()))
+                .buildCustomerId(resultSet.getInt(DBFields.DB_ORDER_CUSTOMER_ID.getValue()))
+                .buildTotalPrice(resultSet.getBigDecimal(DBFields.DB_ORDER_TOTAL_PRICE.getValue()))
+                .buildOrderStatusId(resultSet.getInt(DBFields.DB_ORDER_STATUS.getValue()))
+                .build();
     }
 }
