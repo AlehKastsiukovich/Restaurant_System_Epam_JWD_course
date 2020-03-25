@@ -22,7 +22,9 @@ public enum SQLQuery {
            + " values (?, ?, ?)"),
     CREATE_ORDER("insert into `order` (order_date, customer_id, total_price,"
             + " order_status, id_delivery_address) values (?, ?, ?, ?, (select delivery_address_id"
-            + " from delivery_address where street = (?) and build = (?) and apartment = (?)))");
+            + " from delivery_address where street = (?) and build = (?) and apartment = (?)))"),
+    UPDATE_ORDER("update `order` set total_price = (?), order_status = (?)"
+            + " where order_id = (?)");
 
     private String value;
 

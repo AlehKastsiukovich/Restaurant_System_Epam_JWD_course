@@ -16,21 +16,22 @@ public class Runner {
         ConnectionPool.getInstance().initializeConnectionPool();
 
         Order order = new Order();
-        order.setCustomerId(4);
+        order.setOrderId(4);
+        order.setCustomerId(6);
         order.setOrderDate(new Date());
         order.setOrderStatusId(1);
-        order.setTotalPrice(new BigDecimal(500));
+        order.setTotalPrice(new BigDecimal(300));
 
         DeliveryAddress address = new DeliveryAddress();
-        address.setStreet("The Street");
-        address.setBuildNumber(1000);
+        address.setStreet("The Street grow!");
+        address.setBuildNumber(329);
 
         order.setDeliveryAddress(address);
 
         MySQLOrderDAO dao = new MySQLOrderDAO();
         try {
-            dao.create(order);
-        } catch (ServiceException e) {
+            dao.update(order);
+        } catch (DAOException e) {
             e.printStackTrace();
         }
     }

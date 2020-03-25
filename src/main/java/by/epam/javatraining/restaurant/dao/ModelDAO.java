@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface ModelDAO <T> {
 
-    void create(T t) throws DAOException, ServiceException;
+    void create(T t) throws DAOException;
 
     void update(T t) throws DAOException;
 
