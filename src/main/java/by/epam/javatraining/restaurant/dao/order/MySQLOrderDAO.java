@@ -8,15 +8,12 @@ import by.epam.javatraining.restaurant.exception.DAOException;
 import by.epam.javatraining.restaurant.pool.ConnectionPool;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class MySQLOrderDAO implements OrderDAO {
     private static final Logger LOGGER = LogManager.getLogger(MySQLOrderDAO.class);
-
-    private static final String query = "select * from `order` inner join delivery_address da on `order`.id_delivery_address = da.delivery_address_id";
 
     @Override
     public void create(Order order) throws DAOException {
@@ -58,12 +55,39 @@ public class MySQLOrderDAO implements OrderDAO {
 
     @Override
     public void delete(Order order) throws DAOException {
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(SQLQuery.DELETE_ORDER.getValue())) {
 
+            statement.setInt(1, order.getOrderId());
+            statement.setInt(2, order.getCustomerId());
+            statement.executeUpdate();
+
+        } catch (SQLException e) {
+            LOGGER.error(e);
+            throw new DAOException(e);
+        }
     }
 
     @Override
+
     public Order readById(int id) throws DAOException {
-        return null;
+        Order order = null;
+
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(SQLQuery.READ_ORDER_BY_ID.getValue())) {
+
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                order = buildOrder(resultSet);
+            }
+
+        } catch (SQLException e) {
+            LOGGER.error(e);
+            throw new DAOException(e);
+        }
+
+        return order;
     }
 
     @Override
@@ -71,7 +95,7 @@ public class MySQLOrderDAO implements OrderDAO {
         List<Order> orderList = new ArrayList<>();
 
         try (Connection connection = ConnectionPool.getInstance().getConnection();
-             PreparedStatement statement = connection.prepareStatement(query)) {
+             PreparedStatement statement = connection.prepareStatement(SQLQuery.GET_ALL_ORDERS.getValue())) {
 
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {

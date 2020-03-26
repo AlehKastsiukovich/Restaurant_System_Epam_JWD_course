@@ -1,8 +1,6 @@
 package by.epam.javatraining.restaurant.dao;
 
 import by.epam.javatraining.restaurant.exception.DAOException;
-import by.epam.javatraining.restaurant.exception.ServiceException;
-
 import java.util.List;
 
 public interface ModelDAO <T> {
