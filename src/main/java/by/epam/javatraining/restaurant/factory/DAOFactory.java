@@ -1,7 +1,7 @@
 package by.epam.javatraining.restaurant.factory;
 
-import by.epam.javatraining.restaurant.dao.order.OrderDAO;
-import by.epam.javatraining.restaurant.dao.user.UserDAO;
+import by.epam.javatraining.restaurant.dao.OrderDAO;
+import by.epam.javatraining.restaurant.dao.UserDAO;
 
 public interface DAOFactory {
 

@@ -1,8 +1,9 @@
-package by.epam.javatraining.restaurant.dao.order;
+package by.epam.javatraining.restaurant.dao.impl;
 
 import by.epam.javatraining.restaurant.builder.OrderBuilder;
 import by.epam.javatraining.restaurant.dao.DBFields;
-import by.epam.javatraining.restaurant.dao.query.SQLQuery;
+import by.epam.javatraining.restaurant.dao.OrderDAO;
+import by.epam.javatraining.restaurant.dao.SQLQuery;
 import by.epam.javatraining.restaurant.entity.Order;
 import by.epam.javatraining.restaurant.exception.DAOException;
 import by.epam.javatraining.restaurant.pool.ConnectionPool;
@@ -12,10 +13,21 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MySQLOrderDAO implements OrderDAO {
-    private static final Logger LOGGER = LogManager.getLogger(MySQLOrderDAO.class);
+public class OrderDAOImpl implements OrderDAO {
+    private static final Logger LOGGER = LogManager.getLogger(OrderDAOImpl.class);
 
     private ConnectionPool pool = ConnectionPool.getInstance();
+
+    private OrderDAOImpl() {
+    }
+
+    private static class OrderDAOHolder {
+        private static final OrderDAOImpl INSTANCE = new OrderDAOImpl();
+    }
+
+    public static OrderDAOImpl getInstance() {
+        return OrderDAOHolder.INSTANCE;
+    }
 
     @Override
     public void create(Order order) throws DAOException {

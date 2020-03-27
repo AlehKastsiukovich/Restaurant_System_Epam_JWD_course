@@ -1,9 +1,10 @@
-package by.epam.javatraining.restaurant.dao.user;
+package by.epam.javatraining.restaurant.dao.impl;
 
 import by.epam.javatraining.restaurant.builder.UserBuilder;
+import by.epam.javatraining.restaurant.dao.UserDAO;
 import by.epam.javatraining.restaurant.pool.ConnectionPool;
 import by.epam.javatraining.restaurant.dao.DBFields;
-import by.epam.javatraining.restaurant.dao.query.SQLQuery;
+import by.epam.javatraining.restaurant.dao.SQLQuery;
 import by.epam.javatraining.restaurant.entity.User;
 import by.epam.javatraining.restaurant.exception.DAOException;
 import org.apache.log4j.LogManager;
@@ -15,15 +16,28 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MySQLUserDAO implements UserDAO {
-    private static final Logger LOGGER = LogManager.getLogger(MySQLUserDAO.class);
+public class UserDAOImpl implements UserDAO {
+    private static final Logger LOGGER = LogManager.getLogger(UserDAOImpl.class);
     private static final String DAO_ISSUES_MESSAGE = "Issues with connecting to database!";
+
+    private ConnectionPool pool = ConnectionPool.getInstance();
+
+    private UserDAOImpl() {
+    }
+
+    private static class UserDAOImplHolder {
+        private static final UserDAOImpl INSTANCE = new UserDAOImpl();
+    }
+
+    public static UserDAOImpl getInstance() {
+        return UserDAOImplHolder.INSTANCE;
+    }
 
     @Override
     public User readByLogin(String login) throws DAOException {
         User user = null;
 
-        try (Connection connection = ConnectionPool.getInstance().getConnection();
+        try (Connection connection = pool.getConnection();
              PreparedStatement statement = connection.prepareStatement(SQLQuery.READ_USER_BY_LOGIN_QUERY.getValue())) {
             statement.setString(1, login);
 
@@ -45,7 +59,7 @@ public class MySQLUserDAO implements UserDAO {
     public User readById(int id) throws DAOException {
         User user = null;
 
-        try (Connection connection = ConnectionPool.getInstance().getConnection();
+        try (Connection connection = pool.getConnection();
              PreparedStatement statement = connection.prepareStatement(SQLQuery.READ_USER_BY_ID.getValue())) {
             statement.setInt(1, id);
 
@@ -67,7 +81,7 @@ public class MySQLUserDAO implements UserDAO {
     public User readByEmail(String email) throws DAOException {
         User user = null;
 
-        try (Connection connection = ConnectionPool.getInstance().getConnection();
+        try (Connection connection = pool.getConnection();
              PreparedStatement statement = connection.prepareStatement(SQLQuery.READ_USER_BY_EMAIL.getValue())) {
             statement.setString(1, email);
 
@@ -87,7 +101,7 @@ public class MySQLUserDAO implements UserDAO {
 
     @Override
     public void create(User user) throws DAOException {
-        try (Connection connection = ConnectionPool.getInstance().getConnection();
+        try (Connection connection = pool.getConnection();
              PreparedStatement statement = connection.prepareStatement(SQLQuery.CREATE_USER.getValue())) {
 
             statement.setString(1, user.getLogin());
@@ -107,7 +121,7 @@ public class MySQLUserDAO implements UserDAO {
 
     @Override
     public void update(User user) throws DAOException {
-        try (Connection connection = ConnectionPool.getInstance().getConnection();
+        try (Connection connection = pool.getConnection();
              PreparedStatement statement = connection.prepareStatement(SQLQuery.UPDATE_USER.getValue())) {
 
             statement.setString(1, user.getPassword());
@@ -125,7 +139,7 @@ public class MySQLUserDAO implements UserDAO {
 
     @Override
     public void delete(User user) throws DAOException {
-        try (Connection connection = ConnectionPool.getInstance().getConnection();
+        try (Connection connection = pool.getConnection();
              PreparedStatement statement = connection.prepareStatement(SQLQuery.DELETE_USER.getValue())) {
             statement.setInt(1, user.getUserId());
             statement.setString(2, user.getLogin());
@@ -142,7 +156,7 @@ public class MySQLUserDAO implements UserDAO {
     public List<User> getAll() throws DAOException {
         List<User> userList = new ArrayList<>();
 
-        try (Connection connection = ConnectionPool.getInstance().getConnection();
+        try (Connection connection = pool.getConnection();
              PreparedStatement statement = connection.prepareStatement(SQLQuery.GET_ALL_USERS.getValue())) {
 
             try (ResultSet resultSet = statement.executeQuery()) {

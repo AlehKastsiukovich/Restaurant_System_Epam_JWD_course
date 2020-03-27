@@ -1,10 +1,10 @@
 package by.epam.javatraining.restaurant.service;
 
-import by.epam.javatraining.restaurant.dao.user.UserDAO;
+import by.epam.javatraining.restaurant.dao.UserDAO;
 import by.epam.javatraining.restaurant.entity.User;
 import by.epam.javatraining.restaurant.exception.DAOException;
 import by.epam.javatraining.restaurant.exception.ServiceException;
-import by.epam.javatraining.restaurant.factory.MySQLDAOFactory;
+import by.epam.javatraining.restaurant.factory.DAOFactoryImpl;
 import by.epam.javatraining.restaurant.validator.UserValidator;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -13,7 +13,7 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     private static final Logger LOGGER = LogManager.getLogger(UserServiceImpl.class);
 
-    private UserDAO dao = MySQLDAOFactory.INSTANCE.getUserDAO();
+    private UserDAO dao = DAOFactoryImpl.INSTANCE.getUserDAO();
 
     @Override
     public User signIn(String login, String password) throws ServiceException {

@@ -1,4 +1,4 @@
-package by.epam.javatraining.restaurant.dao.query;
+package by.epam.javatraining.restaurant.dao;
 
 public enum SQLQuery {
     READ_USER_BY_LOGIN_QUERY("select * from user inner join user_role r"

@@ -1,4 +1,4 @@
-package by.epam.javatraining.restaurant.dao.order;
+package by.epam.javatraining.restaurant.dao;
 
 import by.epam.javatraining.restaurant.dao.ModelDAO;
 import by.epam.javatraining.restaurant.entity.Order;

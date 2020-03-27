@@ -1,6 +1,5 @@
-package by.epam.javatraining.restaurant.dao.user;
+package by.epam.javatraining.restaurant.dao;
 
-import by.epam.javatraining.restaurant.dao.ModelDAO;
 import by.epam.javatraining.restaurant.entity.User;
 import by.epam.javatraining.restaurant.exception.DAOException;
 
