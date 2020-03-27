@@ -16,6 +16,7 @@ public class ControllerServlet extends HttpServlet {
        ConnectionPool.getInstance().initializeConnectionPool();
     }
 
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Command command = new UserRegistration();
         String page = command.execute(request, response);

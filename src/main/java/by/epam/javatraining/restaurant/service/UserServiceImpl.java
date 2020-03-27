@@ -15,6 +15,17 @@ public class UserServiceImpl implements UserService {
 
     private UserDAO dao = DAOFactoryImpl.INSTANCE.getUserDAO();
 
+    private UserServiceImpl() {
+    }
+
+    private static class UserServiceImplHolder {
+        private static final UserServiceImpl INSTANCE = new UserServiceImpl();
+    }
+
+    public static UserServiceImpl getInstance() {
+        return UserServiceImplHolder.INSTANCE;
+    }
+
     @Override
     public User signIn(String login, String password) throws ServiceException {
         User user = null;
@@ -23,7 +34,7 @@ public class UserServiceImpl implements UserService {
             user = getUserByLogin(login);
 
             if (user == null || !password.equals(user.getPassword())) {
-                throw new ServiceException();
+                throw new ServiceException("Wrong password or user does not exist!");
             }
         }
 
@@ -32,24 +43,24 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void signOut(User user) {
-
+        //soon
     }
 
     @Override
     public void registerUser(User user) throws ServiceException {
         if (!UserValidator.INSTANCE.validateUser(user)) {
             LOGGER.warn("User parameters set incorrectly");
-            throw new ServiceException();
+            throw new ServiceException("Can't register user. User parameters set incorrectly");
         }
 
         if (isLoginExist(user.getLogin())) {
             LOGGER.warn("Login is Used");
-            throw new ServiceException();
+            throw new ServiceException("Can't register user with this login. Login is used!");
         }
 
         if (isEmailExist(user.getEmail())) {
             LOGGER.warn("Email is used");
-            throw new ServiceException();
+            throw new ServiceException("Can't register user with this email. Email is used!");
         }
 
         try {
@@ -78,7 +89,7 @@ public class UserServiceImpl implements UserService {
     public void deleteUser(User user) throws ServiceException {
         if (!UserValidator.INSTANCE.validateUser(user)) {
             LOGGER.warn("User parameters are incorrect!");
-            throw new ServiceException();
+            throw new ServiceException("Can't delete user!");
         }
 
         try {
