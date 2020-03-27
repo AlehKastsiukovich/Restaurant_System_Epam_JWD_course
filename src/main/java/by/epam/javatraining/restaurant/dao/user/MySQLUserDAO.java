@@ -25,11 +25,12 @@ public class MySQLUserDAO implements UserDAO {
 
         try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(SQLQuery.READ_USER_BY_LOGIN_QUERY.getValue())) {
-
             statement.setString(1, login);
-            ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                user = buildUser(resultSet);
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    user = buildUser(resultSet);
+                }
             }
 
         } catch (SQLException e) {
@@ -46,11 +47,12 @@ public class MySQLUserDAO implements UserDAO {
 
         try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(SQLQuery.READ_USER_BY_ID.getValue())) {
-
             statement.setInt(1, id);
-            ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                user = buildUser(resultSet);
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    user = buildUser(resultSet);
+                }
             }
 
         } catch (SQLException e) {
@@ -67,11 +69,12 @@ public class MySQLUserDAO implements UserDAO {
 
         try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(SQLQuery.READ_USER_BY_EMAIL.getValue())) {
-
             statement.setString(1, email);
-            ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                user = buildUser(resultSet);
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    user = buildUser(resultSet);
+                }
             }
 
         } catch (SQLException e) {
@@ -142,10 +145,11 @@ public class MySQLUserDAO implements UserDAO {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(SQLQuery.GET_ALL_USERS.getValue())) {
 
-            ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                User user = buildUser(resultSet);
-                userList.add(user);
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    User user = buildUser(resultSet);
+                    userList.add(user);
+                }
             }
 
         } catch (SQLException e) {

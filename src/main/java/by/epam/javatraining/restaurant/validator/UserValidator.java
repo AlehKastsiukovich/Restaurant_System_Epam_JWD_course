@@ -1,7 +1,6 @@
 package by.epam.javatraining.restaurant.validator;
 
 import by.epam.javatraining.restaurant.entity.User;
-import org.omg.CORBA.PUBLIC_MEMBER;
 
 public enum UserValidator {
 

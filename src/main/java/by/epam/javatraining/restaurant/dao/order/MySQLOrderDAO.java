@@ -15,9 +15,11 @@ import java.util.List;
 public class MySQLOrderDAO implements OrderDAO {
     private static final Logger LOGGER = LogManager.getLogger(MySQLOrderDAO.class);
 
+    private ConnectionPool pool = ConnectionPool.getInstance();
+
     @Override
     public void create(Order order) throws DAOException {
-        try (Connection connection = ConnectionPool.getInstance().getConnection();
+        try (Connection connection = pool.getConnection();
              PreparedStatement statement = connection.prepareStatement(SQLQuery.CREATE_ORDER.getValue())) {
 
             createAddress(order);
@@ -39,7 +41,7 @@ public class MySQLOrderDAO implements OrderDAO {
 
     @Override
     public void update(Order order) throws DAOException {
-        try (Connection connection = ConnectionPool.getInstance().getConnection();
+        try (Connection connection = pool.getConnection();
              PreparedStatement statement = connection.prepareStatement(SQLQuery.UPDATE_ORDER.getValue())) {
 
             statement.setBigDecimal(1, order.getTotalPrice());
@@ -55,7 +57,7 @@ public class MySQLOrderDAO implements OrderDAO {
 
     @Override
     public void delete(Order order) throws DAOException {
-        try (Connection connection = ConnectionPool.getInstance().getConnection();
+        try (Connection connection = pool.getConnection();
              PreparedStatement statement = connection.prepareStatement(SQLQuery.DELETE_ORDER.getValue())) {
 
             statement.setInt(1, order.getOrderId());
@@ -69,17 +71,17 @@ public class MySQLOrderDAO implements OrderDAO {
     }
 
     @Override
-
     public Order readById(int id) throws DAOException {
         Order order = null;
 
-        try (Connection connection = ConnectionPool.getInstance().getConnection();
+        try (Connection connection = pool.getConnection();
              PreparedStatement statement = connection.prepareStatement(SQLQuery.READ_ORDER_BY_ID.getValue())) {
-
             statement.setInt(1, id);
-            ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                order = buildOrder(resultSet);
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    order = buildOrder(resultSet);
+                }
             }
 
         } catch (SQLException e) {
@@ -94,10 +96,10 @@ public class MySQLOrderDAO implements OrderDAO {
     public List<Order> getAll() throws DAOException {
         List<Order> orderList = new ArrayList<>();
 
-        try (Connection connection = ConnectionPool.getInstance().getConnection();
-             PreparedStatement statement = connection.prepareStatement(SQLQuery.GET_ALL_ORDERS.getValue())) {
+        try (Connection connection = pool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(SQLQuery.GET_ALL_ORDERS.getValue());
+             ResultSet resultSet = statement.executeQuery();) {
 
-            ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 Order order = buildOrder(resultSet);
                 orderList.add(order);
@@ -112,7 +114,7 @@ public class MySQLOrderDAO implements OrderDAO {
     }
 
     private void createAddress(Order order) throws DAOException {
-        try (Connection connection = ConnectionPool.getInstance().getConnection();
+        try (Connection connection = pool.getConnection();
              PreparedStatement statement = connection.prepareStatement(SQLQuery.CREATE_ADDRESS.getValue())) {
 
             statement.setString(1, order.getDeliveryAddress().getStreet());
