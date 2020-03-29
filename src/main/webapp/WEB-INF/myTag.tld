@@ -5,7 +5,7 @@
 
     <tag>
         <name>myTag</name>
-        <tag-class>by.epam.javatraining.restaurant.tag.TagHandler</tag-class>
+        <tag-class>by.epam.javatraining.restaurant.tag.CustomTagHandler</tag-class>
         <body-content>empty</body-content>
     </tag>
 </taglib>

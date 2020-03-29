@@ -1,11 +1,14 @@
 package by.epam.javatraining.restaurant.tag;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.*;
 import java.io.IOException;
 
-public class TagHandler extends TagSupport {
+public class CustomTagHandler extends TagSupport {
+    private static final Logger LOGGER = LogManager.getLogger(CustomTagHandler.class);
 
     @Override
     public int doStartTag() throws JspException {
@@ -13,9 +16,10 @@ public class TagHandler extends TagSupport {
 
         try {
             JspWriter out = pageContext.getOut();
-            out.println(message);
+            out.write(message);
         } catch (IOException e) {
-            e.printStackTrace();
+            LOGGER.error(e);
+            throw new JspException(e);
         }
 
         return SKIP_BODY;
