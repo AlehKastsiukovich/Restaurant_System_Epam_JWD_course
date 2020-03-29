@@ -10,29 +10,18 @@ import by.epam.javatraining.restaurant.pool.ConnectionPool;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class Runner {
 
     public static void main(String[] args) {
-        PositionDAO dao = DAOFactoryImpl.INSTANCE.getPositionDAO();
-        ConnectionPool pool = ConnectionPool.getInstance();
-        pool.initializeConnectionPool();
+        Locale locale = Locale.getDefault();
 
-//        Position position = new PositionBuilder()
-//                .buildId(1)
-//                .buildItemName("Sprite")
-//                .buildItemPrice(new BigDecimal(2))
-//                .buildPositionItemGroup(2)
-//                .build();
+        System.out.println(locale);
 
-        Position position = null;
+        Locale locale1 = new Locale("be", "BY");
+        Locale.setDefault(locale1);
 
-        try {
-            position = dao.readById(5);
-        } catch (DAOException e) {
-            e.printStackTrace();
-        }
-
-        System.out.println(position.toString());
+        System.out.println(Locale.getDefault());
     }
 }

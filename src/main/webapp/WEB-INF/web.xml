@@ -8,7 +8,7 @@
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
 <!--    <error-page>-->
-<!--        <location>/error.jsp</location>-->
+<!--        <location>/errorpage.jsp</location>-->
 <!--    </error-page>-->
 
     <servlet>

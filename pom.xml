@@ -16,6 +16,7 @@
         <junit.version>4.12</junit.version>
         <javax.servlet.version>4.0.1</javax.servlet.version>
         <jstl.version>1.2</jstl.version>
+        <javax.servlet.jsp.version>2.3.3</javax.servlet.jsp.version>
         <mysql-connector-java.version>8.0.19</mysql-connector-java.version>
     </properties>
 
@@ -59,6 +60,12 @@
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
             <version>${jstl.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet.jsp</groupId>
+            <artifactId>javax.servlet.jsp-api</artifactId>
+            <version>${javax.servlet.jsp.version}</version>
         </dependency>
 
         <dependency>
