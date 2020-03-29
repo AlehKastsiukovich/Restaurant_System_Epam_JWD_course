@@ -14,4 +14,8 @@ public enum PositionValidator {
                 && position.getGroup().getGroupId() > 0
                 && position.getItemPrice().doubleValue() > 0;
     }
+
+    public boolean isIdValidate(int id) {
+        return id > 0;
+    }
 }

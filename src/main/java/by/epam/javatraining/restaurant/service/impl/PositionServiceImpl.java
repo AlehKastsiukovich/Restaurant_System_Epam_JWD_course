@@ -6,6 +6,7 @@ import by.epam.javatraining.restaurant.exception.DAOException;
 import by.epam.javatraining.restaurant.exception.ServiceException;
 import by.epam.javatraining.restaurant.factory.DAOFactoryImpl;
 import by.epam.javatraining.restaurant.service.PositionService;
+import by.epam.javatraining.restaurant.validator.PositionValidator;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import java.util.List;
@@ -28,6 +29,10 @@ public class PositionServiceImpl implements PositionService {
 
     @Override
     public void createPosition(Position position) throws ServiceException {
+        if (!PositionValidator.INSTANCE.isPositionValidate(position)) {
+            throw new ServiceException("Position parameter set incorrectly!");
+        }
+
         try {
             dao.create(position);
         } catch (DAOException e) {
@@ -38,6 +43,10 @@ public class PositionServiceImpl implements PositionService {
 
     @Override
     public void deletePosition(Position position) throws ServiceException {
+        if (!PositionValidator.INSTANCE.isPositionValidate(position)) {
+            throw new ServiceException("Position parameter set incorrectly!");
+        }
+
         try {
             dao.delete(position);
         } catch (DAOException e) {
@@ -48,6 +57,10 @@ public class PositionServiceImpl implements PositionService {
 
     @Override
     public Position getPositionById(int id) throws ServiceException {
+        if (PositionValidator.INSTANCE.isIdValidate(id)) {
+            throw new ServiceException("Position id must be > 0");
+        }
+
         Position position;
 
         try {
@@ -75,6 +88,10 @@ public class PositionServiceImpl implements PositionService {
 
     @Override
     public void updatePrice(Position position) throws ServiceException {
+        if (!PositionValidator.INSTANCE.isPositionValidate(position)) {
+            throw new ServiceException("Position parameter set incorrectly!");
+        }
+
         try {
             dao.update(position);
         } catch (DAOException e) {
