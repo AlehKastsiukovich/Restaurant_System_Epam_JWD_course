@@ -1,10 +1,11 @@
-package by.epam.javatraining.restaurant.service;
+package by.epam.javatraining.restaurant.service.impl;
 
 import by.epam.javatraining.restaurant.dao.UserDAO;
 import by.epam.javatraining.restaurant.entity.User;
 import by.epam.javatraining.restaurant.exception.DAOException;
 import by.epam.javatraining.restaurant.exception.ServiceException;
 import by.epam.javatraining.restaurant.factory.DAOFactoryImpl;
+import by.epam.javatraining.restaurant.service.UserService;
 import by.epam.javatraining.restaurant.validator.UserValidator;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;

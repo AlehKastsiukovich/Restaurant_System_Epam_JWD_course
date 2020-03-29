@@ -14,6 +14,4 @@ public interface OrderService {
     Order getOrderById(int id) throws ServiceException;
 
     List<Order> getAllOrders() throws ServiceException;
-
-    void updatePrice(Position position);
 }
