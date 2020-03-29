@@ -1,8 +1,8 @@
 package by.epam.javatraining.restaurant.service;
 
 import by.epam.javatraining.restaurant.entity.Order;
+import by.epam.javatraining.restaurant.entity.Position;
 import by.epam.javatraining.restaurant.exception.ServiceException;
-
 import java.util.List;
 
 public interface OrderService {
@@ -14,4 +14,6 @@ public interface OrderService {
     Order getOrderById(int id) throws ServiceException;
 
     List<Order> getAllOrders() throws ServiceException;
+
+    void updatePrice(Position position);
 }
