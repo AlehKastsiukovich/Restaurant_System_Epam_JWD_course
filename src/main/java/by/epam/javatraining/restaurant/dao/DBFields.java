@@ -14,7 +14,11 @@ public enum DBFields {
     DB_ORDER_CUSTOMER_ID("customer_id"),
     DB_ORDER_TOTAL_PRICE("total_price"),
     DB_ORDER_STATUS("order_status"),
-    DB_ORDER_DELIVERY_ADDRESS_ID("id_delivery_address");
+    DB_ORDER_DELIVERY_ADDRESS_ID("id_delivery_address"),
+    DB_POSITIONS_ITEM_ID("item_id"),
+    DB_POSITIONS_ITEM_NAME("item_name"),
+    DB_POSITIONS_GROUP_ID("group_id"),
+    DB_POSITIONS_ITEM_PRICE("item_price");
 
     private String value;
 

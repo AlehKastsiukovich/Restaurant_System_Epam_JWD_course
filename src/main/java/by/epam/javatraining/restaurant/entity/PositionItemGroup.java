@@ -7,7 +7,6 @@ public class PositionItemGroup {
     private String groupName;
 
     public PositionItemGroup() {
-
     }
 
     public int getGroupId() {

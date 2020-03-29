@@ -15,7 +15,7 @@ public enum SQLQuery {
     DELETE_USER("delete from user where user_id = (?) and login = (?) "
             + "and password = (?)"),
     CREATE_USER("insert into user (login, password, email, "
-            + "phone_number, first_name, last_name, role_id) value ((?), (?), (?), (?), (?), (?), (?))"),
+            + "phone_number, first_name, last_name, role_id) values ((?), (?), (?), (?), (?), (?), (?))"),
     UPDATE_USER("update user set password = (?), email = (?), phone_number = (?) "
             + "where user_id = (?) and login = (?)"),
     CREATE_ADDRESS("insert into delivery_address (street, build, apartment)"
@@ -29,7 +29,16 @@ public enum SQLQuery {
             + " on `order`.id_delivery_address = da.delivery_address_id"),
     DELETE_ORDER("delete from `order` where order_id = (?) and customer_id = (?)"),
     READ_ORDER_BY_ID("select * from `order` inner join delivery_address da"
-            + " on id_delivery_address = da.delivery_address_id where order_id = (?)");
+            + " on id_delivery_address = da.delivery_address_id where order_id = (?)"),
+    CREATE_POSITION("insert into positions (item_name, group_id, item_price)"
+            + " values ((?), (?), (?))"),
+    UPDATE_POSITION("update positions set item_name = (?), group_id = (?), item_price = (?)"
+            + " where item_id = (?)"),
+    DELETE_POSITION("delete from positions where item_id = (?) and item_name = (?)"),
+    GET_ALL_POSITIONS("select * from positions inner join positions_item_group pig"
+            + " on positions.group_id = pig.group_id"),
+    READ_POSITION_BY_ID("select * from positions inner join positions_item_group pig"
+            + " on positions.group_id = pig.group_id where item_id = (?)");
 
     private String value;
 

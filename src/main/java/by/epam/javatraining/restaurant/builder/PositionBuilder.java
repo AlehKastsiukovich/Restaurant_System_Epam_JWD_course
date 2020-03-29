@@ -1,5 +1,6 @@
 package by.epam.javatraining.restaurant.builder;
 
+import by.epam.javatraining.restaurant.entity.Position;
 import by.epam.javatraining.restaurant.entity.PositionItemGroup;
 import java.math.BigDecimal;
 
@@ -28,6 +29,10 @@ public class PositionBuilder {
         group = new PositionItemGroup();
         group.setGroupId(groupId);
         return this;
+    }
+
+    public Position build() {
+        return new Position(this);
     }
 
     public int getPositionId() {

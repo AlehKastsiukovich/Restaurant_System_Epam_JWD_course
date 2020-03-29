@@ -1,5 +1,6 @@
 package by.epam.javatraining.restaurant.entity;
 
+import by.epam.javatraining.restaurant.builder.PositionBuilder;
 import java.math.BigDecimal;
 import java.util.Objects;
 
@@ -9,7 +10,11 @@ public class Position {
     private String itemName;
     private PositionItemGroup group;
 
-    public Position() {
+    public Position(PositionBuilder builder) {
+        this.positionId = builder.getPositionId();
+        this.itemPrice = builder.getItemPrice();
+        this.itemName = builder.getItemName();
+        this.group = builder.getGroup();
     }
 
     public int getPositionId() {
@@ -69,10 +74,10 @@ public class Position {
     @Override
     public String toString() {
         return "Position[" +
-                "id =" + positionId +
+                "id = " + positionId +
                 ", itemPrice = " + itemPrice +
                 ", itemName = " + itemName +
-                ", group = " + group.getGroupName() +
+                ", group = " + group +
                 ']';
     }
 }
