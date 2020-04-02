@@ -19,8 +19,10 @@ public enum UserValidator {
                 && user.getPassword().matches(PASSWORD_PATTERN)
                 && user.getEmail().matches(EMAIL_PATTERN)
                 && user.getPhoneNumber().matches(PHONE_NUMBER_PATTERN)
-                && (user.getFirstName() == null || user.getFirstName().matches(FIRST_NAME_PATTERN))
-                && (user.getLastName() == null || user.getLastName().matches(LAST_NAME_PATTERN));
+                && (user.getFirstName() == null || user.getFirstName().equals("")
+                || user.getFirstName().matches(FIRST_NAME_PATTERN))
+                && (user.getLastName() == null || user.getLastName().equals("")
+                || user.getLastName().matches(LAST_NAME_PATTERN));
     }
 
     public boolean validateLogin(String login) {

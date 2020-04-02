@@ -1,6 +1,7 @@
 package by.epam.javatraining.restaurant.controller;
 
 import by.epam.javatraining.restaurant.command.Command;
+import by.epam.javatraining.restaurant.command.impl.SignIn;
 import by.epam.javatraining.restaurant.command.impl.UserRegistration;
 import by.epam.javatraining.restaurant.pool.ConnectionPool;
 import javax.servlet.ServletException;

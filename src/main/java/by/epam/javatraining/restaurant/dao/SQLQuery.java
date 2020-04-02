@@ -8,7 +8,7 @@ public enum SQLQuery {
             + " on user.role_id = r.id"
             + " where user.user_id = ?"),
     READ_USER_BY_EMAIL("select * from user inner join user_role r"
-            + " on user_role_id = r.id"
+            + " on user.role_id = r.id"
             + " where user.email = ?"),
     GET_ALL_USERS("select * from user inner join user_role r"
             + " on user.role_id = r.id"),

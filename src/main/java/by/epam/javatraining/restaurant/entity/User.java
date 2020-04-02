@@ -1,10 +1,12 @@
 package by.epam.javatraining.restaurant.entity;
 
 import by.epam.javatraining.restaurant.builder.UserBuilder;
-
+import java.io.Serializable;
 import java.util.Objects;
 
-public class User {
+public class User implements Serializable {
+    private static final long serialVersionUID = 4174824460567982532L;
+
     private int userId;
     private String login;
     private String password;

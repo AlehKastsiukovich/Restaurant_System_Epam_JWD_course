@@ -7,7 +7,9 @@ public enum JSPParameter {
     FIRST_NAME("firstName"),
     LAST_NAME("lastName"),
     PHONE_NUMBER("phoneNumber"),
-    EMAIL("email");
+    EMAIL("email"),
+    USER("user"),
+    ROLE("role");
 
     private String value;
 

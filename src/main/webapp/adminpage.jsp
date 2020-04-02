@@ -1,16 +1,11 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: AlehKastsiukovich
-  Date: 3/15/2020
-  Time: 10:13 PM
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-<head>
-    <title>Title</title>
-</head>
-<body>
-Admin here!
-</body>
+    <head>
+        <title>Admin page</title>
+    </head>
+    <br>
+    <h1>Admin page</h1>
+    <a href="#">Logout</a></br>
+    </body>
 </html>
