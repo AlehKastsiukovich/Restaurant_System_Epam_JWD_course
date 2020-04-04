@@ -31,10 +31,18 @@
             <td><input type="password" name="password"></td>
           </tr>
           <tr>
-            <td><input type="submit" name="submit" value="<fmt:message key="label.login" />"></td>
+            <td><input type="submit" name="command" value="<fmt:message key="label.login" />"></td>
             <td><a href="/register.jsp"><fmt:message key="label.registration" /></a></td>
           </tr>
         </table>
       </form>
+
+<%--    <c:forEach var="list" items="${list}" varStatus="status">--%>
+<%--      <tr align="center">--%>
+<%--        <td><c:out value="${list.positionId}" /></td>--%>
+<%--        <td><c:out value="${list.itemPrice}" /></td>--%>
+<%--        <td><c:out value="${list.itemName}" /></td>--%>
+<%--      </tr>--%>
+<%--    </c:forEach>--%>
   </body>
 </html>

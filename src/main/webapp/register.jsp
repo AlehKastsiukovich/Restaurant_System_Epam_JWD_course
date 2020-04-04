@@ -50,7 +50,7 @@
             <td><span id='message'></span></td>
         </tr>
         <tr>
-            <td><input type="submit" name="submit" value="<fmt:message key="label.register"/>" id="submit"/></td>
+            <td><input type="submit" name="command" value="<fmt:message key="label.register"/>" id="submit"/></td>
         </tr>
     </table>
 </form>
