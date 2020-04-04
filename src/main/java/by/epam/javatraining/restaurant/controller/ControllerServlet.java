@@ -1,5 +1,6 @@
 package by.epam.javatraining.restaurant.controller;
 
+import by.epam.javatraining.restaurant.command.PageType;
 import by.epam.javatraining.restaurant.pool.ConnectionPool;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -8,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-
 
 public class ControllerServlet extends HttpServlet {
     Logger LOGGER = LogManager.getLogger(ControllerServlet.class);
@@ -28,7 +28,7 @@ public class ControllerServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.getRequestDispatcher("/start_page.jsp").forward(request, response);
+        request.getRequestDispatcher(PageType.START_PAGE.getValue()).forward(request, response);
     }
 
     @Override

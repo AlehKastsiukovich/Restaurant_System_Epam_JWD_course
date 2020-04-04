@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-public class SignIn implements Command {
-    private static final Logger LOGGER = LogManager.getLogger(SignIn.class);
+public class UserSignIn implements Command {
+    private static final Logger LOGGER = LogManager.getLogger(UserSignIn.class);
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
