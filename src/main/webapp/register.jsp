@@ -18,7 +18,7 @@
     <%@include file="/js/confirm_password.js"%>
 </script>
 
-<form action="/controller" method="post">
+<form action="/" method="post">
     <table>
         <tr>
             <td><fmt:message key="label.login"/>:</td>
@@ -50,7 +50,7 @@
             <td><span id='message'></span></td>
         </tr>
         <tr>
-            <td><input type="submit" name="command" value="<fmt:message key="label.register"/>" id="submit"/></td>
+            <td><button type="submit" name="command" value="REGISTRATION"><fmt:message key="label.register"/></button></td>
         </tr>
     </table>
 </form>

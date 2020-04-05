@@ -27,7 +27,7 @@ public class UserRegistration implements Command {
             LOGGER.error(e);
         }
 
-        return PageType.HOME_PAGE.getValue();
+        return PageType.START_PAGE.getValue();
     }
 
     private User createUserFromRegistrationForm(HttpServletRequest request) {

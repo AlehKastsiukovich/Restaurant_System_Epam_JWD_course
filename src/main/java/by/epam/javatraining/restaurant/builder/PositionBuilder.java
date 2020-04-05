@@ -8,6 +8,7 @@ public class PositionBuilder {
     private int positionId;
     private BigDecimal itemPrice;
     private String itemName;
+    private String positionImage;
     private PositionItemGroup group;
 
     public PositionBuilder buildId(int positionId) {
@@ -22,6 +23,11 @@ public class PositionBuilder {
 
     public PositionBuilder buildItemName(String itemName) {
         this.itemName = itemName;
+        return this;
+    }
+
+    public PositionBuilder buildPositionImage(String image) {
+        this.positionImage = image;
         return this;
     }
 
@@ -46,6 +52,8 @@ public class PositionBuilder {
     public String getItemName() {
         return itemName;
     }
+
+    public String getPositionImage() { return positionImage; }
 
     public PositionItemGroup getGroup() {
         return group;

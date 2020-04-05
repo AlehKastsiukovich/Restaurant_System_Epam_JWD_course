@@ -20,7 +20,7 @@
         <option value="en" ${language == 'en' ? 'selected' : ''}>English</option>
       </select>
     </form>
-      <form action="/controller" method="post">
+      <form action="/" method="post">
         <table>
           <tr>
             <td><fmt:message key="label.login" />: </td>
@@ -31,12 +31,15 @@
             <td><input type="password" name="password"></td>
           </tr>
           <tr>
-            <td><input type="submit" name="command" value="<fmt:message key="label.login" />"></td>
-            <td><a href="/register.jsp"><fmt:message key="label.registration" /></a></td>
+            <td><button type="submit" name="command" value="SIGN_IN"><fmt:message key="label.login"/></button></td>
+            <td><a href="/
+            .jsp"><fmt:message key="label.registration" /></a></td>
           </tr>
         </table>
       </form>
 
+
+    <h1>${test}</h1>
 <%--    <c:forEach var="list" items="${list}" varStatus="status">--%>
 <%--      <tr align="center">--%>
 <%--        <td><c:out value="${list.positionId}" /></td>--%>

@@ -57,7 +57,7 @@ public class PositionServiceImpl implements PositionService {
 
     @Override
     public Position getPositionById(int id) throws ServiceException {
-        if (PositionValidator.INSTANCE.isIdValidate(id)) {
+        if (!PositionValidator.INSTANCE.isIdValidate(id)) {
             throw new ServiceException("Position id must be > 0");
         }
 

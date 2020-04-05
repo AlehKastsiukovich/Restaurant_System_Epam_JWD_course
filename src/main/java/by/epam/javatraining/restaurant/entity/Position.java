@@ -8,12 +8,14 @@ public class Position {
     private int positionId;
     private BigDecimal itemPrice;
     private String itemName;
+    private String positionImage;
     private PositionItemGroup group;
 
     public Position(PositionBuilder builder) {
         this.positionId = builder.getPositionId();
         this.itemPrice = builder.getItemPrice();
         this.itemName = builder.getItemName();
+        this.positionImage = builder.getPositionImage();
         this.group = builder.getGroup();
     }
 
@@ -47,6 +49,14 @@ public class Position {
 
     public void setGroup(PositionItemGroup group) {
         this.group = group;
+    }
+
+    public String getPositionImage() {
+        return positionImage;
+    }
+
+    public void setPositionImage(String positionImage) {
+        this.positionImage = positionImage;
     }
 
     @Override

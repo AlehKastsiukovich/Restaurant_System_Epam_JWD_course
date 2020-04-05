@@ -7,6 +7,7 @@ import by.epam.javatraining.restaurant.dao.SQLQuery;
 import by.epam.javatraining.restaurant.entity.Position;
 import by.epam.javatraining.restaurant.exception.DAOException;
 import by.epam.javatraining.restaurant.pool.ConnectionPool;
+import by.epam.javatraining.restaurant.util.ImageEncoder;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import java.sql.Connection;
@@ -126,10 +127,13 @@ public class PositionDAOImpl implements PositionDAO {
     }
 
     private Position buildPosition(ResultSet resultSet) throws SQLException {
+        ImageEncoder encoder = ImageEncoder.getInstance();
+
         return new PositionBuilder()
                 .buildId(resultSet.getInt(DBFields.DB_POSITIONS_ITEM_ID.getValue()))
                 .buildItemName(resultSet.getString(DBFields.DB_POSITIONS_ITEM_NAME.getValue()))
                 .buildItemPrice(resultSet.getBigDecimal(DBFields.DB_POSITIONS_ITEM_PRICE.getValue()))
+                .buildPositionImage(encoder.encodeImageToBase64String(resultSet.getBlob("pos_image")))
                 .buildPositionItemGroup(resultSet.getInt(DBFields.DB_POSITIONS_GROUP_ID.getValue()))
                 .build();
     }

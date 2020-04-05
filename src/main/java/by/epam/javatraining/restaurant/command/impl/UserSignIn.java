@@ -36,7 +36,8 @@ public class UserSignIn implements Command {
         if (user != null) {
             session.setAttribute(JSPParameter.USER.getValue(), user);
             session.setAttribute(JSPParameter.ROLE.getValue(), user.getRole().getRoleName());
-            page = PageType.HOME_PAGE.getValue();
+            System.out.println(session.getCreationTime());
+            page = PageType.START_PAGE.getValue();
         } else {
             page = PageType.SIGN_IN_PAGE.getValue();
         }

@@ -7,6 +7,7 @@ import by.epam.javatraining.restaurant.exception.ServiceException;
 import by.epam.javatraining.restaurant.factory.ServiceFactory;
 import by.epam.javatraining.restaurant.pool.ConnectionPool;
 import by.epam.javatraining.restaurant.service.OrderService;
+import by.epam.javatraining.restaurant.service.PositionService;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -24,19 +25,15 @@ public class Runner {
         ConnectionPool pool = ConnectionPool.getInstance();
         pool.initializeConnectionPool();
 
-        OrderService service = ServiceFactory.INSTANCE.getOrderService();
-        List<Order> list = null;
-
+        PositionService service = ServiceFactory.INSTANCE.getPositionService();
+        Position position = null;
         try {
-            list = service.getAllOrders();
+            position = service.getPositionById(5);
         } catch (ServiceException e) {
             e.printStackTrace();
         }
-
-        for (Order order: list) {
-            System.out.println(order);
-        }
-
+        System.out.println(position.toString());
+        System.out.println(position.getPositionImage());
 //        String query = "update positions set  pos_picture = (?) where item_id = (?)";
 //        try (PreparedStatement statement = pool.getConnection().prepareStatement(query)) {
 //            statement.setBinaryStream(1, new FileInputStream(new File("C:/Users/AlehKastsiukovich/Desktop/navi.jpg")));
