@@ -12,7 +12,7 @@
     <head>
       <title>Home page</title>
     </head>
-    <body>
+    <img>
 
     <form>
       <select id="language" name="language" onchange="submit()">
@@ -39,7 +39,7 @@
       </form>
 
 
-    <h1>${test}</h1>
+    <img src="data:image/jpg;base64,${image}" width="300" height="300"/>
 <%--    <c:forEach var="list" items="${list}" varStatus="status">--%>
 <%--      <tr align="center">--%>
 <%--        <td><c:out value="${list.positionId}" /></td>--%>

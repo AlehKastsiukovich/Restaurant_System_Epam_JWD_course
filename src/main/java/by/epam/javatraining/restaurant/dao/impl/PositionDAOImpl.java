@@ -133,7 +133,8 @@ public class PositionDAOImpl implements PositionDAO {
                 .buildId(resultSet.getInt(DBFields.DB_POSITIONS_ITEM_ID.getValue()))
                 .buildItemName(resultSet.getString(DBFields.DB_POSITIONS_ITEM_NAME.getValue()))
                 .buildItemPrice(resultSet.getBigDecimal(DBFields.DB_POSITIONS_ITEM_PRICE.getValue()))
-                .buildPositionImage(encoder.encodeImageToBase64String(resultSet.getBlob("pos_image")))
+                .buildPositionImage(encoder.encodeImageToBase64String(resultSet
+                .getBlob(DBFields.DB_POSITION_ITEM_IMAGE.getValue())))
                 .buildPositionItemGroup(resultSet.getInt(DBFields.DB_POSITIONS_GROUP_ID.getValue()))
                 .build();
     }

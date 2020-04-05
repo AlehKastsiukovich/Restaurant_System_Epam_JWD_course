@@ -18,7 +18,8 @@ public enum DBFields {
     DB_POSITIONS_ITEM_ID("item_id"),
     DB_POSITIONS_ITEM_NAME("item_name"),
     DB_POSITIONS_GROUP_ID("group_id"),
-    DB_POSITIONS_ITEM_PRICE("item_price");
+    DB_POSITIONS_ITEM_PRICE("item_price"),
+    DB_POSITION_ITEM_IMAGE("pos_image");
 
     private String value;
 

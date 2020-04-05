@@ -22,32 +22,33 @@ public class ControllerServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         ConnectionPool.getInstance().initializeConnectionPool();
-
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         LOGGER.warn("get******************");
-        PositionService service = ServiceFactory.INSTANCE.getPositionService();
-
-
-        request.setAttribute("test", "cool");
-        request.getRequestDispatcher(PageType.START_PAGE.getValue()).forward(request, response);
+        handleRequest(request, response);
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         LOGGER.warn("post*****************");
-        Command command = CommandFactory.getInstance().spotCommand(req);
-        String page = command.execute(req, resp);
-        req.getRequestDispatcher(page).forward(req, resp);
+        handleRequest(request, response);
     }
 
     @Override
     public void destroy() {
         super.destroy();
         ConnectionPool.getInstance().closeAllPoolConnections();
+    }
+
+    private void handleRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        LOGGER.warn("handle*******");
+        Command command = CommandFactory.getInstance().spotCommand(request);
+        String page = command.execute(request, response);
+        request.getRequestDispatcher(page).forward(request, response);
     }
 }

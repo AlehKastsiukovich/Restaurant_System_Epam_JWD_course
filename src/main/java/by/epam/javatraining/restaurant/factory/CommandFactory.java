@@ -3,6 +3,7 @@ package by.epam.javatraining.restaurant.factory;
 import by.epam.javatraining.restaurant.command.Command;
 import by.epam.javatraining.restaurant.command.CommandName;
 import by.epam.javatraining.restaurant.command.JSPParameter;
+import by.epam.javatraining.restaurant.command.impl.RedirectToStartPage;
 import by.epam.javatraining.restaurant.command.impl.UserSignIn;
 import by.epam.javatraining.restaurant.command.impl.UserRegistration;
 import javax.servlet.http.HttpServletRequest;
@@ -27,6 +28,15 @@ public class CommandFactory {
     }
 
     public Command spotCommand(HttpServletRequest request) {
-        return commands.get(CommandName.valueOf(request.getParameter(JSPParameter.COMMAND.getValue())));
+        Command command;
+
+        String commandName = request.getParameter(JSPParameter.COMMAND.getValue());
+        if (commandName != null) {
+            command = commands.get(CommandName.valueOf(request.getParameter(JSPParameter.COMMAND.getValue())));
+        } else {
+            command = new RedirectToStartPage();
+        }
+
+        return command;
     }
 }
