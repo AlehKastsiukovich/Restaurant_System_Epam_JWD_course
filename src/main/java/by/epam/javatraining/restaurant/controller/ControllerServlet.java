@@ -1,13 +1,8 @@
 package by.epam.javatraining.restaurant.controller;
 
 import by.epam.javatraining.restaurant.command.Command;
-import by.epam.javatraining.restaurant.command.PageType;
-import by.epam.javatraining.restaurant.entity.Position;
-import by.epam.javatraining.restaurant.exception.ServiceException;
 import by.epam.javatraining.restaurant.factory.CommandFactory;
-import by.epam.javatraining.restaurant.factory.ServiceFactory;
 import by.epam.javatraining.restaurant.pool.ConnectionPool;
-import by.epam.javatraining.restaurant.service.PositionService;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import javax.servlet.ServletException;
@@ -22,6 +17,7 @@ public class ControllerServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         ConnectionPool.getInstance().initializeConnectionPool();
+
     }
 
     @Override
@@ -49,6 +45,7 @@ public class ControllerServlet extends HttpServlet {
         LOGGER.warn("handle*******");
         Command command = CommandFactory.getInstance().spotCommand(request);
         String page = command.execute(request, response);
+        System.out.println(page);
         request.getRequestDispatcher(page).forward(request, response);
     }
 }

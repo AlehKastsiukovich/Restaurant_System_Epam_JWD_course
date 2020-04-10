@@ -27,6 +27,7 @@ public class UserSignIn implements Command {
 
         try {
             user = service.signIn(login, password);
+            System.out.println(user);
         } catch (ServiceException e) {
             LOGGER.error(e);
         }
@@ -34,9 +35,11 @@ public class UserSignIn implements Command {
         HttpSession session = request.getSession();
 
         if (user != null) {
-            session.setAttribute(JSPParameter.USER.getValue(), user);
-            session.setAttribute(JSPParameter.ROLE.getValue(), user.getRole().getRoleName());
-            System.out.println(session.getCreationTime());
+//            session.setAttribute(JSPParameter.USER.getValue(), user);
+//            session.setAttribute(JSPParameter.ROLE.getValue(), user.getRole().getRoleName());
+//            System.out.println(session.getCreationTime());
+//            page = PageType.START_PAGE.getValue();
+            LOGGER.warn("logged");
             page = PageType.START_PAGE.getValue();
         } else {
             page = PageType.SIGN_IN_PAGE.getValue();
