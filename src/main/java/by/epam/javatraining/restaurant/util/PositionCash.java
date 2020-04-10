@@ -1,6 +1,7 @@
 package by.epam.javatraining.restaurant.util;
 
 import by.epam.javatraining.restaurant.entity.Position;
+import by.epam.javatraining.restaurant.exception.PositionInitializeException;
 import by.epam.javatraining.restaurant.exception.ServiceException;
 import by.epam.javatraining.restaurant.factory.ServiceFactory;
 import by.epam.javatraining.restaurant.service.PositionService;
@@ -33,12 +34,13 @@ public class PositionCash {
         positionList = positions;
     }
 
-    public void initPositions() {
+    public void initPositions() throws PositionInitializeException {
         PositionService service = ServiceFactory.INSTANCE.getPositionService();
         try {
             positionList = service.getAllPositions();
         } catch (ServiceException e) {
-            e.printStackTrace();
+            LOGGER.error(e);
+            throw new PositionInitializeException(e);
         }
     }
 }
