@@ -19,6 +19,9 @@ public class Position {
         this.group = builder.getGroup();
     }
 
+    public Position() {
+    }
+
     public int getPositionId() {
         return positionId;
     }

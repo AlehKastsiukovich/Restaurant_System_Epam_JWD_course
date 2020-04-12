@@ -3,6 +3,8 @@ package by.epam.javatraining.restaurant.entity;
 import by.epam.javatraining.restaurant.builder.OrderBuilder;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Objects;
 
 public class Order {
@@ -12,8 +14,10 @@ public class Order {
     private Date orderDate;
     private DeliveryAddress deliveryAddress;
     private BigDecimal totalPrice;
+    private List<ItemOrder> itemOrderList;
 
     public Order() {
+        itemOrderList = new LinkedList<>();
     }
 
     public Order(OrderBuilder builder) {

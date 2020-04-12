@@ -110,7 +110,7 @@ public class OrderDAOImpl implements OrderDAO {
 
         try (Connection connection = pool.getConnection();
              PreparedStatement statement = connection.prepareStatement(SQLQuery.GET_ALL_ORDERS.getValue());
-             ResultSet resultSet = statement.executeQuery();) {
+             ResultSet resultSet = statement.executeQuery()) {
 
             while (resultSet.next()) {
                 Order order = buildOrder(resultSet);

@@ -1,6 +1,8 @@
 package by.epam.javatraining.restaurant.factory;
 
+import by.epam.javatraining.restaurant.dao.ItemOrderDAO;
 import by.epam.javatraining.restaurant.dao.PositionDAO;
+import by.epam.javatraining.restaurant.dao.impl.ItemOrderDAOImpl;
 import by.epam.javatraining.restaurant.dao.impl.OrderDAOImpl;
 import by.epam.javatraining.restaurant.dao.OrderDAO;
 import by.epam.javatraining.restaurant.dao.impl.PositionDAOImpl;
@@ -23,4 +25,9 @@ public enum DAOFactoryImpl implements DAOFactory {
 
     @Override
     public PositionDAO getPositionDAO() { return PositionDAOImpl.getInstance(); }
+
+    @Override
+    public ItemOrderDAO getItemOrderDAO() {
+        return ItemOrderDAOImpl.getInstance();
+    }
 }

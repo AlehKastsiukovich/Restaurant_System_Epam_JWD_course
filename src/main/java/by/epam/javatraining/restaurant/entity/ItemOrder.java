@@ -1,11 +1,18 @@
 package by.epam.javatraining.restaurant.entity;
 
+import by.epam.javatraining.restaurant.builder.ItemOrderBuilder;
 import java.util.Objects;
 
 public class ItemOrder {
     private Position position;
     private Order order;
     private int quantity;
+
+    public ItemOrder(ItemOrderBuilder builder) {
+        position = builder.getPosition();
+        order = builder.getOrder();
+        quantity = builder.getQuantity();
+    }
 
     public ItemOrder() {
     }
@@ -59,6 +66,7 @@ public class ItemOrder {
         return "ItemOrder[" +
                 "position = " + position.getPositionId() +
                 ", order = " + order.getOrderId() +
+                ", quantity = " + quantity +
                 ']';
     }
 }
