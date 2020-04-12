@@ -36,7 +36,7 @@ public class CommandFactory {
         } else {
             command = new RedirectToStartPage();
         }
-
+        System.out.println("Command is " + command.toString());
         return command;
     }
 }

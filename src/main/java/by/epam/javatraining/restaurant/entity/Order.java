@@ -1,7 +1,6 @@
 package by.epam.javatraining.restaurant.entity;
 
 import by.epam.javatraining.restaurant.builder.OrderBuilder;
-
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Objects;

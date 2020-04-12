@@ -26,7 +26,7 @@
     <div class="wrapper header__wrapper">
       <div class="header__logo-line">
         <a href="#" class="logo">
-          <h1 class="logo__text">The restaurant</h1>
+          <h1 class="logo__text">Restaurant</h1>
         </a>
       </div>
       <div class="header__navigation">
@@ -54,7 +54,7 @@
         </ul>
       </div>
       <div class="products-list">
-        <c:forEach var="list" items="${positionList}" varStatus="status">
+        <c:forEach items="${positionList}" var="list" varStatus="status">
         <div class="product">
           <h2 class="product__name">${list.itemName}</h2>
           <img src="data:image/jpg;base64,${list.positionImage}" width="200" height="200"/>
@@ -75,7 +75,7 @@
           <h3 class="modal-title">LOGIN</h3>
         </div>
         <div class="modal-body">
-          <form action="/" method="post">
+          <form action="${pageContext.request.contextPath}/" method="post">
             <button></button>
             <input class="modal-body__input" type="text" name="login" placeholder="Username">
             <input class="modal-body__input" type="password" name="password" placeholder="Password">

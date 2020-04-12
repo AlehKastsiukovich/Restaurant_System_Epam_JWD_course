@@ -27,7 +27,6 @@ public class UserSignIn implements Command {
 
         try {
             user = service.signIn(login, password);
-            System.out.println(user);
         } catch (ServiceException e) {
             LOGGER.error(e);
         }
