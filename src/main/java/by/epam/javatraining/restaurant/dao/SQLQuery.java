@@ -38,7 +38,9 @@ public enum SQLQuery {
     GET_ALL_POSITIONS("select * from positions inner join positions_item_group pig"
             + " on positions.group_id = pig.group_id"),
     READ_POSITION_BY_ID("select * from positions inner join positions_item_group pig"
-            + " on positions.group_id = pig.group_id where item_id = (?)");
+            + " on positions.group_id = pig.group_id where item_id = (?)"),
+    CREATE_ITEM_ORDER("insert into item_order (order_id, item_id, quantity)"
+            + " VALUES ((?), (?), (?))");
 
     private String value;
 

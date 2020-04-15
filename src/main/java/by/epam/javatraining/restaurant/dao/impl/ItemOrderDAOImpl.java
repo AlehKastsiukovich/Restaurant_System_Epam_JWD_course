@@ -1,6 +1,7 @@
 package by.epam.javatraining.restaurant.dao.impl;
 
 import by.epam.javatraining.restaurant.dao.ItemOrderDAO;
+import by.epam.javatraining.restaurant.dao.SQLQuery;
 import by.epam.javatraining.restaurant.entity.ItemOrder;
 import by.epam.javatraining.restaurant.exception.DAOException;
 import by.epam.javatraining.restaurant.pool.ConnectionPool;
@@ -29,15 +30,15 @@ public class ItemOrderDAOImpl implements ItemOrderDAO {
         return ItemOrderDAOImplHolder.INSTANCE;
     }
 
-    public static final String query = "";
+    public String query = "update item_order set item_id = (?), quantity = (?) where item_order.order_id = (?)";
 
     @Override
     public void create(ItemOrder itemOrder) throws DAOException {
         try (Connection connection = pool.getConnection();
-             PreparedStatement statement = connection.prepareStatement(query)) {
+             PreparedStatement statement = connection.prepareStatement(SQLQuery.CREATE_ITEM_ORDER.getValue())) {
 
-            statement.setInt(2, itemOrder.getOrder().getOrderId());
-            statement.setInt(1, itemOrder.getPosition().getPositionId());
+            statement.setInt(1, itemOrder.getOrder().getOrderId());
+            statement.setInt(2, itemOrder.getPosition().getPositionId());
             statement.setInt(3, itemOrder.getQuantity());
             statement.executeUpdate();
 
@@ -53,7 +54,8 @@ public class ItemOrderDAOImpl implements ItemOrderDAO {
              PreparedStatement statement = connection.prepareStatement(query)) {
 
             statement.setInt(1, itemOrder.getPosition().getPositionId());
-            statement.setInt(3, itemOrder.getQuantity());
+            statement.setInt(2, itemOrder.getQuantity());
+            statement.setInt(3, itemOrder.getOrder().getOrderId());
             statement.executeUpdate();
 
         } catch (SQLException e) {

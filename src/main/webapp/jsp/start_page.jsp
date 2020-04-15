@@ -13,7 +13,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css" type="text/css"/>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/login.css">
   <title>My restaurant</title>
   <style>
     <%@ include file="/css/styles.css"%>
@@ -25,15 +26,15 @@
   <header class="header">
     <div class="wrapper header__wrapper">
       <div class="header__logo-line">
-        <a href="#" class="logo">
+        <a href="${pageContext.request.contextPath}/controller" class="logo">
           <h1 class="logo__text">Restaurant</h1>
         </a>
       </div>
       <div class="header__navigation">
         <ul class="navigation">
-          <li class="navigation__item"><a href="#" class="navigation__link">contacts</a></li>
-          <li class="navigation__item"><a href="#" class="navigation__link">orders</a></li>
-          <li class="navigation__item"><a href="#" id="login" class="navigation__link">Sign in</a></li>
+          <li class="navigation__item"><a href="" class="navigation__link">contacts</a></li>
+          <li class="navigation__item"><a href="${pageContext.request.contextPath}/jsp/order.jsp" class="navigation__link">Cart</a></li>
+          <li class="navigation__item"><a href="${pageContext.request.contextPath}/jsp/login.jsp" id="login" class="navigation__link">Sign in</a></li>
         </ul>
         <select name="language">
           <option value="en" selected>en</option>
@@ -51,43 +52,22 @@
           <li>Pizza</li>
           <li>Drinks</li>
           <li>Sushi</li>
-        </ul>
-      </div>
-      <div class="products-list">
-        <c:forEach items="${positionList}" var="list" varStatus="status">
-        <div class="product">
-          <h2 class="product__name">${list.itemName}</h2>
-          <img src="data:image/jpg;base64,${list.positionImage}" width="200" height="200"/>
-          <div class="product__content">
-            <button>add</button>
-            <span class="price">${list.itemPrice}$</span>
-          </div>
-        </div>
-        </c:forEach>
-      </div>
-    </div>
-  </main>
-  
-  <div class="modal-box">
-    <div class="modal-overlay">
-      <div class="modal-window">
-        <div class="modal-header">
-          <h3 class="modal-title">LOGIN</h3>
-        </div>
-        <div class="modal-body">
-          <form action="${pageContext.request.contextPath}" method="post">
-            <button></button>
-            <input class="modal-body__input" type="text" name="login" placeholder="Username">
-            <input class="modal-body__input" type="password" name="password" placeholder="Password">
-            <button class="modal-body__input button-login" type="submit" name="command" value="SIGN_IN">Login</button>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <input class="modal-body__input button-sign-up" type="button" value="Sign up">
-        </div>
-      </div>
-    </div>
+   </ul>
   </div>
+  <div class="products-list">
+    <c:forEach items="${positionList}" var="list" varStatus="status">
+      <div class="product">
+        <h2 class="product__name">${list.itemName}</h2>
+        <img src="data:image/jpg;base64,${list.positionImage}" width="200" height="200"/>
+        <div class="product__content">
+          <button>add</button>
+          <span class="price">${list.itemPrice}$</span>
+        </div>
+      </div>
+    </c:forEach>
+  </div>
+  </div>
+  </main>
 
   <div class="footer">
     <div class="wrapper"></div>

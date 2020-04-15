@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(urlPatterns = "")
+@WebServlet(urlPatterns = {"/controller"} )
 public class ControllerServlet extends HttpServlet {
     Logger LOGGER = LogManager.getLogger(ControllerServlet.class);
 
@@ -46,6 +46,7 @@ public class ControllerServlet extends HttpServlet {
             throws ServletException, IOException {
         LOGGER.warn("handle---------------------");
         Command command = CommandFactory.getInstance().spotCommand(request);
+        System.out.println(command);
         String page = command.execute(request, response);
         request.getServletContext().getRequestDispatcher(page).forward(request, response);
     }

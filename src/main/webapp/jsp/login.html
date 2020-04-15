@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <title>Shop</title>
+</head>
+
+<body>
+  <header class="header">
+    <div class="wrapper header__wrapper">
+      <div class="header__logo-line">
+        <a href="#" class="logo">
+          <h1 class="logo__text">Shop</h1>
+        </a>
+      </div>
+      <div class="header__navigation">
+        <ul class="navigation">
+          <li class="navigation__item"><a href="#" class="navigation__link">contacts</a></li>
+          <li class="navigation__item"><a href="#" class="navigation__link">orders</a></li>
+          <li class="navigation__item"><a id="login" href="#" class="navigation__link">Sign in</a></li>
+        </ul>
+        <select name="language">
+          <option value="en" selected>en</option>
+          <option value="ru">ru</option>
+        </select>
+      </div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="wrapper main__wrapper">
+      <div class="modal-window">
+        <div class="modal-header">
+          <h3 class="modal-title">LOGIN</h3>
+        </div>
+        <div class="modal-body">
+          <form action="">
+            <input class="modal-body__input" type="text" placeholder="Username">
+            <input class="modal-body__input" type="password" placeholder="Password">
+            <input class="modal-body__input button-login" type="button" value="Login">
+          </form>
+        </div>
+        <div class="modal-footer">
+          <input class="modal-body__input button-sign-up" type="button" value="Sign up">
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="index.js"></script>
+</body>
+
+</html>
