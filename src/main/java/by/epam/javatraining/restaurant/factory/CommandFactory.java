@@ -3,9 +3,9 @@ package by.epam.javatraining.restaurant.factory;
 import by.epam.javatraining.restaurant.command.Command;
 import by.epam.javatraining.restaurant.command.CommandName;
 import by.epam.javatraining.restaurant.command.JSPParameter;
-import by.epam.javatraining.restaurant.command.impl.RedirectToStartPage;
-import by.epam.javatraining.restaurant.command.impl.UserSignIn;
-import by.epam.javatraining.restaurant.command.impl.UserRegistration;
+import by.epam.javatraining.restaurant.command.impl.RedirectToStartPageCommand;
+import by.epam.javatraining.restaurant.command.impl.UserSignInCommand;
+import by.epam.javatraining.restaurant.command.impl.UserRegistrationCommand;
 import javax.servlet.http.HttpServletRequest;
 import java.util.EnumMap;
 import java.util.Map;
@@ -15,8 +15,8 @@ public class CommandFactory {
 
     private CommandFactory() {
         commands = new EnumMap<>(CommandName.class);
-        commands.put(CommandName.REGISTRATION, new UserRegistration());
-        commands.put(CommandName.SIGN_IN, new UserSignIn());
+        commands.put(CommandName.REGISTRATION, new UserRegistrationCommand());
+        commands.put(CommandName.SIGN_IN, new UserSignInCommand());
     }
 
     private static class CommandFactoryHolder {
@@ -34,7 +34,7 @@ public class CommandFactory {
         if (commandName != null) {
             command = commands.get(CommandName.valueOf(request.getParameter(JSPParameter.COMMAND.getValue())));
         } else {
-            command = new RedirectToStartPage();
+            command = new RedirectToStartPageCommand();
         }
         System.out.println("Command is " + command.toString());
         return command;

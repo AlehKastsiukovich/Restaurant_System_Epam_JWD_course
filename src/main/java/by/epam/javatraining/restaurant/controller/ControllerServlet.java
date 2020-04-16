@@ -46,8 +46,7 @@ public class ControllerServlet extends HttpServlet {
             throws ServletException, IOException {
         LOGGER.warn("handle---------------------");
         Command command = CommandFactory.getInstance().spotCommand(request);
-        System.out.println(command);
         String page = command.execute(request, response);
-        request.getServletContext().getRequestDispatcher(page).forward(request, response);
+        request.getRequestDispatcher(page).forward(request, response);
     }
 }

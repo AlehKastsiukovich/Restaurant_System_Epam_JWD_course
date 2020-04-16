@@ -13,8 +13,8 @@ import org.apache.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class UserRegistration implements Command {
-    private static final Logger LOGGER = LogManager.getLogger(UserRegistration.class);
+public class UserRegistrationCommand implements Command {
+    private static final Logger LOGGER = LogManager.getLogger(UserRegistrationCommand.class);
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {

@@ -7,8 +7,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../css/styles.css">
-  <link rel="stylesheet" href="../css/login.css">
+<%--  <link rel="stylesheet" href="../css/styles.css">--%>
+<%--  <link rel="stylesheet" href="../css/login.css">--%>
+  <style>
+    <%@ include file="/css/styles.css"%>
+    <%@ include file="/css/login.css"%>
+  </style>
   <title>login page</title>
 </head>
 
@@ -41,7 +45,7 @@
           <h3 class="modal-title">LOGIN</h3>
         </div>
         <div class="modal-body">
-          <form action="${pageContext.request.contextPath}/" method="post">
+          <form action="${pageContext.request.contextPath}/controller" method="post">
             <input class="modal-body__input" type="text" name="login" placeholder="Username">
             <input class="modal-body__input" type="password" name="password" placeholder="Password">
             <button class="modal-body__input button-login" type="submit" name="command" value="SIGN_IN">Login</button>
