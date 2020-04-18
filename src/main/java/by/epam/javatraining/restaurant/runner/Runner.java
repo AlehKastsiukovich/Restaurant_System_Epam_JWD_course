@@ -10,22 +10,6 @@ import by.epam.javatraining.restaurant.pool.ConnectionPool;
 public class Runner {
 
     public static void main(String[] args) {
-        ConnectionPool pool = ConnectionPool.getInstance();
-        pool.initializeConnectionPool();
-
-        ItemOrder order = new ItemOrderBuilder()
-                .buildOrder(3)
-                .buildPosition(10)
-                .buildQuantity(5)
-                .build();
-
-        System.out.println(order);
-
-        ItemOrderDAO dao = ItemOrderDAOImpl.getInstance();
-        try {
-            dao.update(order);
-        } catch (DAOException e) {
-            e.printStackTrace();
-        }
+        int num = Integer.parseInt(null);
     }
 }

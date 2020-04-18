@@ -15,7 +15,7 @@
 <header class="header">
     <div class="wrapper header__wrapper">
         <div class="header__logo-line">
-            <a href="${pageContext.request.contextPath}/controller" class="logo">
+            <a href="${pageContext.request.contextPath}/jsp/start_page.jsp" class="logo">
                 <h1 class="logo__text">Restaurant</h1>
             </a>
         </div>

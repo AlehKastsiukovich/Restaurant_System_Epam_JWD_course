@@ -12,6 +12,7 @@ import org.apache.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 
 public class UserSignInCommand implements Command {
     private static final Logger LOGGER = LogManager.getLogger(UserSignInCommand.class);
@@ -38,7 +39,7 @@ public class UserSignInCommand implements Command {
             session.setAttribute(JSPParameter.ROLE.getValue(), user.getRole().getRoleName());
             page = PageType.START_PAGE.getValue();
         } else {
-            page = PageType.START_PAGE.getValue();
+            page = PageType.SIGN_IN_PAGE.getValue();
         }
 
         return page;

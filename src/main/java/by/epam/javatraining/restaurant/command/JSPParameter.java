@@ -10,7 +10,8 @@ public enum JSPParameter {
     EMAIL("email"),
     USER("user"),
     ROLE("role"),
-    POSITIONS("positionList");
+    POSITIONS("positionList"),
+    ID("id");
 
 
     private String value;

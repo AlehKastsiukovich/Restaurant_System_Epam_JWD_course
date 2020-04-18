@@ -21,8 +21,9 @@ public class ControllerServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         ConnectionPool.getInstance().initializeConnectionPool();
+        PositionCash cash = PositionCash.getInstance();
         try {
-            PositionCash.getInstance().initPositions();
+            cash.initPositions();
         } catch (PositionInitializeException e) {
             LOGGER.error(e);
         }

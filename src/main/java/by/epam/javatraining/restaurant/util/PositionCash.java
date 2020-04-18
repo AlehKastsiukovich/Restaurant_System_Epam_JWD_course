@@ -34,6 +34,18 @@ public class PositionCash {
         positionList = positions;
     }
 
+    public Position getPositionById(int id) {
+        Position position = null;
+
+        for (Position item: positionList) {
+            if (item.getPositionId() == id) {
+                position = item;
+            }
+        }
+
+        return position;
+    }
+
     public void initPositions() throws PositionInitializeException {
         PositionService service = ServiceFactory.INSTANCE.getPositionService();
         try {
