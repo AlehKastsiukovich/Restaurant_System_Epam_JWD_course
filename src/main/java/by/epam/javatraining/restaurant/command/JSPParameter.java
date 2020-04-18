@@ -9,7 +9,9 @@ public enum JSPParameter {
     PHONE_NUMBER("phoneNumber"),
     EMAIL("email"),
     USER("user"),
-    ROLE("role");
+    ROLE("role"),
+    POSITIONS("positionList");
+
 
     private String value;
 

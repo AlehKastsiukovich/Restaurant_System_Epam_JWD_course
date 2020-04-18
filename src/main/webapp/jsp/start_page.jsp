@@ -1,3 +1,6 @@
+<%@ page import="by.epam.javatraining.restaurant.entity.Position" %>
+<%@ page import="java.util.List" %>
+<%@ page import="by.epam.javatraining.restaurant.util.PositionCash" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="s" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -26,7 +29,7 @@
   <header class="header">
     <div class="wrapper header__wrapper">
       <div class="header__logo-line">
-        <a href="${pageContext.request.contextPath}/controller" class="logo">
+        <a href="${pageContext.request.contextPath}/jsp/start_page.jsp" class="logo">
           <h1 class="logo__text">Restaurant</h1>
         </a>
       </div>
@@ -57,12 +60,14 @@
   <div class="products-list">
     <c:forEach items="${positionList}" var="list" varStatus="status">
       <div class="product">
-        <h2 class="product__name">${list.itemName}</h2>
+          <form action="${pageContext.request.contextPath}/controller?id=${list.positionId}" method="post">
+          <h2 class="product__name">${list.itemName}</h2>
         <img src="data:image/jpg;base64,${list.positionImage}" width="200" height="200"/>
         <div class="product__content">
-          <button>add</button>
+           <button type="submit" name="command" value="ADD_TO_CART">add</button>
           <span class="price">${list.itemPrice}$</span>
         </div>
+          </form>
       </div>
     </c:forEach>
   </div>
