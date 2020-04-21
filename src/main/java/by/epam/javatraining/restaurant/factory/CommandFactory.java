@@ -3,10 +3,7 @@ package by.epam.javatraining.restaurant.factory;
 import by.epam.javatraining.restaurant.command.Command;
 import by.epam.javatraining.restaurant.command.CommandName;
 import by.epam.javatraining.restaurant.command.JSPParameter;
-import by.epam.javatraining.restaurant.command.impl.AddPositionToCartCommand;
-import by.epam.javatraining.restaurant.command.impl.RedirectToStartPageCommand;
-import by.epam.javatraining.restaurant.command.impl.UserSignInCommand;
-import by.epam.javatraining.restaurant.command.impl.UserRegistrationCommand;
+import by.epam.javatraining.restaurant.command.impl.*;
 import javax.servlet.http.HttpServletRequest;
 import java.util.EnumMap;
 import java.util.Map;
@@ -19,6 +16,7 @@ public class CommandFactory {
         commands.put(CommandName.REGISTRATION, new UserRegistrationCommand());
         commands.put(CommandName.SIGN_IN, new UserSignInCommand());
         commands.put(CommandName.ADD_TO_CART, new AddPositionToCartCommand());
+        commands.put(CommandName.LOGOUT, new UserLogoutCommand());
     }
 
     private static class CommandFactoryHolder {

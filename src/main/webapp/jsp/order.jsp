@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <!DOCTYPE html>
@@ -37,46 +38,20 @@
     <div class="wrapper main__wrapper">
         <div class="orders">
             <ul class="orders__list">
-                <li class="order__item">
-                    <span class="order__text">item 1</span>
-                    <div class="buttons">
-                        <button class="order__button button_danger">-</button>
-                        <span class="order__quantity">1</span>
-                        <button class="order__button button_success">+</button>
-                    </div>
-                </li>
-                <li class="order__item">
-                    <span class="order__text">item 2</span>
-                    <div class="buttons">
-                        <button class="order__button button_danger">-</button>
-                        <span class="order__quantity">1</span>
-                        <button class="order__button button_success">+</button>
-                    </div>
-                </li>
-                <li class="order__item">
-                    <span class="order__text">item 3</span>
-                    <div class="buttons">
-                        <button class="order__button button_danger">-</button>
-                        <span class="order__quantity">1</span>
-                        <button class="order__button button_success">+</button>
-                    </div>
-                </li>
-                <li class="order__item">
-                    <span class="order__text">item 4</span>
-                    <div class="buttons">
-                        <button class="order__button button_danger">-</button>
-                        <span class="order__quantity">1</span>
-                        <button class="order__button button_success">+</button>
-                    </div>
-                </li>
-                <li class="order__item">
-                    <span class="order__text">item 5</span>
-                    <div class="buttons">
-                        <button class="order__button button_danger">-</button>
-                        <span class="order__quantity">1</span>
-                        <button class="order__button button_success">+</button>
-                    </div>
-                </li>
+                <c:forEach items="${positions}" var="positions" varStatus="status">
+                    <li class="order__item">
+                        <img src="data:image/jpg;base64,${positions.key.positionImage}" width="50" height="50"/>
+                        <span class="order__text">${positions.key.itemName}</span>
+                        <div class="buttons">
+                            <button class="order__button button_danger">-</button>
+                            <span class="order__quantity">${positions.value}</span>
+                            <button class="order__button button_success">+</button>
+                        </div>
+                        <c:set var="quantity" scope="session" value="${positions.value}" />
+                        <c:set var="price" scope="session" value="${positions.key.itemPrice}" />
+                        <span id="total" class="order__text"><c:out value="${quantity * price}"/></span>
+                    </li>
+                </c:forEach>
             </ul>
             <button class="confirm-button">Order</button>
         </div>

@@ -36,8 +36,23 @@
       <div class="header__navigation">
         <ul class="navigation">
           <li class="navigation__item"><a href="" class="navigation__link">contacts</a></li>
-          <li class="navigation__item"><a href="${pageContext.request.contextPath}/jsp/order.jsp" class="navigation__link">Cart</a></li>
-          <li class="navigation__item"><a href="${pageContext.request.contextPath}/jsp/login.jsp" id="login" class="navigation__link">Sign in</a></li>
+            <li class="navigation__item"><a href="${pageContext.request.contextPath}/jsp/order.jsp" class="navigation__link">Cart</a></li>
+          <li class="navigation__item">
+            <c:choose>
+              <c:when test="${user.role.roleId == 2}">
+                <form method="get" action="${pageContext.request.contextPath}/controller">
+                  <input class="navigation__link" type="submit" value="LOGOUT" name="command"/>
+                </form>
+<%--                <a href="${pageContext.request.contextPath}/jsp/login.jsp" id="logout" class="navigation__link">Logout</a>--%>
+              </c:when>
+              <c:when test="${alter > 28}">
+                Переменная alter > 28
+              </c:when>
+              <c:otherwise>
+                  <a href="${pageContext.request.contextPath}/jsp/login.jsp" id="login" class="navigation__link">Sign in</a>
+              </c:otherwise>
+            </c:choose>
+          </li>
         </ul>
         <select name="language">
           <option value="en" selected>en</option>

@@ -1,15 +1,36 @@
 package by.epam.javatraining.restaurant.runner;
 
-import by.epam.javatraining.restaurant.builder.ItemOrderBuilder;
-import by.epam.javatraining.restaurant.dao.ItemOrderDAO;
-import by.epam.javatraining.restaurant.dao.impl.ItemOrderDAOImpl;
-import by.epam.javatraining.restaurant.entity.ItemOrder;
-import by.epam.javatraining.restaurant.exception.DAOException;
-import by.epam.javatraining.restaurant.pool.ConnectionPool;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Runner {
 
     public static void main(String[] args) {
-        int num = Integer.parseInt(null);
+        Map<Object, Integer> map = new HashMap<>();
+        Object object1 = new Object();
+        Object object2 = new Object();
+        map.put(object1, 5);
+
+        increaseQuantity(object1, map);
+
+//        if (map.containsKey(object1)) {
+//            Integer temp = map.get(object1);
+//            temp++;
+//            map.put(object1, temp);
+//        }
+
+        for (Map.Entry<Object, Integer> entry: map.entrySet()) {
+            System.out.println(entry.getKey() + " " + entry.getValue());
+        }
+    }
+
+    private static void increaseQuantity(Object object, Map map) {
+        if (map.containsKey(object)) {
+            Integer temp = (Integer) map.get(object);
+            temp++;
+            map.put(object, temp);
+        } else {
+            map.put(object, 1);
+        }
     }
 }

@@ -66,6 +66,9 @@ a {
 .navigation__link {
   font-size: 1.8rem;
   text-transform: uppercase;
+  border: none;
+  color: rgb(255, 255, 255);
+  background-color: rgb(0, 0, 0);
 }
 
 /* MAIN */
