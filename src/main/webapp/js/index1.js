@@ -1,6 +1,6 @@
-const modalBox = document.querySelector('.modal-box');
+const list = document.querySelector('.orders__list');
 
-document.addEventListener('click', (event) => {
+list.addEventListener('click', (event) => {
   event.preventDefault();
 
   const element = event.target;
@@ -19,3 +19,4 @@ document.addEventListener('click', (event) => {
     count.textContent = +count.textContent + 1;
   }
 });
+

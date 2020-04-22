@@ -1,4 +1,4 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <!DOCTYPE html>
@@ -56,28 +56,21 @@
     <div class="wrapper main__wrapper">
         <div class="orders">
             <ul class="orders__list">
-                <c:forEach items="${positions}" var="positions" varStatus="status">
-                    <li class="order__item">
-                        <img src="data:image/jpg;base64,${positions.key.positionImage}" width="50" height="50"/>
-                        <span class="order__text">${positions.key.itemName}</span>
-                        <div class="buttons">
-                            <button class="order__button button_danger">-</button>
-                            <span class="order__quantity">${positions.value}</span>
-                            <button class="order__button button_success">+</button>
-                        </div>
-                        <c:set var="quantity" scope="session" value="${positions.value}"/>
-                        <c:set var="price" scope="session" value="${positions.key.itemPrice}"/>
-                        <span id="total" class="order__text"><c:out value="${quantity * price}"/></span>
-                    </li>
-                </c:forEach>
+                <li class="order__item">
+                    Phone number: +375292999615
+                </li>
+                <li class="order__item">
+                    Address: vulісa Akadеmіka Kuprеvіča 1/1, Minsk, 220141
+                </li>
+                <li class="order__item">
+                    Instagram: MY_RESTAURANT
+                </li>
+                <li class="order__item">
+                    Facebook: https://www.facebook.com/my_restaurant/
+                </li>
             </ul>
-            <button class="confirm-button">Order</button>
         </div>
     </div>
 </main>
-<script>
-    <%@include file="/js/index1.js"%>
-</script>
 </body>
-
 </html>
