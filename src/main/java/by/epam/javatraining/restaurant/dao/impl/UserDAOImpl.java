@@ -182,7 +182,7 @@ public class UserDAOImpl implements UserDAO {
                 .buildEmail(resultSet.getString(DBFields.DB_USER_EMAIL.getValue()))
                 .buildPhoneNumber(resultSet.getString(DBFields.DB_USER_PHONE_NUMBER.getValue()))
                 .buildFirstName(resultSet.getString(DBFields.DB_USER_FIRST_NAME.getValue()))
-                .buildLastName(DBFields.DB_USER_LAST_NAME.getValue())
+                .buildLastName(resultSet.getString(DBFields.DB_USER_LAST_NAME.getValue()))
                 .build();
     }
 }

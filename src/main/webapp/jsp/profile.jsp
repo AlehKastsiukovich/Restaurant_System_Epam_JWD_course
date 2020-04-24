@@ -7,9 +7,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/styles.css">
-    <link rel="stylesheet" href="../css/orders.css">
-    <title>restaurant</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/orders.css">
+    <title>profile</title>
 </head>
 
 <body>
@@ -60,20 +60,37 @@
 </header>
 
 <main class="main">
+    <form action="${pageContext.request.contextPath}/controller" method="post">
+        <ul>
+            <li>
+                <button class="confirm-button" type="submit" name="command" value="PROFILE">Your info:</button>
+            </li>
+            <li>
+                <button class="confirm-button" type="submit" name="command" value="SHOW_USER_ORDERS">Your orders:</button>
+            </li>
+            <li>
+                <button class="confirm-button" type="submit" name="command" value="EDIT_USER_INFO">Edit info:</button>
+            </li>
+        </ul>
+    </form>
+
     <div class="wrapper main__wrapper">
         <div class="orders">
             <ul class="orders__list">
                 <li class="order__item">
-                    Phone number: +375292999615
+                    Login: ${user.login}
                 </li>
                 <li class="order__item">
-                    Address: vulісa Akadеmіka Kuprеvіča 1/1, Minsk, 220141
+                    Email: ${user.email}
                 </li>
                 <li class="order__item">
-                    Instagram: MY_RESTAURANT
+                    Phone number: ${user.phoneNumber}
                 </li>
                 <li class="order__item">
-                    Facebook: https://www.facebook.com/my_restaurant/
+                    First name: ${user.firstName}
+                </li>
+                <li class="order__item">
+                    Last name: ${user.lastName}
                 </li>
             </ul>
         </div>

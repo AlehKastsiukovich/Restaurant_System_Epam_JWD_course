@@ -22,9 +22,19 @@
         </div>
         <div class="header__navigation">
             <ul class="navigation">
-                <li class="navigation__item"><a href="${pageContext.request.contextPath}/jsp/contacts.jsp" class="navigation__link">contacts</a></li>
+                <li class="navigation__item"><a href="${pageContext.request.contextPath}/jsp/contacts.jsp"
+                                                class="navigation__link">contacts</a></li>
                 <li class="navigation__item"><a href="${pageContext.request.contextPath}/jsp/order.jsp"
                                                 class="navigation__link">cart</a></li>
+                <c:if test="${user.role.roleId == 2}">
+                    <li class="navigation__item">
+                        <form class="header__form" method="get" action="${pageContext.request.contextPath}/controller">
+                            <input style="cursor: pointer; border: none; color: rgb(255, 255, 255);
+                                background: rgb(0, 0, 0);" class="navigation__link" type="submit" value="PROFILE"
+                                   name="command"/>
+                        </form>
+                    </li>
+                </c:if>
                 <li class="navigation__item">
                     <c:choose>
                         <c:when test="${user.role.roleId == 2}">
@@ -33,9 +43,6 @@
                                 background: rgb(0, 0, 0);" class="navigation__link" type="submit" value="LOGOUT"
                                        name="command"/>
                             </form>
-                        </c:when>
-                        <c:when test="${alter > 28}">
-                            Переменная alter > 28
                         </c:when>
                         <c:otherwise>
                             <a href="${pageContext.request.contextPath}/jsp/login.jsp" id="login"
