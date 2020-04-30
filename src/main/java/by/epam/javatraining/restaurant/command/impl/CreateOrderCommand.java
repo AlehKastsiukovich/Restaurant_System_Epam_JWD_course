@@ -14,6 +14,7 @@ import java.math.BigDecimal;
 import java.util.Map;
 
 public class CreateOrderCommand implements Command {
+    private static final Integer CURRENT_POSITIONS_SUM = 0;
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
@@ -22,9 +23,12 @@ public class CreateOrderCommand implements Command {
         Map<Position, Integer> cartMap = (Map<Position, Integer>) session
                 .getAttribute(JSPParameter.SESSION_POSITIONS.getValue());
 
+        BigDecimal totalPrice;
         if (user != null && cartMap != null) {
+            totalPrice = calculateTotalPrice(cartMap);
+
             Order order = new OrderBuilder()
-                    .buildTotalPrice(new BigDecimal(1000))
+                    .buildTotalPrice(totalPrice)
                     .buildCustomerId(user.getUserId())
                     .build();
             session.setAttribute(JSPParameter.ORDER.getValue(), order);
@@ -33,5 +37,15 @@ public class CreateOrderCommand implements Command {
         }
 
         return PageType.CART_PAGE.getValue();
+    }
+
+    private BigDecimal calculateTotalPrice(Map<Position, Integer> map) {
+        BigDecimal totalPrice = new BigDecimal(CURRENT_POSITIONS_SUM);
+
+        for (Map.Entry<Position, Integer> entry : map.entrySet()) {
+            totalPrice = totalPrice.add(entry.getKey().getItemPrice().multiply(new BigDecimal(entry.getValue())));
+        }
+
+        return totalPrice;
     }
 }
