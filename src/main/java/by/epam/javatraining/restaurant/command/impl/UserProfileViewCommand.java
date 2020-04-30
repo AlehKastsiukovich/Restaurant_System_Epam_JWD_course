@@ -9,6 +9,6 @@ public class UserProfileViewCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        return PageType.PROFILE.getValue();
+        return PageType.PROFILE_PAGE.getValue();
     }
 }

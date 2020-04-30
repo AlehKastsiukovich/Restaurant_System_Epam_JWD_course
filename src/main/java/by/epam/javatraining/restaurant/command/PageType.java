@@ -5,8 +5,9 @@ public enum PageType {
     START_PAGE("/jsp/start_page.jsp"),
     SIGN_IN_PAGE("/jsp/login.jsp"),
     CART_PAGE("/jsp/order.jsp"),
-    CONTACTS("/jsp/contacts.jsp"),
-    PROFILE("jsp/profile.jsp");
+    CONTACTS_PAGE("/jsp/contacts.jsp"),
+    PROFILE_PAGE("jsp/profile.jsp"),
+    ADDRESS_FORM_PAGE("/jsp/address.jsp");
 
     private String value;
 

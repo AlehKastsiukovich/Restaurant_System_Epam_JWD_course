@@ -7,5 +7,6 @@ public enum CommandName {
     REDIRECT_TO_START_PAGE,
     ADD_TO_CART,
     LOGOUT,
-    PROFILE;
+    PROFILE,
+    CREATE_ORDER;
 }

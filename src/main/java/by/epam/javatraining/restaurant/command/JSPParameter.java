@@ -12,7 +12,8 @@ public enum JSPParameter {
     ROLE("role"),
     POSITIONS("positionList"),
     ID("id"),
-    SESSION_POSITIONS("positions");
+    SESSION_POSITIONS("positions"),
+    ORDER("order");
 
 
     private String value;

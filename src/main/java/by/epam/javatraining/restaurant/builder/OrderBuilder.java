@@ -15,6 +15,8 @@ public class OrderBuilder {
 
     public OrderBuilder() {
         deliveryAddress = new DeliveryAddress();
+        orderDate = new Date();
+        orderStatusId = 1;
     }
 
     public OrderBuilder buildOrderId(int orderId) {

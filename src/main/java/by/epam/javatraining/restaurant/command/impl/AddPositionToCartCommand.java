@@ -1,10 +1,8 @@
 package by.epam.javatraining.restaurant.command.impl;
 
-import by.epam.javatraining.restaurant.builder.ItemOrderBuilder;
 import by.epam.javatraining.restaurant.command.Command;
 import by.epam.javatraining.restaurant.command.JSPParameter;
 import by.epam.javatraining.restaurant.command.PageType;
-import by.epam.javatraining.restaurant.entity.ItemOrder;
 import by.epam.javatraining.restaurant.entity.Position;
 import by.epam.javatraining.restaurant.util.PositionCash;
 import javax.servlet.http.HttpServletRequest;
