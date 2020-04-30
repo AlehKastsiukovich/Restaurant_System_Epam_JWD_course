@@ -18,6 +18,7 @@ public class CommandFactory {
         commands.put(CommandName.ADD_TO_CART, new AddPositionToCartCommand());
         commands.put(CommandName.LOGOUT, new UserLogoutCommand());
         commands.put(CommandName.PROFILE, new UserProfileViewCommand());
+        commands.put(CommandName.CREATE_ORDER, new CreateOrderCommand());
     }
 
     private static class CommandFactoryHolder {

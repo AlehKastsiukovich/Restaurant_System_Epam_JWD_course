@@ -6,10 +6,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    <%@ include file="/css/styles.css"%>
-    <%@ include file="/css/login.css"%>
-  </style>
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css">
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/css/orders.css">
   <title>login page</title>
 </head>
 

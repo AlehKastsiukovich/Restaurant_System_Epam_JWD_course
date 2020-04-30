@@ -7,8 +7,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/styles.css">
-    <link rel="stylesheet" href="../css/orders.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/orders.css">
     <title>restaurant</title>
 </head>
 
@@ -78,7 +78,9 @@
                     </li>
                 </c:forEach>
             </ul>
-            <button class="confirm-button">Order</button>
+            <form action="${pageContext.request.contextPath}/controller" method="get">
+                <button class="confirm-button" type="submit" name="command" value="CREATE_ORDER">Order</button>
+            </form>
         </div>
     </div>
 </main>
