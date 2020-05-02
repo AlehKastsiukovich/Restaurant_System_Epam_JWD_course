@@ -19,7 +19,11 @@ public enum DBFields {
     DB_POSITIONS_ITEM_NAME("item_name"),
     DB_POSITIONS_GROUP_ID("group_id"),
     DB_POSITIONS_ITEM_PRICE("item_price"),
-    DB_POSITION_ITEM_IMAGE("pos_image");
+    DB_POSITION_ITEM_IMAGE("pos_image"),
+    DB_ADDRESS_ID("delivery_address_id"),
+    DB_ADDRESS_STREET("street"),
+    DB_ADDRESS_BUILD("build"),
+    DB_ADDRESS_APARTMENT("apartment");
 
     private String value;
 

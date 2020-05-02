@@ -20,6 +20,10 @@ public enum SQLQuery {
             + "where user_id = (?) and login = (?)"),
     CREATE_ADDRESS("insert into delivery_address (street, build, apartment)"
            + " values (?, ?, ?)"),
+    UPDATE_ADDRESS("update delivery_address set build = (?), apartment = (?) where delivery_address_id = (?)"),
+    DELETE_ADDRESS("delete from delivery_address where delivery_address_id = (?)"),
+    READ_ADDRESS_BY_ID("select * from delivery_address where delivery_address_id = (?)"),
+    GET_ALL_ADDRESSES("select * from delivery_address"),
     CREATE_ORDER("insert into `order` (order_date, customer_id, total_price,"
             + " order_status, id_delivery_address) values (?, ?, ?, ?, (select delivery_address_id"
             + " from delivery_address where street = (?) and build = (?) and apartment = (?)))"),

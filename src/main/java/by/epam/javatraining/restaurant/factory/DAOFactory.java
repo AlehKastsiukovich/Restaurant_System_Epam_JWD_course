@@ -1,9 +1,6 @@
 package by.epam.javatraining.restaurant.factory;
 
-import by.epam.javatraining.restaurant.dao.ItemOrderDAO;
-import by.epam.javatraining.restaurant.dao.OrderDAO;
-import by.epam.javatraining.restaurant.dao.PositionDAO;
-import by.epam.javatraining.restaurant.dao.UserDAO;
+import by.epam.javatraining.restaurant.dao.*;
 
 public interface DAOFactory {
 
@@ -14,4 +11,6 @@ public interface DAOFactory {
     PositionDAO getPositionDAO();
 
     ItemOrderDAO getItemOrderDAO();
+
+    DeliveryAddressDAO getDeliveryAddressDAO();
 }
