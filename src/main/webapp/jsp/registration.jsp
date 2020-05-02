@@ -65,7 +65,7 @@
                 <h3 class="modal-title">REGISTRATION</h3>
             </div>
             <div class="modal-body">
-                <form action="">
+                <form action="${pageContext.request.contextPath}/controller" method="post">
                     <input class="modal-body__input" type="text" placeholder="Username">
                     <input class="modal-body__input" type="text" placeholder="First name">
                     <input class="modal-body__input" type="text" placeholder="Last name">

@@ -19,6 +19,7 @@ public class CommandFactory {
         commands.put(CommandName.LOGOUT, new UserLogoutCommand());
         commands.put(CommandName.PROFILE, new UserProfileViewCommand());
         commands.put(CommandName.CREATE_ORDER, new CreateOrderCommand());
+        commands.put(CommandName.CONFIRM_ORDER, new ConfirmOrderCommand());
     }
 
     private static class CommandFactoryHolder {

@@ -18,6 +18,7 @@ public class CreateOrderCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
+        String page;
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute(JSPParameter.USER.getValue());
         Map<Position, Integer> cartMap = (Map<Position, Integer>) session

@@ -12,6 +12,7 @@ import java.util.List;
 
 public class OrderServiceImpl implements OrderService {
     private static final Logger LOGGER = LogManager.getLogger(OrderServiceImpl.class);
+    private static final int DEFAULT_NEW_ADDRESS_VALUE = 0;
 
     private OrderDAO dao = DAOFactoryImpl.INSTANCE.getOrderDAO();
 
@@ -72,5 +73,9 @@ public class OrderServiceImpl implements OrderService {
         }
 
         return orderList;
+    }
+
+    private boolean isAddressExist(Order order) {
+        return false;
     }
 }

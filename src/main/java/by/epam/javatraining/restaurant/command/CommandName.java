@@ -8,5 +8,6 @@ public enum CommandName {
     ADD_TO_CART,
     LOGOUT,
     PROFILE,
-    CREATE_ORDER;
+    CREATE_ORDER,
+    CONFIRM_ORDER;
 }

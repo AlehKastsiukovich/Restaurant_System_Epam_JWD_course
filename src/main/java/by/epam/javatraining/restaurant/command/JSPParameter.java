@@ -13,7 +13,10 @@ public enum JSPParameter {
     POSITIONS("positionList"),
     ID("id"),
     SESSION_POSITIONS("positions"),
-    ORDER("order");
+    ORDER("order"),
+    STREET("street"),
+    BUILD_NUMBER("build"),
+    APARTMENTS_NUMBER("number");
 
 
     private String value;
