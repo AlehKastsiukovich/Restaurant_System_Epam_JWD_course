@@ -59,8 +59,7 @@ public class DeliveryAddress {
         if (this == object) return true;
         if (object == null || getClass() != object.getClass()) return false;
         DeliveryAddress that = (DeliveryAddress) object;
-        return deliveryAddressId == that.deliveryAddressId &&
-                buildNumber == that.buildNumber &&
+        return buildNumber == that.buildNumber &&
                 apartmentNumber == that.apartmentNumber &&
                 Objects.equals(street, that.street);
     }

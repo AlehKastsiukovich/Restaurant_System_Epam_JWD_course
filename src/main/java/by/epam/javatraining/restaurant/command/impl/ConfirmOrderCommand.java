@@ -6,8 +6,9 @@ import by.epam.javatraining.restaurant.command.PageType;
 import by.epam.javatraining.restaurant.entity.DeliveryAddress;
 import by.epam.javatraining.restaurant.entity.Order;
 import by.epam.javatraining.restaurant.exception.ServiceException;
+import by.epam.javatraining.restaurant.factory.ServiceFactory;
+import by.epam.javatraining.restaurant.service.DeliveryAddressService;
 import by.epam.javatraining.restaurant.service.OrderService;
-import by.epam.javatraining.restaurant.service.impl.OrderServiceImpl;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
@@ -26,9 +27,11 @@ public class ConfirmOrderCommand implements Command {
 
         if (order != null) {
             order.setDeliveryAddress(address);
-            OrderService service = OrderServiceImpl.getInstance();
+            OrderService orderService = ServiceFactory.INSTANCE.getOrderService();
+            DeliveryAddressService addressService = ServiceFactory.INSTANCE.getDeliveryAddressService();
             try {
-                service.createOrder(order);
+                addressService.createDeliveryAddress(order.getDeliveryAddress());
+                orderService.createOrder(order);
             } catch (ServiceException e) {
                 LOGGER.error(e);
             }

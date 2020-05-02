@@ -29,7 +29,9 @@ public class DeliveryAddressServiceImpl implements DeliveryAddressService {
     @Override
     public void createDeliveryAddress(DeliveryAddress deliveryAddress) throws ServiceException {
         try {
-            dao.create(deliveryAddress);
+            if (!isAddressExist(deliveryAddress)) {
+                dao.create(deliveryAddress);
+            }
         } catch (DAOException e) {
             LOGGER.error(e);
             throw new ServiceException(e);
@@ -81,5 +83,11 @@ public class DeliveryAddressServiceImpl implements DeliveryAddressService {
         }
 
         return addressList;
+    }
+
+    private boolean isAddressExist(DeliveryAddress deliveryAddress) throws DAOException {
+        List<DeliveryAddress> deliveryAddressList = dao.getAll();
+
+        return deliveryAddressList.contains(deliveryAddress);
     }
 }
