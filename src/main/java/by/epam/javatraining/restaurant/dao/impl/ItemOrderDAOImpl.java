@@ -3,14 +3,13 @@ package by.epam.javatraining.restaurant.dao.impl;
 import by.epam.javatraining.restaurant.dao.ItemOrderDAO;
 import by.epam.javatraining.restaurant.dao.SQLQuery;
 import by.epam.javatraining.restaurant.entity.ItemOrder;
+import by.epam.javatraining.restaurant.entity.Order;
 import by.epam.javatraining.restaurant.exception.DAOException;
 import by.epam.javatraining.restaurant.pool.ConnectionPool;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,14 +29,16 @@ public class ItemOrderDAOImpl implements ItemOrderDAO {
         return ItemOrderDAOImplHolder.INSTANCE;
     }
 
-    public String query = "update item_order set item_id = (?), quantity = (?) where item_order.order_id = (?)";
+    public String query = "insert into item_order (order_id, item_id, quantity) " +
+            "values ((select order_id from `order` " +
+            "where order_date = (?) and customer_id = (?) and total_price = (?) " +
+            "and order_status = (?) and id_delivery_address = (?)), (?), (?))";
 
     @Override
     public void create(ItemOrder itemOrder) throws DAOException {
         try (Connection connection = pool.getConnection();
-             PreparedStatement statement = connection.prepareStatement(SQLQuery.CREATE_ITEM_ORDER.getValue())) {
+             PreparedStatement statement = connection.prepareStatement(query)) {
 
-            statement.setInt(1, itemOrder.getOrder().getOrderId());
             statement.setInt(2, itemOrder.getPosition().getPositionId());
             statement.setInt(3, itemOrder.getQuantity());
             statement.executeUpdate();
@@ -117,6 +118,25 @@ public class ItemOrderDAOImpl implements ItemOrderDAO {
         }
 
         return itemOrderList;
+    }
+
+    public void createItemOrder(ItemOrder itemOrder, Order order) throws DAOException {
+        try (Connection connection = pool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+
+            statement.setDate(1, (Date) order.getOrderDate());
+            statement.setInt(2, order.getCustomerId());
+            statement.setBigDecimal(3, order.getTotalPrice());
+            statement.setInt(4, order.getOrderStatusId());
+            statement.setInt(5, order.getDeliveryAddress().getDeliveryAddressId());
+            statement.setInt(6, itemOrder.getPosition().getPositionId());
+            statement.setInt(7, itemOrder.getQuantity());
+            statement.executeUpdate();
+
+        } catch (SQLException e) {
+            LOGGER.error(e);
+            throw new DAOException(e);
+        }
     }
 
     private ItemOrder buildItemOrder(ResultSet resultSet) {

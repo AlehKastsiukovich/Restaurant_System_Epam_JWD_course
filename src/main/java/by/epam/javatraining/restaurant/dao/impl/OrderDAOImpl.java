@@ -34,8 +34,6 @@ public class OrderDAOImpl implements OrderDAO {
         try (Connection connection = pool.getConnection();
              PreparedStatement statement = connection.prepareStatement(SQLQuery.CREATE_ORDER.getValue())) {
 
-//            createAddress(order);
-
             statement.setDate(1, new Date(new java.util.Date().getTime()));
             statement.setInt(2, order.getCustomerId());
             statement.setBigDecimal(3, order.getTotalPrice());
@@ -124,21 +122,6 @@ public class OrderDAOImpl implements OrderDAO {
 
         return orderList;
     }
-
-//    private void createAddress(Order order) throws DAOException {
-//        try (Connection connection = pool.getConnection();
-//             PreparedStatement statement = connection.prepareStatement(SQLQuery.CREATE_ADDRESS.getValue())) {
-//
-//            statement.setString(1, order.getDeliveryAddress().getStreet());
-//            statement.setInt(2, order.getDeliveryAddress().getBuildNumber());
-//            statement.setInt(3, order.getDeliveryAddress().getApartmentNumber());
-//            statement.executeUpdate();
-//
-//        } catch (SQLException e) {
-//            LOGGER.error(e);
-//            throw new DAOException(e);
-//        }
-//    }
 
     private Order buildOrder(ResultSet resultSet) throws SQLException {
         return new OrderBuilder()

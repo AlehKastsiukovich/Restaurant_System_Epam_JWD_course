@@ -28,6 +28,7 @@ public class ConfirmOrderCommand implements Command {
         if (order != null) {
             order.setDeliveryAddress(address);
             OrderService orderService = ServiceFactory.INSTANCE.getOrderService();
+
             DeliveryAddressService addressService = ServiceFactory.INSTANCE.getDeliveryAddressService();
             try {
                 addressService.createDeliveryAddress(order.getDeliveryAddress());

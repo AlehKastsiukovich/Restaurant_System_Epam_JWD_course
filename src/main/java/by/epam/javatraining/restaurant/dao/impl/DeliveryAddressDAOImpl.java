@@ -8,10 +8,8 @@ import by.epam.javatraining.restaurant.exception.DAOException;
 import by.epam.javatraining.restaurant.pool.ConnectionPool;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,12 +32,20 @@ public class DeliveryAddressDAOImpl implements DeliveryAddressDAO {
     @Override
     public void create(DeliveryAddress deliveryAddress) throws DAOException {
         try (Connection connection = pool.getConnection();
-             PreparedStatement statement = connection.prepareStatement(SQLQuery.CREATE_ADDRESS.getValue())) {
+             PreparedStatement statement = connection.prepareStatement(SQLQuery.CREATE_ADDRESS.getValue(), Statement.RETURN_GENERATED_KEYS)) {
+
+            ResultSet resultSet = statement.getGeneratedKeys();
+            if (resultSet.next()) {
+                int a = resultSet.getInt(1);
+                System.out.println("!!!" + a);
+            }
 
             statement.setString(1, deliveryAddress.getStreet());
             statement.setInt(2, deliveryAddress.getBuildNumber());
             statement.setInt(3, deliveryAddress.getApartmentNumber());
             statement.executeUpdate();
+
+
 
         } catch (SQLException e) {
             LOGGER.error(e);
