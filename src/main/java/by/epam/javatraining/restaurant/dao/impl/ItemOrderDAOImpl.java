@@ -30,8 +30,6 @@ public class ItemOrderDAOImpl implements ItemOrderDAO {
         return ItemOrderDAOImplHolder.INSTANCE;
     }
 
-    public String query = "select * from item_order where order_id = (?) and item_id = (?)";
-
     @Override
     public void create(ItemOrder itemOrder) throws DAOException {
         try (Connection connection = pool.getConnection();
@@ -50,11 +48,12 @@ public class ItemOrderDAOImpl implements ItemOrderDAO {
     @Override
     public void update(ItemOrder itemOrder) throws DAOException {
         try (Connection connection = pool.getConnection();
-             PreparedStatement statement = connection.prepareStatement(query)) {
+             PreparedStatement statement = connection.prepareStatement(SQLQuery.UPDATE_ITEM_ORDER.getValue())) {
 
             statement.setInt(1, itemOrder.getPosition().getPositionId());
             statement.setInt(2, itemOrder.getQuantity());
             statement.setInt(3, itemOrder.getOrder().getOrderId());
+            statement.setInt(4, itemOrder.getPosition().getPositionId());
             statement.executeUpdate();
 
         } catch (SQLException e) {
