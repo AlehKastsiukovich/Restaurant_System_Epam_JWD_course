@@ -8,6 +8,7 @@ import by.epam.javatraining.restaurant.exception.DAOException;
 import by.epam.javatraining.restaurant.pool.ConnectionPool;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -102,23 +103,23 @@ public class DeliveryAddressDAOImpl implements DeliveryAddressDAO {
 
     @Override
     public List<DeliveryAddress> getAll() throws DAOException {
-       List<DeliveryAddress> deliveryAddressList = new ArrayList<>();
+        List<DeliveryAddress> deliveryAddressList = new ArrayList<>();
 
-       try (Connection connection = pool.getConnection();
-            PreparedStatement statement = connection.prepareStatement(SQLQuery.GET_ALL_ADDRESSES.getValue());
-            ResultSet resultSet = statement.executeQuery()) {
+        try (Connection connection = pool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(SQLQuery.GET_ALL_ADDRESSES.getValue());
+             ResultSet resultSet = statement.executeQuery()) {
 
             while (resultSet.next()) {
-              DeliveryAddress deliveryAddress = buildDeliveryAddress(resultSet);
-              deliveryAddressList.add(deliveryAddress);
+                DeliveryAddress deliveryAddress = buildDeliveryAddress(resultSet);
+                deliveryAddressList.add(deliveryAddress);
             }
 
-       } catch (SQLException e) {
-           LOGGER.error(e);
-           throw new DAOException(e);
-       }
+        } catch (SQLException e) {
+            LOGGER.error(e);
+            throw new DAOException(e);
+        }
 
-       return deliveryAddressList;
+        return deliveryAddressList;
     }
 
     private DeliveryAddress buildDeliveryAddress(ResultSet resultSet) throws SQLException {

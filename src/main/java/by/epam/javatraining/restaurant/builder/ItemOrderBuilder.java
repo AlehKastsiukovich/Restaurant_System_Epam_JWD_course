@@ -1,20 +1,20 @@
 package by.epam.javatraining.restaurant.builder;
 
-import by.epam.javatraining.restaurant.dao.OrderDAO;
-import by.epam.javatraining.restaurant.dao.PositionDAO;
 import by.epam.javatraining.restaurant.entity.ItemOrder;
 import by.epam.javatraining.restaurant.entity.Order;
 import by.epam.javatraining.restaurant.entity.Position;
-import by.epam.javatraining.restaurant.exception.DAOException;
-import by.epam.javatraining.restaurant.factory.DAOFactoryImpl;
+import by.epam.javatraining.restaurant.exception.ServiceException;
+import by.epam.javatraining.restaurant.factory.ServiceFactory;
+import by.epam.javatraining.restaurant.service.OrderService;
+import by.epam.javatraining.restaurant.service.PositionService;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
 public class ItemOrderBuilder {
     private static final Logger LOGGER = LogManager.getLogger(ItemOrderBuilder.class);
 
-    private PositionDAO positionDAO = DAOFactoryImpl.INSTANCE.getPositionDAO();
-    private OrderDAO orderDAO = DAOFactoryImpl.INSTANCE.getOrderDAO();
+    private PositionService positionService = ServiceFactory.INSTANCE.getPositionService();
+    private OrderService orderService = ServiceFactory.INSTANCE.getOrderService();
 
     private Position position;
     private Order order;
@@ -22,8 +22,8 @@ public class ItemOrderBuilder {
 
     public ItemOrderBuilder buildPosition(int id) {
         try {
-            this.position = positionDAO.readById(id);
-        } catch (DAOException e) {
+            position = positionService.getPositionById(id);
+        } catch (ServiceException e) {
             LOGGER.error(e);
         }
 
@@ -32,9 +32,9 @@ public class ItemOrderBuilder {
 
     public ItemOrderBuilder buildOrder(int orderId) {
         try {
-            order = orderDAO.readById(orderId);
-        } catch (DAOException e) {
-            LOGGER.error(e);
+            order = orderService.getOrderById(orderId);
+        } catch (ServiceException e) {
+           LOGGER.error(e);
         }
 
         return this;

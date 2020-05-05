@@ -12,6 +12,7 @@ import java.util.Date;
 
 public class OrderBuilder {
     private static final Logger LOGGER = LogManager.getLogger(OrderBuilder.class);
+    private static final int ORDER_STATUS_AFTER_CREATING = 1;
 
     private int orderId;
     private int customerId;
@@ -25,7 +26,7 @@ public class OrderBuilder {
     public OrderBuilder() {
         deliveryAddress = new DeliveryAddress();
         orderDate = new Date();
-        orderStatusId = 1;
+        orderStatusId = ORDER_STATUS_AFTER_CREATING;
     }
 
     public OrderBuilder buildOrderId(int orderId) {
