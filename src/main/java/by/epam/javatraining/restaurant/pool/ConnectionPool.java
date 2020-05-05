@@ -16,7 +16,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 public class ConnectionPool {
     private static final Logger LOGGER = LogManager.getLogger(ConnectionPool.class);
 
-    private static final int CONNECTION_POOL_CAPACITY = 10;
+    private static final int CONNECTION_POOL_CAPACITY = 20;
     private static final String DATABASE_PROPERTIES_FILE_NAME = "database.properties";
     private static final String DATABASE_PROPERTIES_USER = "db.user";
     private static final String DATABASE_PROPERTIES_PASSWORD = "db.password";

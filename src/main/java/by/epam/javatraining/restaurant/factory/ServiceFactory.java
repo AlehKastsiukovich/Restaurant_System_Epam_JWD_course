@@ -1,13 +1,7 @@
 package by.epam.javatraining.restaurant.factory;
 
-import by.epam.javatraining.restaurant.service.DeliveryAddressService;
-import by.epam.javatraining.restaurant.service.OrderService;
-import by.epam.javatraining.restaurant.service.PositionService;
-import by.epam.javatraining.restaurant.service.impl.DeliveryAddressServiceImpl;
-import by.epam.javatraining.restaurant.service.impl.OrderServiceImpl;
-import by.epam.javatraining.restaurant.service.UserService;
-import by.epam.javatraining.restaurant.service.impl.PositionServiceImpl;
-import by.epam.javatraining.restaurant.service.impl.UserServiceImpl;
+import by.epam.javatraining.restaurant.service.*;
+import by.epam.javatraining.restaurant.service.impl.*;
 
 public enum ServiceFactory {
 
@@ -24,4 +18,8 @@ public enum ServiceFactory {
     public PositionService getPositionService() { return PositionServiceImpl.getInstance(); }
 
     public DeliveryAddressService getDeliveryAddressService() { return DeliveryAddressServiceImpl.getInstance(); }
+
+    public ItemOrderService getItemOrderService() {
+        return ItemOrderServiceImpl.getInstance();
+    }
 }

@@ -44,7 +44,14 @@ public enum SQLQuery {
     READ_POSITION_BY_ID("select * from positions inner join positions_item_group pig"
             + " on positions.group_id = pig.group_id where item_id = (?)"),
     CREATE_ITEM_ORDER("insert into item_order (order_id, item_id, quantity)"
-            + " VALUES ((?), (?), (?))");
+            + " VALUES ((?), (?), (?))"),
+    CREATE_ITEM_ORDER_BY_ORDER("insert into item_order (item_id, quantity, order_id)"
+            + " values ((?), (?), (select order_id id from `order` where order_date = (?) and customer_id = (?)"
+            + " and total_price = (?) and order_status = (?) and id_delivery_address ="
+            + " (select delivery_address_id from delivery_address where street = (?)"
+            + " and build = (?) and apartment = (?))))"),
+    DELETE_ITEM_ORDER("delete from item_order where order_id = (?) and item_id = (?)"),
+    GET_ALL_ITEM_ORDERS("select * from item_order");
 
     private String value;
 

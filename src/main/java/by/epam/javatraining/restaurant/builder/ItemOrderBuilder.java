@@ -30,9 +30,9 @@ public class ItemOrderBuilder {
         return this;
     }
 
-    public ItemOrderBuilder buildOrder(int id) {
+    public ItemOrderBuilder buildOrder(int orderId) {
         try {
-            this.order = orderDAO.readById(id);
+            order = orderDAO.readById(orderId);
         } catch (DAOException e) {
             LOGGER.error(e);
         }

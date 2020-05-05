@@ -5,15 +5,18 @@ import by.epam.javatraining.restaurant.command.JSPParameter;
 import by.epam.javatraining.restaurant.command.PageType;
 import by.epam.javatraining.restaurant.entity.DeliveryAddress;
 import by.epam.javatraining.restaurant.entity.Order;
+import by.epam.javatraining.restaurant.entity.Position;
 import by.epam.javatraining.restaurant.exception.ServiceException;
 import by.epam.javatraining.restaurant.factory.ServiceFactory;
 import by.epam.javatraining.restaurant.service.DeliveryAddressService;
+import by.epam.javatraining.restaurant.service.ItemOrderService;
 import by.epam.javatraining.restaurant.service.OrderService;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.Map;
 
 public class ConfirmOrderCommand implements Command {
     private static final Logger LOGGER = LogManager.getLogger(ConfirmOrderCommand.class);
@@ -23,16 +26,19 @@ public class ConfirmOrderCommand implements Command {
         HttpSession session = request.getSession();
 
         Order order = (Order) session.getAttribute(JSPParameter.ORDER.getValue());
+        Map<Position, Integer> positionIntegerMap = (Map<Position, Integer>) session
+                .getAttribute(JSPParameter.SESSION_POSITIONS.getValue());
         DeliveryAddress address = createDeliveryAddress(request);
 
         if (order != null) {
             order.setDeliveryAddress(address);
             OrderService orderService = ServiceFactory.INSTANCE.getOrderService();
-
             DeliveryAddressService addressService = ServiceFactory.INSTANCE.getDeliveryAddressService();
+            ItemOrderService itemOrderService = ServiceFactory.INSTANCE.getItemOrderService();
             try {
                 addressService.createDeliveryAddress(order.getDeliveryAddress());
                 orderService.createOrder(order);
+                itemOrderService.createItemOrder(positionIntegerMap, order);
             } catch (ServiceException e) {
                 LOGGER.error(e);
             }

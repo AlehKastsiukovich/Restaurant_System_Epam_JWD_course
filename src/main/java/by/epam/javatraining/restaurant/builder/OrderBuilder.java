@@ -2,16 +2,25 @@ package by.epam.javatraining.restaurant.builder;
 
 import by.epam.javatraining.restaurant.entity.DeliveryAddress;
 import by.epam.javatraining.restaurant.entity.Order;
+import by.epam.javatraining.restaurant.exception.ServiceException;
+import by.epam.javatraining.restaurant.factory.ServiceFactory;
+import by.epam.javatraining.restaurant.service.DeliveryAddressService;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import java.math.BigDecimal;
 import java.util.Date;
 
 public class OrderBuilder {
+    private static final Logger LOGGER = LogManager.getLogger(OrderBuilder.class);
+
     private int orderId;
     private int customerId;
     private int orderStatusId;
     private Date orderDate;
     private DeliveryAddress deliveryAddress;
     private BigDecimal totalPrice;
+
+    private DeliveryAddressService service = ServiceFactory.INSTANCE.getDeliveryAddressService();
 
     public OrderBuilder() {
         deliveryAddress = new DeliveryAddress();
@@ -41,6 +50,16 @@ public class OrderBuilder {
 
     public OrderBuilder buildTotalPrice(BigDecimal totalPrice) {
         this.totalPrice = totalPrice;
+        return this;
+    }
+
+    public OrderBuilder buildDeliveryAddress(int addressId) {
+        try {
+            deliveryAddress = service.readDeliveryAddressById(addressId);
+        } catch (ServiceException e) {
+            LOGGER.error(e);
+        }
+
         return this;
     }
 

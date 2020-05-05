@@ -19,6 +19,7 @@ public enum JSPParameter {
     APARTMENTS_NUMBER("number");
 
 
+
     private String value;
 
     JSPParameter(String value) {

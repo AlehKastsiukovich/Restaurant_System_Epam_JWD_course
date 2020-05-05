@@ -3,11 +3,13 @@ package by.epam.javatraining.restaurant.service.impl;
 import by.epam.javatraining.restaurant.dao.impl.ItemOrderDAOImpl;
 import by.epam.javatraining.restaurant.entity.ItemOrder;
 import by.epam.javatraining.restaurant.entity.Order;
+import by.epam.javatraining.restaurant.entity.Position;
 import by.epam.javatraining.restaurant.exception.DAOException;
 import by.epam.javatraining.restaurant.exception.ServiceException;
 import by.epam.javatraining.restaurant.service.ItemOrderService;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import java.util.Map;
 
 public class ItemOrderServiceImpl implements ItemOrderService {
     private static final Logger LOGGER = LogManager.getLogger(ItemOrderServiceImpl.class);
@@ -26,12 +28,20 @@ public class ItemOrderServiceImpl implements ItemOrderService {
     }
 
     @Override
-    public void createItemOrder(ItemOrder itemOrder, Order order) throws ServiceException {
-        try {
-            dao.createItemOrder(itemOrder, order);
-        } catch (DAOException e) {
-            LOGGER.error(e);
-            throw new ServiceException(e);
+    public void createItemOrder(Map<Position, Integer> positionIntegerMap, Order order) throws ServiceException {
+        ItemOrder itemOrder;
+
+        for (Map.Entry<Position, Integer> entry : positionIntegerMap.entrySet()) {
+            itemOrder = new ItemOrder();
+            itemOrder.setPosition(entry.getKey());
+            itemOrder.setQuantity(entry.getValue());
+
+            try {
+                dao.createItemOrderByOrder(itemOrder, order);
+            } catch (DAOException e) {
+                LOGGER.error(e);
+                throw new ServiceException(e);
+            }
         }
     }
 }

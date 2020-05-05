@@ -66,14 +66,17 @@
             </div>
             <div class="modal-body">
                 <form action="${pageContext.request.contextPath}/controller" method="post">
-                    <input class="modal-body__input" type="text" placeholder="Username">
-                    <input class="modal-body__input" type="text" placeholder="First name">
-                    <input class="modal-body__input" type="text" placeholder="Last name">
-                    <input class="modal-body__input" type="email" placeholder="email">
-                    <input class="modal-body__input" type="text" placeholder="Phone number +375 Your number">
-                    <input class="modal-body__input" type="password" placeholder="Password">
-                    <input class="modal-body__input" type="password" placeholder="Confirm password">
-                    <input class="modal-body__input button-login" type="button" value="Register">
+                    <input class="modal-body__input" type="text" name="login" placeholder="Username">
+                    <input class="modal-body__input" type="text" name="firstName" placeholder="First name">
+                    <input class="modal-body__input" type="text" name="lastName" placeholder="Last name">
+                    <input class="modal-body__input" type="email" name="email" placeholder="email">
+                    <input class="modal-body__input" type="text" name="phoneNumber" placeholder="Phone number +375 Your number">
+                    <input class="modal-body__input" type="password" name="password" placeholder="Password">
+                    <input class="modal-body__input" type="password" name="password_repeat" placeholder="Confirm password">
+                    <button class="modal-body__input button-login" type="submit" name="command" value="REGISTRATION">
+                        Register
+                    </button>
+                    <%--                    <input class="modal-body__input button-login" type="submit" name="command" value="Register">--%>
                 </form>
             </div>
         </div>

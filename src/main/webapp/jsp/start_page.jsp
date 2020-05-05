@@ -52,13 +52,9 @@
                                        name="command"/>
                             </form>
                         </c:when>
-                        <c:when test="${alter > 28}">
-                            Переменная alter > 28
-                        </c:when>
                         <c:otherwise>
                             <a href="${pageContext.request.contextPath}/jsp/login.jsp" id="login"
-                               class="navigation__link">Sign
-                                in</a>
+                               class="navigation__link">Sign in</a>
                         </c:otherwise>
                     </c:choose>
                 </li>
@@ -89,7 +85,7 @@
                         <img src="data:image/jpg;base64,${list.positionImage}" width="200" height="200"/>
                         <div class="product__content">
                             <button type="submit" name="command" value="ADD_TO_CART">add</button>
-                            <span class="price">${list.itemPrice}$</span>
+                            <span class="price">${list.itemPrice} BYN</span>
                         </div>
                     </form>
                 </div>

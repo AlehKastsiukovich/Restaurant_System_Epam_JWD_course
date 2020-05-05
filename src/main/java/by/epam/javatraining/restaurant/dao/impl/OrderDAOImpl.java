@@ -130,6 +130,7 @@ public class OrderDAOImpl implements OrderDAO {
                 .buildCustomerId(resultSet.getInt(DBFields.DB_ORDER_CUSTOMER_ID.getValue()))
                 .buildTotalPrice(resultSet.getBigDecimal(DBFields.DB_ORDER_TOTAL_PRICE.getValue()))
                 .buildOrderStatusId(resultSet.getInt(DBFields.DB_ORDER_STATUS.getValue()))
+                .buildDeliveryAddress(resultSet.getInt(DBFields.DB_ORDER_DELIVERY_ADDRESS_ID.getValue()))
                 .build();
     }
 }

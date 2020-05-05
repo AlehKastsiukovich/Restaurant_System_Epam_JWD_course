@@ -23,7 +23,11 @@ public enum DBFields {
     DB_ADDRESS_ID("delivery_address_id"),
     DB_ADDRESS_STREET("street"),
     DB_ADDRESS_BUILD("build"),
-    DB_ADDRESS_APARTMENT("apartment");
+    DB_ADDRESS_APARTMENT("apartment"),
+    DB_ITEM_ORDER_ORDER_ID("order_id"),
+    DB_ITEM_ORDER_ITEM_ID("item_id"),
+    DB_ITEM_ORDER_QUANTITY("quantity");
+
 
     private String value;
 
