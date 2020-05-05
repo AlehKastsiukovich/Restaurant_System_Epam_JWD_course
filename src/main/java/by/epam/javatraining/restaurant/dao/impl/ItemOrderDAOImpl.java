@@ -30,15 +30,15 @@ public class ItemOrderDAOImpl implements ItemOrderDAO {
         return ItemOrderDAOImplHolder.INSTANCE;
     }
 
-    public String query = "select * from item_order";
+    public String query = "select * from item_order where order_id = (?) and item_id = (?)";
 
     @Override
     public void create(ItemOrder itemOrder) throws DAOException {
         try (Connection connection = pool.getConnection();
              PreparedStatement statement = connection.prepareStatement(SQLQuery.CREATE_ITEM_ORDER.getValue())) {
 
-            statement.setInt(2, itemOrder.getPosition().getPositionId());
-            statement.setInt(3, itemOrder.getQuantity());
+            statement.setInt(1, itemOrder.getPosition().getPositionId());
+            statement.setInt(2, itemOrder.getQuantity());
             statement.executeUpdate();
 
         } catch (SQLException e) {
@@ -79,16 +79,20 @@ public class ItemOrderDAOImpl implements ItemOrderDAO {
     }
 
     @Override
-    public ItemOrder readById(int id) throws DAOException {
-        ItemOrder itemOrder;
+    public ItemOrder readByOrderIdAndPositionId(int orderId, int positionId) throws DAOException {
+        ItemOrder itemOrder = null;
 
         try (Connection connection = pool.getConnection();
-             PreparedStatement statement = connection.prepareStatement(query)) {
+             PreparedStatement statement = connection
+                     .prepareStatement(SQLQuery.READ_ITEM_ORDER_BY_ORDER_ID_AND_POSITION_ID.getValue());
+             ResultSet resultSet = statement.executeQuery()) {
 
-            statement.setInt(1, id);
-            try (ResultSet resultSet = statement.executeQuery()) {
+            statement.setInt(1, orderId);
+            statement.setInt(2, positionId);
+            if (resultSet.next()) {
                 itemOrder = buildItemOrder(resultSet);
             }
+
         } catch (SQLException e) {
             LOGGER.error(e);
             throw new DAOException(e);
@@ -101,13 +105,12 @@ public class ItemOrderDAOImpl implements ItemOrderDAO {
     public List<ItemOrder> getAll() throws DAOException {
         List<ItemOrder> itemOrderList = new ArrayList<>();
         try (Connection connection = pool.getConnection();
-             PreparedStatement statement = connection.prepareStatement(SQLQuery.GET_ALL_ITEM_ORDERS.getValue())) {
+             PreparedStatement statement = connection.prepareStatement(SQLQuery.GET_ALL_ITEM_ORDERS.getValue());
+             ResultSet resultSet = statement.executeQuery()) {
 
-            try (ResultSet resultSet = statement.executeQuery()) {
-                while (resultSet.next()) {
-                    ItemOrder itemOrder = buildItemOrder(resultSet);
-                    itemOrderList.add(itemOrder);
-                }
+            while (resultSet.next()) {
+                ItemOrder itemOrder = buildItemOrder(resultSet);
+                itemOrderList.add(itemOrder);
             }
 
         } catch (SQLException e) {

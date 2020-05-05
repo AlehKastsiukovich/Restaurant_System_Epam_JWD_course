@@ -16,8 +16,7 @@ public interface PositionDAO extends ModelDAO<Position> {
     void delete(Position position) throws DAOException;
 
     @Override
-    Position readById(int id) throws DAOException;
-
-    @Override
     List<Position> getAll() throws DAOException;
+
+    Position readById(int id) throws DAOException;
 }

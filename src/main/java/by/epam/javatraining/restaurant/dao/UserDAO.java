@@ -16,10 +16,9 @@ public interface UserDAO extends ModelDAO<User> {
     void delete(User user) throws DAOException;
 
     @Override
-    User readById(int id) throws DAOException;
-
-    @Override
     List<User> getAll() throws DAOException;
+
+    User readById(int id) throws DAOException;
 
     User readByLogin(String login) throws DAOException;
 

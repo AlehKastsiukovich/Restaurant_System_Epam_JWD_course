@@ -11,7 +11,5 @@ public interface ModelDAO <T> {
 
     void delete(T t) throws DAOException;
 
-    T readById(int id) throws DAOException;
-
     List<T> getAll() throws DAOException;
 }

@@ -16,8 +16,7 @@ public interface DeliveryAddressDAO extends ModelDAO<DeliveryAddress> {
     void delete(DeliveryAddress deliveryAddress) throws DAOException;
 
     @Override
-    DeliveryAddress readById(int id) throws DAOException;
-
-    @Override
     List<DeliveryAddress> getAll() throws DAOException;
+
+    DeliveryAddress readById(int id) throws DAOException;
 }
