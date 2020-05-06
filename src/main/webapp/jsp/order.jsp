@@ -1,8 +1,16 @@
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="s" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<c:set var="language"
+       value="${not empty param.language ? param.language : not empty language ? language : pageContext.request.locale}"
+       scope="session"/>
+<%@ page isELIgnored="false" %>
+<fmt:setLocale value="${language}"/>
+<fmt:setBundle basename="text"/>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="${language}">
 
 <head>
     <meta charset="UTF-8">
@@ -24,8 +32,7 @@
             <ul class="navigation">
                 <li class="navigation__item"><a href="${pageContext.request.contextPath}/jsp/contacts.jsp"
                                                 class="navigation__link">contacts</a></li>
-                <li class="navigation__item"><a href="${pageContext.request.contextPath}/jsp/order.jsp"
-                                                class="navigation__link">cart</a></li>
+                <li class="navigation__item"><a href="${pageContext.request.contextPath}/jsp/order.jsp" class="navigation__link">cart</a></li>
                 <c:if test="${user.role.roleId == 2}">
                     <li class="navigation__item">
                         <form class="header__form" method="get" action="${pageContext.request.contextPath}/controller">
@@ -79,7 +86,7 @@
                 </c:forEach>
             </ul>
             <form action="${pageContext.request.contextPath}/controller" method="get">
-                <button class="confirm-button" type="submit" name="command" value="CREATE_ORDER">Order</button>
+                <button style="position: relative;left: 50%;transform: translate(-50%, 0);" class="confirm-button" type="submit" name="command" value="CREATE_ORDER">Order</button>
             </form>
         </div>
     </div>
