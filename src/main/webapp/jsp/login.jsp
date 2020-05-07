@@ -55,8 +55,10 @@
             </div>
             <div class="modal-body">
                 <form action="${pageContext.request.contextPath}/controller" method="post">
-                    <input class="modal-body__input" type="text" name="login" placeholder="Username">
-                    <input class="modal-body__input" type="password" name="password" placeholder="Password">
+                    <input class="modal-body__input" type="text" name="login"
+                           placeholder="<fmt:message key="label.username"/>">
+                    <input class="modal-body__input" type="password" name="password"
+                           placeholder="<fmt:message key="label.password"/>">
                     <button class="modal-body__input button-login" type="submit" name="command" value="SIGN_IN">
                         <fmt:message key="label.login"/>
                     </button>
