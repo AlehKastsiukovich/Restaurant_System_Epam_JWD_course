@@ -66,7 +66,7 @@
                 <button class="confirm-button" type="submit" name="command" value="PROFILE">Your info:</button>
             </li>
             <li>
-                <button class="confirm-button" type="submit" name="command" value="SHOW_USER_ORDERS">Your orders:</button>
+                <button class="confirm-button" type="submit" name="command" value="VIEW_USER_ORDERS">Your orders:</button>
             </li>
             <li>
                 <button class="confirm-button" type="submit" name="command" value="EDIT_USER_INFO">Edit info:</button>

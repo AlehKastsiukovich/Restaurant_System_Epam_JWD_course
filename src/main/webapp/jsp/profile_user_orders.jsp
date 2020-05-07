@@ -85,6 +85,18 @@
         </ul>
     </form>
 
+    <div class="wrapper main__wrapper">
+        <div class="orders">
+            <ul class="orders__list">
+                <c:forEach items="${orderList}" var="orders" varStatus="status">
+                    <li class="order__item">
+                        ${orders.orderId}
+                    </li>
+                </c:forEach>
+            </ul>
+        </div>
+    </div>
+
 </main>
 
 </body>
