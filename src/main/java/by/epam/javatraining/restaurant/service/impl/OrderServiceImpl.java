@@ -73,4 +73,18 @@ public class OrderServiceImpl implements OrderService {
 
         return orderList;
     }
+
+    @Override
+    public List<Order> getAllOrdersByUserId(int userId) throws ServiceException {
+        List<Order> orderList;
+
+        try {
+            orderList = dao.getAllOrdersByUserId(userId);
+        } catch (DAOException e) {
+            LOGGER.error(e);
+            throw new ServiceException(e);
+        }
+
+        return orderList;
+    }
 }

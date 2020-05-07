@@ -9,5 +9,6 @@ public enum CommandName {
     LOGOUT,
     PROFILE,
     CREATE_ORDER,
-    CONFIRM_ORDER;
+    CONFIRM_ORDER,
+    VIEW_USER_ORDERS;
 }

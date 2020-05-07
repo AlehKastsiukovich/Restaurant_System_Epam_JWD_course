@@ -39,6 +39,7 @@ public class ConfirmOrderCommand implements Command {
                 addressService.createDeliveryAddress(order.getDeliveryAddress());
                 orderService.createOrder(order);
                 itemOrderService.createItemOrder(positionIntegerMap, order);
+                session.removeAttribute(JSPParameter.SESSION_POSITIONS.getValue());
             } catch (ServiceException e) {
                 LOGGER.error(e);
             }

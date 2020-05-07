@@ -19,5 +19,7 @@ public interface OrderDAO extends ModelDAO<Order> {
     List<Order> getAll() throws DAOException;
 
     Order readById(int id) throws DAOException;
+
+    List<Order> getAllOrdersByUserId(int userId) throws DAOException;
 }
 

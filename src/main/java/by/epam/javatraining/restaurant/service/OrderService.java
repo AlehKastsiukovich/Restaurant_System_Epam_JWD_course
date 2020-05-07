@@ -13,4 +13,6 @@ public interface OrderService {
     Order getOrderById(int id) throws ServiceException;
 
     List<Order> getAllOrders() throws ServiceException;
+
+    List<Order> getAllOrdersByUserId(int userId) throws ServiceException;
 }

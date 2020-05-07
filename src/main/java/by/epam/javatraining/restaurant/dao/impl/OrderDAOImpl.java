@@ -102,6 +102,29 @@ public class OrderDAOImpl implements OrderDAO {
         return order;
     }
 
+    private String query = "select * from `order` where customer_id = (?)";
+
+    @Override
+    public List<Order> getAllOrdersByUserId(int userId) throws DAOException {
+        List<Order> orderList = new ArrayList<>();
+
+        try (Connection connection = pool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query);
+             ResultSet resultSet = statement.executeQuery()) {
+
+            if (resultSet.next()) {
+                Order order = buildOrder(resultSet);
+                orderList.add(order);
+            }
+
+        } catch (SQLException e) {
+            LOGGER.error(e);
+            throw new DAOException(e);
+        }
+
+        return orderList;
+    }
+
     @Override
     public List<Order> getAll() throws DAOException {
         List<Order> orderList = new ArrayList<>();
