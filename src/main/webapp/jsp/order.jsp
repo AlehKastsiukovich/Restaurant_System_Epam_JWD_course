@@ -25,20 +25,22 @@
     <div class="wrapper header__wrapper">
         <div class="header__logo-line">
             <a href="${pageContext.request.contextPath}/jsp/start_page.jsp" class="logo">
-                <h1 class="logo__text">Restaurant</h1>
+                <h1 class="logo__text"><fmt:message key="label.restaurant"/></h1>
             </a>
         </div>
         <div class="header__navigation">
             <ul class="navigation">
                 <li class="navigation__item"><a href="${pageContext.request.contextPath}/jsp/contacts.jsp"
-                                                class="navigation__link">contacts</a></li>
-                <li class="navigation__item"><a href="${pageContext.request.contextPath}/jsp/order.jsp" class="navigation__link">cart</a></li>
+                                                class="navigation__link"><fmt:message key="label.contacts"/></a></li>
+                <li class="navigation__item"><a href="${pageContext.request.contextPath}/jsp/order.jsp"
+                                                class="navigation__link"><fmt:message key="label.cart"/></a></li>
                 <c:if test="${user.role.roleId == 2}">
                     <li class="navigation__item">
                         <form class="header__form" method="get" action="${pageContext.request.contextPath}/controller">
-                            <input style="cursor: pointer; border: none; color: rgb(255, 255, 255);
+                            <button style="cursor: pointer; border: none; color: rgb(255, 255, 255);
                                 background: rgb(0, 0, 0);" class="navigation__link" type="submit" value="PROFILE"
-                                   name="command"/>
+                                    name="command"><fmt:message key="label.profile"/>
+                            </button>
                         </form>
                     </li>
                 </c:if>
@@ -46,22 +48,24 @@
                     <c:choose>
                         <c:when test="${user.role.roleId == 2}">
                             <form method="get" action="${pageContext.request.contextPath}/controller">
-                                <input style="cursor: pointer; border: none; color: rgb(255, 255, 255);
-                                background: rgb(0, 0, 0);" class="navigation__link" type="submit" value="LOGOUT"
-                                       name="command"/>
+                                <button style="cursor: pointer" class="navigation__link" type="submit" value="LOGOUT"
+                                        name="command"/><fmt:message key="label.logout"/>
+                                </button>
                             </form>
                         </c:when>
                         <c:otherwise>
                             <a href="${pageContext.request.contextPath}/jsp/login.jsp" id="login"
-                               class="navigation__link">Sign in</a>
+                               class="navigation__link"><fmt:message key="label.sign_in"/></a>
                         </c:otherwise>
                     </c:choose>
                 </li>
             </ul>
-            <select name="language">
-                <option value="en" selected>en</option>
-                <option value="ru">ru</option>
+            <form>
+            <select id="language" name="language" onchange="submit()">
+                <option value="ru" ${language == 'ru' ? 'selected' : ''}>ru</option>
+                <option value="en" ${language == 'en' ? 'selected' : ''}>en</option>
             </select>
+            </form>
         </div>
     </div>
 </header>
@@ -86,7 +90,9 @@
                 </c:forEach>
             </ul>
             <form action="${pageContext.request.contextPath}/controller" method="get">
-                <button style="position: relative;left: 50%;transform: translate(-50%, 0);" class="confirm-button" type="submit" name="command" value="CREATE_ORDER">Order</button>
+                <button style="position: relative;left: 50%;transform: translate(-50%, 0);" class="confirm-button"
+                        type="submit" name="command" value="CREATE_ORDER"><fmt:message key="label.order"/>
+                </button>
             </form>
         </div>
     </div>
