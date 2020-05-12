@@ -98,12 +98,12 @@
     <form action="${pageContext.request.contextPath}/controller" method="post">
         <ul>
             <li>
-                <button style="font-size: 14px;" class="confirm-button" type="submit" name="command" value="PROFILE">
+                <button style="font-size: 16px;" class="confirm-button" type="submit" name="command" value="PROFILE">
                     <fmt:message key="label.your_info"/>
                 </button>
             </li>
             <li>
-                <button style="font-size: 14px;" class="confirm-button" type="submit" name="command" value="VIEW_USER_ORDERS"><fmt:message
+                <button style="font-size: 16px" class="confirm-button" type="submit" name="command" value="VIEW_USER_ORDERS"><fmt:message
                         key="label.my_orders"/>
                 </button>
             </li>
