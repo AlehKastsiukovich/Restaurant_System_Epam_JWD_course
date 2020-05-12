@@ -18,6 +18,29 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/orders.css">
     <title>show_user_orders</title>
+    <style type="text/css">
+        table {
+            font-family: "Lato", Verdana, sans-serif;
+            font-size: 17px;
+            background: white;
+            max-width: 70%;
+            width: 70%;
+            border-collapse: collapse;
+            text-align: left;
+            margin: auto;
+        }
+        th {
+            font-weight: normal;
+            color: black;
+            padding: 10px 15px;
+        }
+        td {
+            color: black;
+            border-top: 1px solid black;
+            padding: 10px 15px;
+        }
+        tr:nth-child(2n) {background: lightgrey;}
+    </style>
 </head>
 
 <body>
@@ -61,10 +84,12 @@
                     </c:choose>
                 </li>
             </ul>
-            <select id="language" name="language" onchange="submit()">
-                <option value="ru" ${language == 'ru' ? 'selected' : ''}>ru</option>
-                <option value="en" ${language == 'en' ? 'selected' : ''}>en</option>
-            </select>
+            <form>
+                <select id="language" name="language" onchange="submit()">
+                    <option value="ru" ${language == 'ru' ? 'selected' : ''}>ru</option>
+                    <option value="en" ${language == 'en' ? 'selected' : ''}>en</option>
+                </select>
+            </form>
         </div>
     </div>
 </header>
@@ -73,27 +98,46 @@
     <form action="${pageContext.request.contextPath}/controller" method="post">
         <ul>
             <li>
-                <button class="confirm-button" type="submit" name="command" value="PROFILE">Your info:</button>
-            </li>
-            <li>
-                <button class="confirm-button" type="submit" name="command" value="VIEW_USER_ORDERS">Your orders:
+                <button style="font-size: 14px;" class="confirm-button" type="submit" name="command" value="PROFILE">
+                    <fmt:message key="label.your_info"/>
                 </button>
             </li>
             <li>
-                <button class="confirm-button" type="submit" name="command" value="EDIT_USER_INFO">Edit info:</button>
+                <button style="font-size: 14px;" class="confirm-button" type="submit" name="command" value="VIEW_USER_ORDERS"><fmt:message
+                        key="label.my_orders"/>
+                </button>
             </li>
+<%--            <li>--%>
+<%--                <button class="confirm-button" type="submit" name="command" value="EDIT_USER_INFO">Edit info:</button>--%>
+<%--            </li>--%>
         </ul>
     </form>
 
     <div class="wrapper main__wrapper">
         <div class="orders">
-            <ul class="orders__list">
+            <table>
+                <tr>
+                    <th><fmt:message key="label.order_id"/></th>
+                    <th><fmt:message key="label.date"/></th>
+                    <th><fmt:message key="label.total_price"/></th>
+                    <th><fmt:message key="label.status"/></th>
+                </tr>
                 <c:forEach items="${orderList}" var="orders" varStatus="status">
-                    <li class="order__item">
-                        ${orders.orderId}
-                    </li>
+                    <tr>
+                        <td>${orders.orderId}</td>
+                        <td>${orders.orderDate}</td>
+                        <td>${orders.totalPrice}</td>
+                        <td>
+                            <c:if test="${orders.orderStatusId == 1}">
+                                <fmt:message key="label.order_status_unprocessed"/>
+                            </c:if>
+                            <c:if test="${orders.orderStatusId == 2}">
+                                <fmt:message key="label.order_status_processed"/>
+                            </c:if>
+                        </td>
+                    </tr>
                 </c:forEach>
-            </ul>
+            </table>
         </div>
     </div>
 

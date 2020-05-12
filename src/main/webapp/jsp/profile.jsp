@@ -1,9 +1,16 @@
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="s" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<c:set var="language"
+       value="${not empty param.language ? param.language : not empty language ? language : pageContext.request.locale}"
+       scope="session"/>
+<%@ page isELIgnored="false" %>
+<fmt:setLocale value="${language}"/>
+<fmt:setBundle basename="text"/>
 
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="${language}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -68,9 +75,9 @@
             <li>
                 <button class="confirm-button" type="submit" name="command" value="VIEW_USER_ORDERS">Your orders:</button>
             </li>
-            <li>
-                <button class="confirm-button" type="submit" name="command" value="EDIT_USER_INFO">Edit info:</button>
-            </li>
+<%--            <li>--%>
+<%--                <button class="confirm-button" type="submit" name="command" value="EDIT_USER_INFO">Edit info:</button>--%>
+<%--            </li>--%>
         </ul>
     </form>
 
