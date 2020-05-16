@@ -47,7 +47,8 @@
                 <li class="navigation__item">
                     <c:choose>
                         <c:when test="${user.role.roleId == 2}">
-                            <form method="get" action="${pageContext.request.contextPath}/controller">
+                            <form class="header__form" method="get"
+                                  action="${pageContext.request.contextPath}/controller">
                                 <button style="cursor: pointer" class="navigation__link" type="submit" value="LOGOUT"
                                         name="command"/><fmt:message key="label.logout"/>
                                 </button>
@@ -61,10 +62,10 @@
                 </li>
             </ul>
             <form>
-            <select id="language" name="language" onchange="submit()">
-                <option value="ru" ${language == 'ru' ? 'selected' : ''}>ru</option>
-                <option value="en" ${language == 'en' ? 'selected' : ''}>en</option>
-            </select>
+                <select id="language" name="language" onchange="submit()">
+                    <option value="ru" ${language == 'ru' ? 'selected' : ''}>ru</option>
+                    <option value="en" ${language == 'en' ? 'selected' : ''}>en</option>
+                </select>
             </form>
         </div>
     </div>
@@ -77,7 +78,9 @@
                 <c:forEach items="${positions}" var="positions" varStatus="status">
                     <li class="order__item">
                         <img src="data:image/jpg;base64,${positions.key.positionImage}" width="50" height="50"/>
-                        <span class="order__text">${positions.key.itemName}</span>
+                        <div class="order__plus__name">
+                            <span class="order__text">${positions.key.itemName}</span>
+                        </div>
                         <div class="buttons">
                             <button class="order__button button_danger">-</button>
                             <span class="order__quantity">${positions.value}</span>
@@ -85,7 +88,7 @@
                         </div>
                         <c:set var="quantity" scope="session" value="${positions.value}"/>
                         <c:set var="price" scope="session" value="${positions.key.itemPrice}"/>
-                        <span id="total" class="order__text"><c:out value="${quantity * price}"/></span>
+                        <span id="total" class="order__text" style="width: 45px;"><c:out value="${quantity * price}"/></span>
                     </li>
                 </c:forEach>
             </ul>

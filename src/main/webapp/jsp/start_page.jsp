@@ -25,7 +25,7 @@
     <div class="wrapper header__wrapper">
         <div class="header__logo-line">
             <a href="${pageContext.request.contextPath}/jsp/start_page.jsp" class="logo">
-                <h1 class="logo__text"><fmt:message key="label.restaurant"/></h1>
+                <h1 class="logo__text" id="restaurant"><fmt:message key="label.restaurant"/></h1>
             </a>
         </div>
         <div class="header__navigation">
@@ -75,18 +75,18 @@
     <div class="wrapper main__wrapper">
         <div class="tags">
             <ul style="font-size: 1.8rem">
-                <li><fmt:message key="label.all"/></li>
-                <li><fmt:message key="label.pizza"/></li>
-                <li><fmt:message key="label.sushi"/></li>
-                <li><fmt:message key="label.soup"/></li>
-                <li><fmt:message key="label.dessert"/></li>
+                <li><a href="#restaurant" style="color: black"> <fmt:message key="label.all"/></a></li>
+                <li><a href="#1" style="color: black"><fmt:message key="label.pizza"/></a></li>
+                <li><a href="#2" style="color: black"><fmt:message key="label.sushi"/></a></li>
+                <li><a href="#3" style="color: black"><fmt:message key="label.soup"/></a></li>
+                <li><a href="#4" style="color: black"><fmt:message key="label.dessert"/></a></li>
             </ul>
         </div>
         <div class="products-list">
             <c:forEach items="${positionList}" var="list" varStatus="status">
                 <div class="product">
                     <form action="${pageContext.request.contextPath}/controller?id=${list.positionId}" method="post">
-                        <h2 class="product__name">${list.itemName}</h2>
+                        <h2 class="product__name" id="${list.group.groupId}">${list.itemName}</h2>
                         <img src="data:image/jpg;base64,${list.positionImage}" width="200" height="200"/>
                         <div class="product__content">
                             <button type="submit" name="command" value="ADD_TO_CART"><fmt:message key="label.add"/></button>

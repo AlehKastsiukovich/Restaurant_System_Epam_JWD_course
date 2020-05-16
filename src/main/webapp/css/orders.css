@@ -8,7 +8,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 20px 20px;
+  margin: 20px 200px;
   padding: 5px;
   font-size: 1.8rem;
   border-bottom: 1px solid #746f6f;
@@ -53,4 +53,8 @@
 
 .confirm-button {
   transition: all 0.3s ease-out;
+}
+
+.order__plus__name {
+  width: 200px;
 }
