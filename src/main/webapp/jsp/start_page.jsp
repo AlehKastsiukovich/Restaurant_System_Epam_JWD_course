@@ -15,8 +15,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/orders.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/styles.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/orders.css">
     <title>My restaurant</title>
 </head>
 
@@ -99,9 +99,11 @@
     </div>
 </main>
 
-<div class="footer">
-    <div class="wrapper"></div>
-</div>
+<footer class="footer">
+    <div class="wrapper footer__wrapper">
+    </div>
+</footer>
+
 <script>
     <%@include file="/js/index.js" %>
 </script>

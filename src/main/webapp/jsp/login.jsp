@@ -72,5 +72,11 @@
         </div>
     </div>
 </main>
+
+<footer class="footer">
+    <div class="wrapper footer__wrapper">
+    </div>
+</footer>
+
 </body>
 </html>

@@ -18,6 +18,76 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/orders.css">
     <title>login page</title>
+    <script>
+        <%@include file="/js/confirm_password.js"%>
+        function validateForm() {
+            var password = document.getElementById('password').value;
+            var password_repeat = document.getElementById('password_repeat').value;
+            var login = document.getElementById('user_login').value;
+            var loginRegex = '^[A-Za-z0-9_-]{3,16}$';
+            var email = document.getElementById('user_email');
+            var emailRegex = '^([a-z0-9_\.-]+)@([a-z0-9_\.-]+)\.([a-z\.]{2,6})$';
+            var phone = document.getElementById('user_phone').value;
+            var phoneRegex = '^\+375(17|29|33|44)[0-9]{7}$';
+
+            if (!(login.match(loginRegex))) {
+                document.getElementById('messageLogin').style.color = 'red';
+                document.getElementById('messageLogin').innerHTML = 'Login must contain 3 or more letter or number';
+                return false;
+            }
+
+            if (!(email.match(emailRegex))) {
+                document.getElementById('messageEmail').style.color = 'red';
+                document.getElementById('messageEmail').innerHTML = 'Wrong email';
+                return false;
+            }
+        }
+
+        var check = function () {
+            if (document.getElementById('password').value ==
+                document.getElementById('password_repeat').value) {
+                document.getElementById('message').style.color = 'green';
+                document.getElementById('message').innerHTML = 'correct';
+            } else {
+                document.getElementById('message').style.color = 'red';
+                document.getElementById('message').innerHTML = 'please repeat your password';
+            }
+        }
+
+        function validateLogin() {
+            var login = document.getElementById('user_login').value;
+            var loginRegex = '^[A-Za-z0-9_-]{3,16}$';
+
+            if (login.match(loginRegex)) {
+                document.getElementById('messageLogin').style.color = 'green';
+                document.getElementById('messageLogin').innerHTML = 'correct';
+                return true;
+            } else {
+                document.getElementById('messageLogin').style.color = 'red';
+                document.getElementById('messageLogin').innerHTML = 'Login must contain 3 or more letter or number';
+                return false;
+            }
+        }
+
+        function validateEmail() {
+            var email = document.getElementById('user_email');
+            var emailRegex = '^\S+@\S+$';
+
+            if (email.match(emailRegex)) {
+                alert('true');
+                document.getElementById('messageEmail').style.color = 'green';
+                document.getElementById('messageEmail').innerHTML = 'ok';
+                return true;
+            } else {
+                alert('false');
+                document.getElementById('messageEmail').style.color = 'red';
+                document.getElementById('messageEmail').innerHTML = 'Wrong email';
+                return false
+            }
+
+            return false;
+        }
+    </script>
 </head>
 
 <body>
@@ -78,16 +148,26 @@
                 <h3 class="modal-title"><fmt:message key="label.registration"/></h3>
             </div>
             <div class="modal-body">
-                <form action="${pageContext.request.contextPath}/controller" method="post">
-                    <input class="modal-body__input" type="text" name="login" placeholder="<fmt:message key="label.username"/>">
-                    <input class="modal-body__input" type="text" name="firstName" placeholder="<fmt:message key="label.firstName"/>">
-                    <input class="modal-body__input" type="text" name="lastName" placeholder="<fmt:message key="label.lastName"/>">
-                    <input class="modal-body__input" type="email" name="email" placeholder="<fmt:message key="label.email"/>">
-                    <input class="modal-body__input" type="text" name="phoneNumber"
-                           placeholder="<fmt:message key="label.place_holder_phone_number"/>">
-                    <input class="modal-body__input" type="password" name="password" placeholder="<fmt:message key="label.password"/>">
-                    <input class="modal-body__input" type="password" name="password_repeat"
-                           placeholder="<fmt:message key="label.confirmPassword"/>">
+                <form id="reg" onsubmit="return(validateEmail())" action="${pageContext.request.contextPath}/controller" method="post">
+                    <input class="modal-body__input" id="user_login" type="text" name="login"
+                           placeholder="<fmt:message key="label.username"/>">
+                    <span id='messageLogin' style="font-size: 12px"></span>
+                    <input class="modal-body__input" type="text" name="firstName"
+                           placeholder="<fmt:message key="label.firstName"/>">
+                    <input class="modal-body__input" type="text" name="lastName"
+                           placeholder="<fmt:message key="label.lastName"/>">
+                    <input class="modal-body__input" id="user_email" name="email"
+                           placeholder="<fmt:message key="label.email"/> ">
+                    <span id='messageEmail' style="font-size: 12px"></span>
+                    <input class="modal-body__input" id="user_phone" type="text" name="phoneNumber"
+                           placeholder="<fmt:message key="label.place_holder_phone_number"/>"
+                           pattern="^\+375(17|29|33|44)[0-9]{7}$" required>
+                    <input class="modal-body__input" type="password" id="password" name="password"
+                            pattern="^[A-Za-z0-9_-]{6,18}$"
+                           placeholder="<fmt:message key="label.password"/>" onkeyup='check();' required>
+                    <input class="modal-body__input" type="password" id="password_repeat" name="password_repeat"
+                           placeholder="<fmt:message key="label.confirmPassword"/>" onkeyup='check();' required>
+                    <span style="font-size: 12px" id='message'></span>
                     <button class="modal-body__input button-login" type="submit" name="command" value="REGISTRATION">
                         <fmt:message key="label.register"/>
                     </button>
@@ -96,6 +176,11 @@
         </div>
     </div>
 </main>
+
+<footer class="footer">
+    <div class="wrapper footer__wrapper">
+    </div>
+</footer>
 
 </body>
 

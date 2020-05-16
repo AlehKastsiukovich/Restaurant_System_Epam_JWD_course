@@ -16,6 +16,16 @@
 
 <script>
     <%@include file="/js/confirm_password.js"%>
+    var check = function () {
+        if (document.getElementById('password').value ==
+            document.getElementById('password_repeat').value) {
+            document.getElementById('message').style.color = 'green';
+            document.getElementById('message').innerHTML = 'correct';
+        } else {
+            document.getElementById('message').style.color = 'red';
+            document.getElementById('message').innerHTML = 'not matching';
+        }
+    }
 </script>
 
 <form action="/" method="post">
@@ -34,7 +44,7 @@
         </tr>
         <tr>
             <td><fmt:message key="label.email"/>:</td>
-            <td><input type="email" pattern="^([a-z0-9_\.-]+)@([a-z0-9_\.-]+)\.([a-z\.]{2,6})$" name="email" required></td>
+            <td><input type="email" id="email" pattern="^([a-z0-9_\.-]+)@([a-z0-9_\.-]+)\.([a-z\.]{2,6})$" name="email" required></td>
         </tr>
         <tr>
             <td><fmt:message key="label.phoneNumber"/>:</td>
@@ -42,11 +52,11 @@
         </tr>
         <tr>
             <td><fmt:message key="label.password"/>:</td>
-            <td><input type="password" name="password" id="password" onkeyup='check()' required></td>
+            <td><input type="password" name="password" id="password" onkeyup='check();' required></td>
         </tr>
         <tr>
             <td><fmt:message key="label.confirmPassword"/>:</td>
-            <td><input type="password" name="password_repeat" id="confirm_password" onkeyup='check();' required></td>
+            <td><input type="password" name="password_repeat" id="password_repeat" onkeyup='check();' required></td>
             <td><span id='message'></span></td>
         </tr>
         <tr>

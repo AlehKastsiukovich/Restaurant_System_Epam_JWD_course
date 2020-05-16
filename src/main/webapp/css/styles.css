@@ -31,6 +31,7 @@ a {
 
 .main {
   background-color: rgb(255, 255, 255);
+  min-height: calc(100vh - 148px);
 }
 
 .tags {
@@ -136,3 +137,10 @@ img {
   font-weight: 700;
   line-height: 39px;
 }
+
+.footer {
+  height: 60px;
+  background-color: black;
+}
+
+
