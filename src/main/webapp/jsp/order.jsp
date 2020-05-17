@@ -107,7 +107,7 @@
 </footer>
 
 <script>
-    <%@include file="/js/index1.js"%>
+    <%@include file="/js/countSelector.js"%>
 </script>
 </body>
 
