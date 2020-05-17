@@ -71,46 +71,67 @@
 </header>
 
 <main class="main">
-    <form action="${pageContext.request.contextPath}/controller" method="post">
-        <ul>
-            <li>
-                <button style="font-size: 16px" class="confirm-button" type="submit" name="command" value="PROFILE">
-                    <fmt:message
-                            key="label.your_info"/></button>
-            </li>
-            <li>
-                <button style="font-size: 16px" class="confirm-button" type="submit" name="command"
-                        value="VIEW_USER_ORDERS"><fmt:message
-                        key="label.my_orders"/>
-                </button>
-            </li>
-            <%--            <li>--%>
-            <%--                <button class="confirm-button" type="submit" name="command" value="EDIT_USER_INFO">Edit info:</button>--%>
-            <%--            </li>--%>
-        </ul>
-    </form>
-
-    <div class="wrapper main__wrapper">
-        <div class="orders">
-            <ul class="orders__list">
-                <li class="order__item">
-                    <fmt:message key="label.user_profile_login"/> ${user.login}
-                </li>
-                <li class="order__item">
-                    <fmt:message key="label.user_profile_email"/>${user.email}
-                </li>
-                <li class="order__item">
-                    <fmt:message key="label.user_profile_phone_number"/> ${user.phoneNumber}
-                </li>
-                <li class="order__item">
-                    <fmt:message key="label.user_first_name"/> ${user.firstName}
-                </li>
-                <li class="order__item">
-                    <fmt:message key="label.user_last_name"/> ${user.lastName}
-                </li>
-            </ul>
+    <div class="wrapper aside__wrapper">
+        <div class="aside-menu">
+            <form action="${pageContext.request.contextPath}/controller" method="post">
+                <ul class="aside__list">
+                    <li class="aside__item">
+                        <button class="aside__button" type="submit" name="command" value="PROFILE"><fmt:message
+                                key="label.your_info"/></button>
+                    </li>
+                    <li class="aside__item">
+                        <button class="aside__button" type="submit" name="command"
+                                value="VIEW_USER_ORDERS"><fmt:message
+                                key="label.my_orders"/>
+                        </button>
+                    </li>
+                </ul>
+            </form>
+        </div>
+        <div class="aside-container">
+            <div class="orders">
+                <ul class="orders__list">
+                    <li class="order__item">
+                        <fmt:message key="label.user_profile_login"/> ${user.login}
+                    </li>
+                    <li class="order__item">
+                        <fmt:message key="label.user_profile_email"/>${user.email}
+                    </li>
+                    <li class="order__item">
+                        <fmt:message key="label.user_profile_phone_number"/> ${user.phoneNumber}
+                    </li>
+                    <li class="order__item">
+                        <fmt:message key="label.user_first_name"/> ${user.firstName}
+                    </li>
+                    <li class="order__item">
+                        <fmt:message key="label.user_last_name"/> ${user.lastName}
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
+
+<%--    <div class="wrapper main__wrapper">--%>
+<%--        <div class="orders">--%>
+<%--            <ul class="orders__list">--%>
+<%--                <li class="order__item">--%>
+<%--                    <fmt:message key="label.user_profile_login"/> ${user.login}--%>
+<%--                </li>--%>
+<%--                <li class="order__item">--%>
+<%--                    <fmt:message key="label.user_profile_email"/>${user.email}--%>
+<%--                </li>--%>
+<%--                <li class="order__item">--%>
+<%--                    <fmt:message key="label.user_profile_phone_number"/> ${user.phoneNumber}--%>
+<%--                </li>--%>
+<%--                <li class="order__item">--%>
+<%--                    <fmt:message key="label.user_first_name"/> ${user.firstName}--%>
+<%--                </li>--%>
+<%--                <li class="order__item">--%>
+<%--                    <fmt:message key="label.user_last_name"/> ${user.lastName}--%>
+<%--                </li>--%>
+<%--            </ul>--%>
+<%--        </div>--%>
+<%--    </div>--%>
 </main>
 
 <footer class="footer">

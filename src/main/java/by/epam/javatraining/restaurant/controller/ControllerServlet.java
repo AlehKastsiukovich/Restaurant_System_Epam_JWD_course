@@ -16,7 +16,7 @@ import java.io.IOException;
 
 @WebServlet(urlPatterns = {"/controller"} )
 public class ControllerServlet extends HttpServlet {
-    private Logger LOGGER = LogManager.getLogger(ControllerServlet.class);
+    private static Logger LOGGER = LogManager.getLogger(ControllerServlet.class);
 
     @Override
     public void init() throws ServletException {

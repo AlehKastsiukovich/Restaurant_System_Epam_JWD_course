@@ -1,6 +1,11 @@
 @import "lato.css";
 @import "login.css";
 @import "orders.css";
+
+:root {
+  --height-main: 148px;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -136,6 +141,63 @@ img {
   font-size: 1.7rem;
   font-weight: 700;
   line-height: 39px;
+}
+
+/* ASIDE */
+
+.aside__wrapper {
+  display: flex;
+  justify-content: space-between;
+}
+
+.aside-menu {
+  width: 18%;
+  min-height: calc(100vh - var(--height-main));
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  background-color: #eeeeee;
+  /*top: 0;*/
+  /*left: 0;*/
+  /*z-index: 1;*/
+}
+
+.aside__list {
+  list-style-type: none;
+  padding: 20px 10px;
+}
+
+.aside__item {
+  font-size: 2rem;
+}
+
+.aside__item:last-child {
+  margin: 0;
+}
+
+.aside__button {
+  width: 100%;
+  height: 34px;
+  margin-top: 10px;
+  padding-left: 10px;
+  cursor: pointer;
+  color: #eeeeee;
+  padding: 0;
+  background-color: black;
+  border: none;
+}
+
+.aside__button:hover {
+  background-color: #746f6f;
+  border-color: #746f6f;
+}
+
+.aside-container {
+  width: 70%;
+  min-height: calc(100vh - var(--height-main));
+}
+
+.aside__button {
+  transition: all 0.3s ease-out;
 }
 
 .footer {

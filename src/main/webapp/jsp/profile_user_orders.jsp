@@ -23,23 +23,29 @@
             font-family: "Lato", Verdana, sans-serif;
             font-size: 17px;
             background: white;
-            max-width: 70%;
-            width: 70%;
+            max-width: 100%;
+            width: 100%;
             border-collapse: collapse;
             text-align: left;
-            margin: auto;
+            /*margin: auto;*/
+            margin-top: 10%;
         }
+
         th {
             font-weight: normal;
             color: black;
             padding: 10px 15px;
         }
+
         td {
             color: black;
             border-top: 1px solid black;
             padding: 10px 15px;
         }
-        tr:nth-child(2n) {background: lightgrey;}
+
+        tr:nth-child(2n) {
+            background: lightgrey;
+        }
     </style>
 </head>
 
@@ -73,7 +79,8 @@
                             <form class="header__form" method="get"
                                   action="${pageContext.request.contextPath}/controller">
                                 <button style="cursor: pointer" class="navigation__link" type="submit" value="LOGOUT"
-                                        name="command"/><fmt:message key="label.logout"/>
+                                        name="command"/>
+                                <fmt:message key="label.logout"/>
                                 </button>
                             </form>
                         </c:when>
@@ -94,50 +101,50 @@
     </div>
 </header>
 
-<main>
-    <form action="${pageContext.request.contextPath}/controller" method="post">
-        <ul>
-            <li>
-                <button style="font-size: 16px;" class="confirm-button" type="submit" name="command" value="PROFILE">
-                    <fmt:message key="label.your_info"/>
-                </button>
-            </li>
-            <li>
-                <button style="font-size: 16px" class="confirm-button" type="submit" name="command" value="VIEW_USER_ORDERS"><fmt:message
-                        key="label.my_orders"/>
-                </button>
-            </li>
-<%--            <li>--%>
-<%--                <button class="confirm-button" type="submit" name="command" value="EDIT_USER_INFO">Edit info:</button>--%>
-<%--            </li>--%>
-        </ul>
-    </form>
-
-    <div class="wrapper main__wrapper">
-        <div class="orders">
-            <table>
-                <tr>
-                    <th><fmt:message key="label.order_id"/></th>
-                    <th><fmt:message key="label.date"/></th>
-                    <th><fmt:message key="label.total_price"/></th>
-                    <th><fmt:message key="label.status"/></th>
-                </tr>
-                <c:forEach items="${orderList}" var="orders" varStatus="status">
+<main class="main">
+    <div class="wrapper aside__wrapper">
+        <div class="aside-menu">
+            <form action="${pageContext.request.contextPath}/controller" method="post">
+                <ul class="aside__list">
+                    <li class="aside__item">
+                        <button class="aside__button" type="submit" name="command" value="PROFILE"><fmt:message
+                                key="label.your_info"/></button>
+                    </li>
+                    <li class="aside__item">
+                        <button class="aside__button" type="submit" name="command"
+                                value="VIEW_USER_ORDERS"><fmt:message
+                                key="label.my_orders"/>
+                        </button>
+                    </li>
+                </ul>
+            </form>
+        </div>
+        <div class="aside-container">
+            <div class="orders">
+                <table>
                     <tr>
-                        <td>${orders.orderId}</td>
-                        <td>${orders.orderDate}</td>
-                        <td>${orders.totalPrice}</td>
-                        <td>
-                            <c:if test="${orders.orderStatusId == 1}">
-                                <fmt:message key="label.order_status_unprocessed"/>
-                            </c:if>
-                            <c:if test="${orders.orderStatusId == 2}">
-                                <fmt:message key="label.order_status_processed"/>
-                            </c:if>
-                        </td>
+                        <th><fmt:message key="label.order_id"/></th>
+                        <th><fmt:message key="label.date"/></th>
+                        <th><fmt:message key="label.total_price"/></th>
+                        <th><fmt:message key="label.status"/></th>
                     </tr>
-                </c:forEach>
-            </table>
+                    <c:forEach items="${orderList}" var="orders" varStatus="status">
+                        <tr>
+                            <td>${orders.orderId}</td>
+                            <td>${orders.orderDate}</td>
+                            <td>${orders.totalPrice}</td>
+                            <td>
+                                <c:if test="${orders.orderStatusId == 1}">
+                                    <fmt:message key="label.order_status_unprocessed"/>
+                                </c:if>
+                                <c:if test="${orders.orderStatusId == 2}">
+                                    <fmt:message key="label.order_status_processed"/>
+                                </c:if>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </table>
+            </div>
         </div>
     </div>
 

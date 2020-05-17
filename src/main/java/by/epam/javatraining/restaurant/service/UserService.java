@@ -8,8 +8,6 @@ public interface UserService {
 
     User signIn(String login, String password) throws ServiceException;
 
-    void signOut(User user);
-
     void registerUser(User user) throws ServiceException;
 
     List<User> getAllUsers() throws ServiceException;

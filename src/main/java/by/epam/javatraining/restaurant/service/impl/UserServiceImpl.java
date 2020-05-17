@@ -43,11 +43,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void signOut(User user) {
-        //soon
-    }
-
-    @Override
     public void registerUser(User user) throws ServiceException {
         if (!UserValidator.INSTANCE.validateUser(user)) {
             LOGGER.warn("User parameters set incorrectly");
