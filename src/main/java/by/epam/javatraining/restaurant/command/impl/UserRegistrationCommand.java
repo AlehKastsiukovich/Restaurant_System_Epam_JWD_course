@@ -24,7 +24,9 @@ public class UserRegistrationCommand implements Command {
         try {
             service.registerUser(user);
         } catch (ServiceException e) {
+            request.setAttribute("registrationError", e.getMessage());
             LOGGER.error(e);
+            return PageType.REGISTRATION_PAGE.getValue();
         }
 
         return PageType.START_PAGE.getValue();

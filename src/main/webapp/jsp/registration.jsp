@@ -104,6 +104,7 @@
                            onkeyup="checkCorrectRepeatPassword()" required>
                     <span style="font-size: 12px" id='messagePassword'></span>
                     <span style="font-size: 12px" id='message'></span>
+                    <span style="font-size: 12px; color: red;">${registrationError}</span>
                     <button class="modal-body__input button-login" type="submit" name="command" value="REGISTRATION">
                         <fmt:message key="label.register"/>
                     </button>

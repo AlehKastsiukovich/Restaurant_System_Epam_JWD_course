@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 
 public class UserSignInCommand implements Command {
     private static final Logger LOGGER = LogManager.getLogger(UserSignInCommand.class);
+    private static final String LOGIN_ERROR_MESSAGE = "User does not exist or you entered incorrect password";
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
@@ -37,7 +38,7 @@ public class UserSignInCommand implements Command {
             session.setAttribute(JSPParameter.ROLE.getValue(), user.getRole().getRoleId());
             page = PageType.START_PAGE.getValue();
         } else {
-            request.setAttribute("loginError", "User does not exist or you entered incorrect password");
+            request.setAttribute("loginError", LOGIN_ERROR_MESSAGE);
             page = PageType.SIGN_IN_PAGE.getValue();
         }
 
