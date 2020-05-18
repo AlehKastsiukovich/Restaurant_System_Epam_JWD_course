@@ -26,7 +26,6 @@ public class UserSignInCommand implements Command {
         UserService service = ServiceFactory.INSTANCE.getUserService();
         try {
             user = service.signIn(login, password);
-            System.out.println(user);
         } catch (ServiceException e) {
             LOGGER.error(e);
         }
@@ -38,6 +37,7 @@ public class UserSignInCommand implements Command {
             session.setAttribute(JSPParameter.ROLE.getValue(), user.getRole().getRoleId());
             page = PageType.START_PAGE.getValue();
         } else {
+            request.setAttribute("loginError", "User does not exist or you entered incorrect password");
             page = PageType.SIGN_IN_PAGE.getValue();
         }
 
