@@ -145,10 +145,10 @@
                                     </c:if>
                                 </td>
                                 <td>
-                                    <form method="get" action="${pageContext.request.contextPath}/controller">
+                                    <form method="get" action="${pageContext.request.contextPath}/controller?id=${orders.orderId}">
                                         <div class="product__content">
                                             <button style="position: relative;left: 50%;transform: translate(-50%, 0);"
-                                                    class="button__accept_admin" type="submit" name="command" value="">
+                                                    class="button__accept_admin" type="submit" name="command" value="PROCESS_USER_ORDER">
                                                 <fmt:message key="label.admin_confirm_order"/>
                                             </button>
                                         </div>

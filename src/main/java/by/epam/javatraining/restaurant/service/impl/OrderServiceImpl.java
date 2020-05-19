@@ -87,4 +87,14 @@ public class OrderServiceImpl implements OrderService {
 
         return orderList;
     }
+
+    @Override
+    public void updateOrder(Order order) throws ServiceException {
+        try {
+            dao.update(order);
+        } catch (DAOException e) {
+            LOGGER.error(e);
+            throw new ServiceException(e);
+        }
+    }
 }
