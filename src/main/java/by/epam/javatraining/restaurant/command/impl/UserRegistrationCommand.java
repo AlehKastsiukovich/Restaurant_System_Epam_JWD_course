@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 
 public class UserRegistrationCommand implements Command {
     private static final Logger LOGGER = LogManager.getLogger(UserRegistrationCommand.class);
+    private static final int DEFAULT_USER_ROLE_ID = 2;
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
@@ -40,6 +41,7 @@ public class UserRegistrationCommand implements Command {
                 .buildEmail(request.getParameter(JSPParameter.EMAIL.getValue()))
                 .buildPhoneNumber(request.getParameter(JSPParameter.PHONE_NUMBER.getValue()))
                 .buildPassword(request.getParameter(JSPParameter.PASSWORD.getValue()))
+                .buildRole(DEFAULT_USER_ROLE_ID)
                 .build();
     }
 }

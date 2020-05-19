@@ -4,7 +4,6 @@ import by.epam.javatraining.restaurant.entity.Role;
 import by.epam.javatraining.restaurant.entity.User;
 
 public class UserBuilder {
-    private static final int DEFAULT_USER_ROLE_ID = 2;
 
     private int id;
     private String login;
@@ -16,8 +15,6 @@ public class UserBuilder {
     private Role role;
 
     public UserBuilder() {
-        role = new Role();
-        role.setRoleId(DEFAULT_USER_ROLE_ID);
     }
 
     public UserBuilder buildId(int id) {
@@ -52,6 +49,12 @@ public class UserBuilder {
 
     public UserBuilder buildLastName(String lastName) {
         this.lastName = lastName;
+        return this;
+    }
+
+    public UserBuilder buildRole(int roleId) {
+        role = new Role();
+        role.setRoleId(roleId);
         return this;
     }
 

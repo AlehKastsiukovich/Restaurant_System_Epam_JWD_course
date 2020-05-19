@@ -63,7 +63,7 @@
                                                 class="navigation__link"><fmt:message key="label.contacts"/></a></li>
                 <li class="navigation__item"><a href="${pageContext.request.contextPath}/jsp/order.jsp"
                                                 class="navigation__link"><fmt:message key="label.cart"/></a></li>
-                <c:if test="${user.role.roleId == 2}">
+                <c:if test="${user.role.roleId == 2 || user.role.roleId == 1}">
                     <li class="navigation__item">
                         <form class="header__form" method="get" action="${pageContext.request.contextPath}/controller">
                             <button style="cursor: pointer; border: none; color: rgb(255, 255, 255);
@@ -75,7 +75,7 @@
                 </c:if>
                 <li class="navigation__item">
                     <c:choose>
-                        <c:when test="${user.role.roleId == 2}">
+                        <c:when test="${user.role.roleId == 2 || user.role.roleId == 1}">
                             <form class="header__form" method="get"
                                   action="${pageContext.request.contextPath}/controller">
                                 <button style="cursor: pointer" class="navigation__link" type="submit" value="LOGOUT"
