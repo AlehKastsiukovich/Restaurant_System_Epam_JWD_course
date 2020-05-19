@@ -11,7 +11,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class ViewUnconfirmedOrdersCommand implements Command {
@@ -37,7 +37,7 @@ public class ViewUnconfirmedOrdersCommand implements Command {
     }
 
     private List<Order> getUnconfirmedOrdersList(List<Order> orderList) {
-        List<Order> unconfirmedOrderList = new ArrayList<>();
+        List<Order> unconfirmedOrderList = new LinkedList<>();
 
         for (Order order : orderList) {
             if (order.getOrderStatusId() == UNCONFIRMED_ORDER_STATUS_ID) {
