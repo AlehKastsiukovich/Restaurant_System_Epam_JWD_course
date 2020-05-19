@@ -17,7 +17,9 @@ public enum JSPParameter {
     STREET("street"),
     BUILD_NUMBER("build"),
     APARTMENTS_NUMBER("number"),
-    USER_ORDER_LIST("orderList");
+    USER_ORDER_LIST("orderList"),
+    UNCONFIRMED_ORDERS("unconfirmedOrderList");
+
 
     private String value;
 

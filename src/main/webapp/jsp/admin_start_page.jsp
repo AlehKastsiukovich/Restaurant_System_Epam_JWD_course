@@ -81,8 +81,7 @@
                     </li>
                     <li class="aside__item">
                         <button class="aside__button" type="submit" name="command"
-                                value="VIEW_USER_ORDERS"><fmt:message
-                                key="label.my_orders"/>
+                                value="VIEW_UNCONFIRMED_ORDERS">VIEW UNC ORDERS
                         </button>
                     </li>
                 </ul>

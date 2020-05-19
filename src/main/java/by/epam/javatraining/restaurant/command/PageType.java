@@ -9,7 +9,8 @@ public enum PageType {
     PROFILE_PAGE("jsp/profile.jsp"),
     ADDRESS_FORM_PAGE("/jsp/address.jsp"),
     PROFILE_USER_ORDERS("/jsp/profile_user_orders.jsp"),
-    ADMIN_START_PAGE("/jsp/admin_start_page.jsp");
+    ADMIN_START_PAGE("/jsp/admin_start_page.jsp"),
+    ADMIN_UNCONFIRMED_ORDERS_PAGE("/jsp/admin_unconfirmed_orders.jsp");
 
     private String value;
 

@@ -21,6 +21,8 @@ public class CommandFactory {
         commands.put(CommandName.CREATE_ORDER, new CreateOrderCommand());
         commands.put(CommandName.CONFIRM_ORDER, new ConfirmOrderCommand());
         commands.put(CommandName.VIEW_USER_ORDERS, new ViewUserOrdersCommands());
+        commands.put(CommandName.VIEW_ADMIN_PROFILE, new ViewAdminProfileCommand());
+        commands.put(CommandName.VIEW_UNCONFIRMED_ORDERS, new ViewUnconfirmedOrdersCommand());
     }
 
     private static class CommandFactoryHolder {
