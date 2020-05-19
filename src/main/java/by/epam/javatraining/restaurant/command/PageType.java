@@ -8,7 +8,8 @@ public enum PageType {
     CONTACTS_PAGE("/jsp/contacts.jsp"),
     PROFILE_PAGE("jsp/profile.jsp"),
     ADDRESS_FORM_PAGE("/jsp/address.jsp"),
-    PROFILE_USER_ORDERS("/jsp/profile_user_orders.jsp");
+    PROFILE_USER_ORDERS("/jsp/profile_user_orders.jsp"),
+    ADMIN_START_PAGE("/jsp/admin_start_page.jsp");
 
     private String value;
 

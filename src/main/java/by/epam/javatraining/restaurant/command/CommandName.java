@@ -10,5 +10,6 @@ public enum CommandName {
     PROFILE,
     CREATE_ORDER,
     CONFIRM_ORDER,
-    VIEW_USER_ORDERS;
+    VIEW_USER_ORDERS,
+    VIEW_ADMIN_PROFILE;
 }

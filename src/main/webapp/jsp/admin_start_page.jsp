@@ -76,7 +76,7 @@
             <form action="${pageContext.request.contextPath}/controller" method="post">
                 <ul class="aside__list">
                     <li class="aside__item">
-                        <button class="aside__button" type="submit" name="command" value="PROFILE"><fmt:message
+                        <button class="aside__button" type="submit" name="command" value="VIEW_ADMIN_PROFILE"><fmt:message
                                 key="label.your_info"/></button>
                     </li>
                     <li class="aside__item">
