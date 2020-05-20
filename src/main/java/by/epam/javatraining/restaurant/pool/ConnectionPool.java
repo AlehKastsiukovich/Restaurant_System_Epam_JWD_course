@@ -19,7 +19,7 @@ import java.util.concurrent.locks.ReentrantLock;
 public class ConnectionPool {
     private static final Logger LOGGER = LogManager.getLogger(ConnectionPool.class);
 
-    private static final int CONNECTION_POOL_CAPACITY = 10;
+    private static final int CONNECTION_POOL_CAPACITY = 30;
     private static final String DATABASE_PROPERTIES_FILE_NAME = "database.properties";
     private static final String DATABASE_PROPERTIES_USER = "db.user";
     private static final String DATABASE_PROPERTIES_PASSWORD = "db.password";
@@ -51,7 +51,7 @@ public class ConnectionPool {
     }
 
     public void initializeConnectionPool() {
-        if (!isInitialized.get()) {
+
             try {
                 InputStream inputStream = getClass().getClassLoader().getResourceAsStream(DATABASE_PROPERTIES_FILE_NAME);
                 dbProperties.load(inputStream);
@@ -64,22 +64,10 @@ public class ConnectionPool {
                 Class.forName(driver);
 
                 fillAvailableConnections(databaseUrl, user, password);
-                isInitialized.set(true);
 
             } catch (IOException | ClassNotFoundException e) {
                 LOGGER.error(e);
-            } finally {
-                initLock.unlock();
             }
-        }
-    }
-
-    private void closeConnection(ProxyConnection connection) {
-        try {
-            connection.forceClose();
-        } catch (SQLException e) {
-            LOGGER.error("Can't close connection", e);
-        }
     }
 
     public Connection getConnection() {

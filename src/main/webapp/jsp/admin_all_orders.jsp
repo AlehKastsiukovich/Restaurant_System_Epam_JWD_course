@@ -23,12 +23,17 @@
             font-size: 13px;
             background: white;
             /*max-width: 180%;*/
-            width: 180%;
+            width: 900px;
             border-collapse: collapse;
             text-align: center;
             table-layout: fixed;
             margin-top: 10%;
+            margin-bottom: 10%;
         }
+
+        /*.col {*/
+        /*    width: ;*/
+        /*}*/
 
         th {
             font-weight: normal;
@@ -80,7 +85,8 @@
                             <form class="header__form" method="get"
                                   action="${pageContext.request.contextPath}/controller">
                                 <button style="cursor: pointer" class="navigation__link" type="submit" value="LOGOUT"
-                                        name="command"/><fmt:message key="label.logout"/>
+                                        name="command"/>
+                                <fmt:message key="label.logout"/>
                                 </button>
                             </form>
                         </c:when>
@@ -107,8 +113,9 @@
             <form action="${pageContext.request.contextPath}/controller" method="post">
                 <ul class="aside__list">
                     <li class="aside__item">
-                        <button class="aside__button" type="submit" name="command" value="VIEW_ADMIN_PROFILE"><fmt:message
-                                key="label.your_info"/></button>
+                        <button class="aside__button" type="submit" name="command" value="VIEW_ADMIN_PROFILE">
+                            <fmt:message
+                                    key="label.your_info"/></button>
                     </li>
                     <li class="aside__item">
                         <button class="aside__button" type="submit" name="command"
@@ -134,8 +141,10 @@
                             <th><fmt:message key="label.user_id"/></th>
                             <th><fmt:message key="label.status"/></th>
                             <th><fmt:message key="label.admin_confirm_order"/></th>
+                            <th><fmt:message key="label.admin_button_info"/></th>
+                            <th><fmt:message key="label.admin_button_delete"/></th>
                         </tr>
-                        <c:forEach items="${unconfirmedOrderList}" var="orders" varStatus="status">
+                        <c:forEach items="${allUsersOrders}" var="orders" varStatus="status">
                             <tr>
                                 <td>${orders.orderId}</td>
                                 <td>${orders.orderDate}</td>
@@ -150,11 +159,47 @@
                                     </c:if>
                                 </td>
                                 <td>
-                                    <form method="post" action="${pageContext.request.contextPath}/controller?id=${orders.orderId}">
+                                    <form method="post"
+                                          action="${pageContext.request.contextPath}/controller?id=${orders.orderId}">
                                         <div class="product__content">
-                                            <button style="position: relative;left: 50%;transform: translate(-50%, 0);"
-                                                    class="button__accept_admin" type="submit" name="command" value="PROCESS_USER_ORDER">
-                                                <fmt:message key="label.admin_confirm_order"/>
+                                            <c:if test="${orders.orderStatusId == 1}">
+                                                <button style="position: relative;left: 50%;transform: translate(-50%, 0);"
+                                                        class="button__accept_admin" type="submit" name="command"
+                                                        value="PROCESS_USER_ORDER">
+                                                    <fmt:message key="label.admin_confirm_order"/>
+                                                </button>
+                                            </c:if>
+                                            <c:if test="${orders.orderStatusId == 2}">
+                                                <button disabled
+                                                        style="background: grey;position: relative;left: 50%;transform: translate(-50%, 0);"
+                                                        class="button__accept_admin" type="submit" name="command"
+                                                        value="PROCESS_USER_ORDER">
+                                                    <fmt:message key="label.admin_confirm_order"/>
+                                                </button>
+                                            </c:if>
+                                        </div>
+                                    </form>
+                                </td>
+                                <td>
+                                    <form method="post"
+                                          action="${pageContext.request.contextPath}/controller?id=${orders.orderId}">
+                                        <div class="product__content">
+                                            <button style="background: darkblue;position: relative;left: 50%;transform: translate(-50%, 0);"
+                                                    class="button__accept_admin" type="submit" name="command"
+                                                    value="PROCESS_USER_ORDER">
+                                                <fmt:message key="label.admin_button_info"/>
+                                            </button>
+                                        </div>
+                                    </form>
+                                </td>
+                                <td>
+                                    <form method="post"
+                                          action="${pageContext.request.contextPath}/controller?id=${orders.orderId}">
+                                        <div class="product__content">
+                                            <button style="background: red; position: relative;left: 50%;transform: translate(-50%, 0);"
+                                                    class="button__accept_admin" type="submit" name="command"
+                                                    value="PROCESS_USER_ORDER">
+                                                <fmt:message key="label.admin_button_delete"/>
                                             </button>
                                         </div>
                                     </form>
