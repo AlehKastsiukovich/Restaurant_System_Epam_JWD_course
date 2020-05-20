@@ -96,7 +96,12 @@
                     </li>
                     <li class="aside__item">
                         <button class="aside__button" type="submit" name="command"
-                                value="FIND_USER"><fmt:message key="label.admin_find_user"/>
+                                value="ENTER_FIND_USER_PAGE"><fmt:message key="label.admin_find_user"/>
+                        </button>
+                    </li>
+                    <li class="aside__item">
+                        <button class="aside__button" type="submit" name="command"
+                                value="ENTER_FIND_ORDER_PAGE"><fmt:message key="label.admin_find_order"/>
                         </button>
                     </li>
                 </ul>

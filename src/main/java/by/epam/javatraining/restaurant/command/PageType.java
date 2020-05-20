@@ -1,6 +1,7 @@
 package by.epam.javatraining.restaurant.command;
 
 public enum PageType {
+
     REGISTRATION_PAGE("/jsp/registration.jsp"),
     START_PAGE("/jsp/start_page.jsp"),
     SIGN_IN_PAGE("/jsp/login.jsp"),
@@ -13,7 +14,8 @@ public enum PageType {
     ADMIN_UNCONFIRMED_ORDERS_PAGE("/jsp/admin_unconfirmed_orders.jsp"),
     ADMIN_ALL_USERS_ORDERS("/jsp/admin_all_orders.jsp"),
     ADMIN_ALL_USERS("/jsp/admin_all_users.jsp"),
-    ADMIN_USER_SEARCH("jsp/admin_user_search.jsp");
+    ADMIN_USER_SEARCH("/jsp/admin_user_search.jsp"),
+    ADMIN_ORDER_SEARCH("/jsp/admin_order_search.jsp");
 
     private String value;
 

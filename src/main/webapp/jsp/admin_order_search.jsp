@@ -145,26 +145,13 @@
                 <table>
                     <tr>
                         <th><fmt:message key="label.admin_find_by"/></th>
+                        <th width="10px"><fmt:message key="label.order_id"/></th>
                         <th width="10px"><fmt:message key="label.user_id"/></th>
-                        <th width="10px"><fmt:message key="label.login"/></th>
-                        <th width="10px"><fmt:message key="label.email"/></th>
                     </tr>
 
                     <tr>
                         <td style="padding-top: 0px"><input class="modal-body__input" type="text" name="login"
-                                   placeholder="<fmt:message key="label.admin_search_enter_parameter"/>"></td>
-                        <td width="10px">
-                            <form method="post"
-                                  action="${pageContext.request.contextPath}/controller?id=${orders.orderId}">
-                                <div class="product__content">
-                                    <button style="position: relative;left: 50%;transform: translate(-50%, 0);"
-                                            class="button__accept_admin" type="submit" name="command"
-                                            value="PROCESS_USER_ORDER">
-                                        <fmt:message key="label.admin_find"/>
-                                    </button>
-                                </div>
-                            </form>
-                        </td>
+                                                            placeholder="<fmt:message key="label.admin_search_enter_parameter"/>"></td>
                         <td width="10px">
                             <form method="post"
                                   action="${pageContext.request.contextPath}/controller?id=${orders.orderId}">
