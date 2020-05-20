@@ -12,7 +12,8 @@ public enum PageType {
     ADMIN_START_PAGE("/jsp/admin_start_page.jsp"),
     ADMIN_UNCONFIRMED_ORDERS_PAGE("/jsp/admin_unconfirmed_orders.jsp"),
     ADMIN_ALL_USERS_ORDERS("/jsp/admin_all_orders.jsp"),
-    ADMIN_ALL_USERS("/jsp/admin_all_users.jsp");
+    ADMIN_ALL_USERS("/jsp/admin_all_users.jsp"),
+    ADMIN_USER_SEARCH("jsp/admin_user_search.jsp");
 
     private String value;
 

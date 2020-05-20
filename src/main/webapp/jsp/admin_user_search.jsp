@@ -16,14 +16,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/orders.css">
-    <title>profile</title>
+    <title>user search</title>
     <style type="text/css">
         table {
             font-family: "Lato", Verdana, sans-serif;
             font-size: 13px;
             background: white;
             /*max-width: 180%;*/
-            width: 180%;
+            width: 600px;
             border-collapse: collapse;
             text-align: center;
             table-layout: fixed;
@@ -80,7 +80,8 @@
                             <form class="header__form" method="get"
                                   action="${pageContext.request.contextPath}/controller">
                                 <button style="cursor: pointer" class="navigation__link" type="submit" value="LOGOUT"
-                                        name="command"/><fmt:message key="label.logout"/>
+                                        name="command"/>
+                                <fmt:message key="label.logout"/>
                                 </button>
                             </form>
                         </c:when>
@@ -107,8 +108,9 @@
             <form action="${pageContext.request.contextPath}/controller" method="post">
                 <ul class="aside__list">
                     <li class="aside__item">
-                        <button class="aside__button" type="submit" name="command" value="VIEW_ADMIN_PROFILE"><fmt:message
-                                key="label.your_info"/></button>
+                        <button class="aside__button" type="submit" name="command" value="VIEW_ADMIN_PROFILE">
+                            <fmt:message
+                                    key="label.your_info"/></button>
                     </li>
                     <li class="aside__item">
                         <button class="aside__button" type="submit" name="command"
@@ -134,45 +136,56 @@
             </form>
         </div>
         <div class="aside-container">
-            <div class="aside-container">
-                <div class="orders">
-                    <table>
-                        <tr>
-                            <th><fmt:message key="label.order_id"/></th>
-                            <th><fmt:message key="label.date"/></th>
-                            <th><fmt:message key="label.total_price"/></th>
-                            <th><fmt:message key="label.user_id"/></th>
-                            <th><fmt:message key="label.status"/></th>
-                            <th><fmt:message key="label.admin_confirm_order"/></th>
-                        </tr>
-                        <c:forEach items="${unconfirmedOrderList}" var="orders" varStatus="status">
-                            <tr>
-                                <td>${orders.orderId}</td>
-                                <td>${orders.orderDate}</td>
-                                <td>${orders.totalPrice}</td>
-                                <td>${orders.customerId}</td>
-                                <td>
-                                    <c:if test="${orders.orderStatusId == 1}">
-                                        <fmt:message key="label.order_status_unprocessed"/>
-                                    </c:if>
-                                    <c:if test="${orders.orderStatusId == 2}">
-                                        <fmt:message key="label.order_status_processed"/>
-                                    </c:if>
-                                </td>
-                                <td>
-                                    <form method="post" action="${pageContext.request.contextPath}/controller?id=${orders.orderId}">
-                                        <div class="product__content">
-                                            <button style="position: relative;left: 50%;transform: translate(-50%, 0);"
-                                                    class="button__accept_admin" type="submit" name="command" value="PROCESS_USER_ORDER">
-                                                <fmt:message key="label.admin_confirm_order"/>
-                                            </button>
-                                        </div>
-                                    </form>
-                                </td>
-                            </tr>
-                        </c:forEach>
-                    </table>
-                </div>
+            <div class="orders">
+                <table>
+                    <tr>
+                        <th><fmt:message key="label.admin_find_by"/></th>
+                        <th width="10px"><fmt:message key="label.user_id"/></th>
+                        <th width="10px"><fmt:message key="label.login"/></th>
+                        <th width="10px"><fmt:message key="label.email"/></th>
+                    </tr>
+
+                    <tr>
+                        <td style="padding-top: 0px"><input class="modal-body__input" type="text" name="login"
+                                   placeholder="<fmt:message key="label.admin_search_enter_parameter"/>"></td>
+                        <td width="10px">
+                            <form method="post"
+                                  action="${pageContext.request.contextPath}/controller?id=${orders.orderId}">
+                                <div class="product__content">
+                                    <button style="position: relative;left: 50%;transform: translate(-50%, 0);"
+                                            class="button__accept_admin" type="submit" name="command"
+                                            value="PROCESS_USER_ORDER">
+                                        <fmt:message key="label.admin_find"/>
+                                    </button>
+                                </div>
+                            </form>
+                        </td>
+                        <td width="10px">
+                            <form method="post"
+                                  action="${pageContext.request.contextPath}/controller?id=${orders.orderId}">
+                                <div class="product__content">
+                                    <button style="position: relative;left: 50%;transform: translate(-50%, 0);"
+                                            class="button__accept_admin" type="submit" name="command"
+                                            value="PROCESS_USER_ORDER">
+                                        <fmt:message key="label.admin_find"/>
+                                    </button>
+                                </div>
+                            </form>
+                        </td>
+                        <td width="10px">
+                            <form method="post"
+                                  action="${pageContext.request.contextPath}/controller?id=${orders.orderId}">
+                                <div class="product__content">
+                                    <button style="position: relative;left: 50%;transform: translate(-50%, 0);"
+                                            class="button__accept_admin" type="submit" name="command"
+                                            value="PROCESS_USER_ORDER">
+                                        <fmt:message key="label.admin_find"/>
+                                    </button>
+                                </div>
+                            </form>
+                        </td>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>

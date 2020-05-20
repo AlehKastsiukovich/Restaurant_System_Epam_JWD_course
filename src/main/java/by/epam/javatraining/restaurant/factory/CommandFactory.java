@@ -26,6 +26,7 @@ public class CommandFactory {
         commands.put(CommandName.PROCESS_USER_ORDER, new ProcessUserOrderByAdminCommand());
         commands.put(CommandName.VIEW_ALL_USERS_ORDERS, new ViewAllOrdersByAdminCommand());
         commands.put(CommandName.VIEW_ALL_USERS, new ViewAllUsersByAdminCommand());
+        commands.put(CommandName.FIND_USER, new FindUserByAdminCommand());
     }
 
     private static class CommandFactoryHolder {

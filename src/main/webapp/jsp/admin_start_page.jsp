@@ -94,6 +94,11 @@
                                 value="VIEW_ALL_USERS"><fmt:message key="label.admin_all_users"/>
                         </button>
                     </li>
+                    <li class="aside__item">
+                        <button class="aside__button" type="submit" name="command"
+                                value="FIND_USER"><fmt:message key="label.admin_find_user"/>
+                        </button>
+                    </li>
                 </ul>
             </form>
         </div>
