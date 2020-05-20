@@ -89,6 +89,11 @@
                                 value="VIEW_ALL_USERS_ORDERS"><fmt:message key="label.admin_users_all_orders"/>
                         </button>
                     </li>
+                    <li class="aside__item">
+                        <button class="aside__button" type="submit" name="command"
+                                value="VIEW_ALL_USERS"><fmt:message key="label.admin_all_users"/>
+                        </button>
+                    </li>
                 </ul>
             </form>
         </div>
