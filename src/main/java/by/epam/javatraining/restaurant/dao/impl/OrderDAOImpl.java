@@ -11,6 +11,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class OrderDAOImpl implements OrderDAO {
@@ -104,7 +105,7 @@ public class OrderDAOImpl implements OrderDAO {
 
     @Override
     public List<Order> getAllOrdersByUserId(int userId) throws DAOException {
-        List<Order> orderList = new ArrayList<>();
+        List<Order> orderList = new LinkedList<>();
 
         try (Connection connection = pool.getConnection();
              PreparedStatement statement = connection.prepareStatement(SQLQuery.GET_ALL_ORDERS_BY_USER_ID.getValue())) {
@@ -128,7 +129,7 @@ public class OrderDAOImpl implements OrderDAO {
 
     @Override
     public List<Order> getAll() throws DAOException {
-        List<Order> orderList = new ArrayList<>();
+        List<Order> orderList = new LinkedList<>();
 
         try (Connection connection = pool.getConnection();
              PreparedStatement statement = connection.prepareStatement(SQLQuery.GET_ALL_ORDERS.getValue());
@@ -136,6 +137,7 @@ public class OrderDAOImpl implements OrderDAO {
 
             while (resultSet.next()) {
                 Order order = buildOrder(resultSet);
+                LOGGER.warn("in dao after build order" + " " + order);
                 orderList.add(order);
             }
 

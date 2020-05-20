@@ -145,7 +145,7 @@
                                     </c:if>
                                 </td>
                                 <td>
-                                    <form method="get" action="${pageContext.request.contextPath}/controller?id=${orders.orderId}">
+                                    <form method="post" action="${pageContext.request.contextPath}/controller?id=${orders.orderId}">
                                         <div class="product__content">
                                             <button style="position: relative;left: 50%;transform: translate(-50%, 0);"
                                                     class="button__accept_admin" type="submit" name="command" value="PROCESS_USER_ORDER">

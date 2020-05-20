@@ -23,6 +23,7 @@ public class CommandFactory {
         commands.put(CommandName.VIEW_USER_ORDERS, new ViewUserOrdersCommands());
         commands.put(CommandName.VIEW_ADMIN_PROFILE, new ViewAdminProfileCommand());
         commands.put(CommandName.VIEW_UNCONFIRMED_ORDERS, new ViewUnconfirmedOrdersCommand());
+        commands.put(CommandName.PROCESS_USER_ORDER, new ProcessUserOrderByAdminCommand());
     }
 
     private static class CommandFactoryHolder {

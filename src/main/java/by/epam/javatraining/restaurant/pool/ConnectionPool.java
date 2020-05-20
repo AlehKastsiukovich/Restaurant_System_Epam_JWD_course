@@ -7,16 +7,19 @@ import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 public class ConnectionPool {
     private static final Logger LOGGER = LogManager.getLogger(ConnectionPool.class);
 
-    private static final int CONNECTION_POOL_CAPACITY = 20;
+    private static final int CONNECTION_POOL_CAPACITY = 10;
     private static final String DATABASE_PROPERTIES_FILE_NAME = "database.properties";
     private static final String DATABASE_PROPERTIES_USER = "db.user";
     private static final String DATABASE_PROPERTIES_PASSWORD = "db.password";
@@ -25,12 +28,18 @@ public class ConnectionPool {
 
     private final BlockingQueue<Connection> availableConnections;
     private final List<Connection> usedConnections;
-    private Properties dbProperties;
+    private final Properties dbProperties;
+    private final AtomicBoolean isInitialized;
+    private final AtomicBoolean isPoolClosing;
+    private final Lock initLock;
 
     private ConnectionPool() {
         availableConnections = new LinkedBlockingQueue<>();
-        usedConnections = new ArrayList<>();
+        usedConnections = new LinkedList<>();
         dbProperties = new Properties();
+        isInitialized = new AtomicBoolean(false);
+        isPoolClosing = new AtomicBoolean(false);
+        initLock = new ReentrantLock();
     }
 
     private static class ConnectionPollHolder {
@@ -42,21 +51,34 @@ public class ConnectionPool {
     }
 
     public void initializeConnectionPool() {
+        if (!isInitialized.get()) {
+            try {
+                InputStream inputStream = getClass().getClassLoader().getResourceAsStream(DATABASE_PROPERTIES_FILE_NAME);
+                dbProperties.load(inputStream);
+
+                String user = dbProperties.getProperty(DATABASE_PROPERTIES_USER);
+                String password = dbProperties.getProperty(DATABASE_PROPERTIES_PASSWORD);
+                String databaseUrl = dbProperties.getProperty(DATABASE_PROPERTIES_URL);
+                String driver = dbProperties.getProperty(DATABASE_PROPERTIES_DRIVER);
+
+                Class.forName(driver);
+
+                fillAvailableConnections(databaseUrl, user, password);
+                isInitialized.set(true);
+
+            } catch (IOException | ClassNotFoundException e) {
+                LOGGER.error(e);
+            } finally {
+                initLock.unlock();
+            }
+        }
+    }
+
+    private void closeConnection(ProxyConnection connection) {
         try {
-            InputStream inputStream = getClass().getClassLoader().getResourceAsStream(DATABASE_PROPERTIES_FILE_NAME);
-            dbProperties.load(inputStream);
-
-            String user = dbProperties.getProperty(DATABASE_PROPERTIES_USER);
-            String password = dbProperties.getProperty(DATABASE_PROPERTIES_PASSWORD);
-            String databaseUrl = dbProperties.getProperty(DATABASE_PROPERTIES_URL);
-            String driver = dbProperties.getProperty(DATABASE_PROPERTIES_DRIVER);
-
-            Class.forName(driver);
-
-            fillAvailableConnections(databaseUrl, user, password);
-
-        } catch (SQLException | IOException | ClassNotFoundException e) {
-            LOGGER.error(e);
+            connection.forceClose();
+        } catch (SQLException e) {
+            LOGGER.error("Can't close connection", e);
         }
     }
 
@@ -72,28 +94,24 @@ public class ConnectionPool {
         return connection;
     }
 
-    public void retrieveConnection(Connection connection) {
-        if (connection != null && usedConnections.remove(connection)) {
-            try {
-                availableConnections.put(connection);
-            } catch (InterruptedException e) {
-                LOGGER.error("Can't retrieve", e);
-            }
+    public void releaseConnection(Connection connection) {
+        if (connection != null) {
+            usedConnections.remove(connection);
+            availableConnections.add(connection);
+        } else {
+            LOGGER.warn("Cant release null connection");
         }
     }
 
-    public void closeAllPoolConnections() {
+
+    public void closeAllPoolConnections() throws SQLException, InterruptedException {
         closeAvailableConnections();
         closeUsedConnections();
     }
 
-    private void closeAvailableConnections() {
-        try {
-            while (!availableConnections.isEmpty()) {
-                availableConnections.take().close();
-            }
-        } catch (SQLException | InterruptedException e) {
-            LOGGER.error("Can't close available connections", e);
+    private void closeAvailableConnections() throws SQLException, InterruptedException {
+        while (!availableConnections.isEmpty()) {
+            availableConnections.take().close();
         }
     }
 
@@ -108,9 +126,13 @@ public class ConnectionPool {
         }
     }
 
-    private void fillAvailableConnections(String url, String user, String password) throws SQLException {
+    private void fillAvailableConnections(String url, String user, String password) {
         for (int i = 0; i < CONNECTION_POOL_CAPACITY; i++) {
-            availableConnections.add(new ProxyConnection(DriverManager.getConnection(url, user, password)));
+            try {
+                availableConnections.add(new ProxyConnection(DriverManager.getConnection(url, user, password)));
+            } catch (SQLException e) {
+                LOGGER.error(e);
+            }
         }
     }
 }

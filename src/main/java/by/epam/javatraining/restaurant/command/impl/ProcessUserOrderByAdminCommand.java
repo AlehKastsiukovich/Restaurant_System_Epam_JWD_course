@@ -2,6 +2,7 @@ package by.epam.javatraining.restaurant.command.impl;
 
 import by.epam.javatraining.restaurant.command.Command;
 import by.epam.javatraining.restaurant.command.JSPParameter;
+import by.epam.javatraining.restaurant.command.PageType;
 import by.epam.javatraining.restaurant.entity.Order;
 import by.epam.javatraining.restaurant.exception.ServiceException;
 import by.epam.javatraining.restaurant.factory.ServiceFactory;
@@ -17,16 +18,19 @@ public class ProcessUserOrderByAdminCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         int orderId = Integer.parseInt(request.getParameter(JSPParameter.ID.getValue()));
+        LOGGER.warn(orderId);
 
         OrderService service = ServiceFactory.INSTANCE.getOrderService();
 
         try {
             Order order = service.getOrderById(orderId);
+            LOGGER.warn(order);
             order.setOrderStatusId(2);
-            service.
+            service.updateOrder(order);
         } catch (ServiceException e) {
-            e.printStackTrace();
+            LOGGER.error(e);
         }
 
+        return new ViewUnconfirmedOrdersCommand().execute(request, response);
     }
 }
