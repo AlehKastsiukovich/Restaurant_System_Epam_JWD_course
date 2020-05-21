@@ -150,7 +150,6 @@ public class OrderDAOImpl implements OrderDAO {
 
             while (resultSet.next()) {
                 Order order = buildOrder(resultSet);
-                LOGGER.warn("in dao after build order" + " " + order);
                 orderList.add(order);
             }
 

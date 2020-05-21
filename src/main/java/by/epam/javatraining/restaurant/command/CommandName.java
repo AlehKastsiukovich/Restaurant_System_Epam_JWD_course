@@ -18,5 +18,6 @@ public enum CommandName {
     VIEW_ALL_USERS,
     ENTER_FIND_USER_PAGE,
     ENTER_FIND_ORDER_PAGE,
-    VIEW_ORDER_INFO;
+    VIEW_ORDER_INFO,
+    DELETE_ORDER;
 }
