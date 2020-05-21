@@ -97,4 +97,14 @@ public class OrderServiceImpl implements OrderService {
             throw new ServiceException(e);
         }
     }
+
+    @Override
+    public void deleteOrderById(int orderId) throws ServiceException {
+        try {
+            dao.deleteOrderById(orderId);
+        } catch (DAOException e) {
+            LOGGER.error(e);
+            throw new ServiceException(e);
+        }
+    }
 }
