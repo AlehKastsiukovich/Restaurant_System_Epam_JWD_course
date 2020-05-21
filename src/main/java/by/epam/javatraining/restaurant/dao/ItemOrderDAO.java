@@ -22,4 +22,6 @@ public interface ItemOrderDAO extends ModelDAO<ItemOrder> {
     void createItemOrderByOrder(ItemOrder itemOrder, Order order) throws DAOException;
 
     ItemOrder readByOrderIdAndPositionId(int orderId, int positionId) throws DAOException;
+
+    List<ItemOrder> getItemOrdersByOrderId(int orderId) throws DAOException;
 }

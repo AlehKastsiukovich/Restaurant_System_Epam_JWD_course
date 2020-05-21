@@ -54,7 +54,8 @@ public enum SQLQuery {
     GET_ALL_ITEM_ORDERS("select * from item_order"),
     READ_ITEM_ORDER_BY_ORDER_ID_AND_POSITION_ID("select * from item_order where order_id = (?) and item_id = (?)"),
     UPDATE_ITEM_ORDER("select * from item_order where order_id = (?) and item_id = (?)"),
-    GET_ALL_ORDERS_BY_USER_ID("select * from `order` where customer_id = (?)");
+    GET_ALL_ORDERS_BY_USER_ID("select * from `order` where customer_id = (?)"),
+    GET_ITEM_ORDERS_BY_ORDER_ID("select * from item_order where order_id = (?)");
 
     private String value;
 

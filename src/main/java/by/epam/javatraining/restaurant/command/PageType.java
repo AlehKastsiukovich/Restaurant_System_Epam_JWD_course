@@ -15,7 +15,8 @@ public enum PageType {
     ADMIN_ALL_USERS_ORDERS("/jsp/admin_all_orders.jsp"),
     ADMIN_ALL_USERS("/jsp/admin_all_users.jsp"),
     ADMIN_USER_SEARCH("/jsp/admin_user_search.jsp"),
-    ADMIN_ORDER_SEARCH("/jsp/admin_order_search.jsp");
+    ADMIN_ORDER_SEARCH("/jsp/admin_order_search.jsp"),
+    ADMIN_ORDER_INFO("/jsp/admin_order_info.jsp");
 
     private String value;
 

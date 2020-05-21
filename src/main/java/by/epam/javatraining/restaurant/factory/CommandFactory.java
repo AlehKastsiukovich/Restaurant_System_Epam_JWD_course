@@ -28,6 +28,7 @@ public class CommandFactory {
         commands.put(CommandName.VIEW_ALL_USERS, new ViewAllUsersByAdminCommand());
         commands.put(CommandName.ENTER_FIND_USER_PAGE, new FindUserByAdminCommand());
         commands.put(CommandName.ENTER_FIND_ORDER_PAGE, new FindOrderByAdminCommand());
+        commands.put(CommandName.VIEW_ORDER_INFO, new ViewOrderInfoByAdminCommand());
     }
 
     private static class CommandFactoryHolder {

@@ -201,7 +201,7 @@
                                         <div class="product__content">
                                             <button style="background: darkblue;position: relative;left: 50%;transform: translate(-50%, 0);"
                                                     class="button__accept_admin" type="submit" name="command"
-                                                    value="PROCESS_USER_ORDER">
+                                                    value="VIEW_ORDER_INFO">
                                                 <fmt:message key="label.admin_button_info"/>
                                             </button>
                                         </div>

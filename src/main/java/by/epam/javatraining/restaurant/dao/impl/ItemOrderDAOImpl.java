@@ -12,6 +12,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class ItemOrderDAOImpl implements ItemOrderDAO {
@@ -140,6 +141,27 @@ public class ItemOrderDAOImpl implements ItemOrderDAO {
             LOGGER.error(e);
             throw new DAOException(e);
         }
+    }
+
+    @Override
+    public List<ItemOrder> getItemOrdersByOrderId(int orderId) throws DAOException {
+        List<ItemOrder> itemOrderList = new LinkedList<>();
+        try (Connection connection = pool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(SQLQuery.GET_ITEM_ORDERS_BY_ORDER_ID.getValue())) {
+            statement.setInt(1, orderId);
+
+            try (ResultSet resultSet = statement.executeQuery()) {
+                while (resultSet.next()) {
+                    ItemOrder itemOrder = buildItemOrder(resultSet);
+                    itemOrderList.add(itemOrder);
+                }
+            }
+        } catch (SQLException e) {
+            LOGGER.error(e);
+            throw new DAOException(e);
+        }
+
+        return itemOrderList;
     }
 
     private ItemOrder buildItemOrder(ResultSet resultSet) throws SQLException {
