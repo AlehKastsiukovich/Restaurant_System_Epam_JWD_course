@@ -127,6 +127,20 @@ public class OrderDAOImpl implements OrderDAO {
     }
 
     @Override
+    public void deleteOrderById(int orderId) throws DAOException {
+        try (Connection connection = pool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(SQLQuery.DELETE_ORDER_BY_ORDER_ID.getValue())) {
+
+            statement.setInt(1, orderId);
+            statement.executeUpdate();
+
+        } catch (SQLException e) {
+            LOGGER.error(e);
+            throw new DAOException(e);
+        }
+    }
+
+    @Override
     public List<Order> getAll() throws DAOException {
         List<Order> orderList = new LinkedList<>();
 
