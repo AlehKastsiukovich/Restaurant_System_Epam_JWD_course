@@ -1,6 +1,7 @@
 package by.epam.javatraining.restaurant.command;
 
 public enum JSPParameter {
+
     COMMAND("command"),
     LOGIN("login"),
     PASSWORD("password"),
@@ -20,8 +21,8 @@ public enum JSPParameter {
     USER_ORDER_LIST("orderList"),
     UNCONFIRMED_ORDERS("unconfirmedOrderList"),
     ALL_USERS_ORDERS("allUsersOrders"),
-    ALL_USERS("userList");
-
+    ALL_USERS("userList"),
+    ITEM_ORDER_LIST("itemOrderList");
 
     private String value;
 

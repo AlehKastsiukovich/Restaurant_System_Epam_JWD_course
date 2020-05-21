@@ -17,6 +17,42 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/orders.css">
     <title>profile</title>
+    <style type="text/css">
+        table {
+            font-family: "Lato", Verdana, sans-serif;
+            font-size: 13px;
+            background: white;
+            /*max-width: 180%;*/
+            width: 900px;
+            border-collapse: collapse;
+            text-align: center;
+            table-layout: fixed;
+            margin-top: 10%;
+            margin-bottom: 10%;
+        }
+
+        /*.col {*/
+        /*    width: ;*/
+        /*}*/
+
+        th {
+            font-weight: normal;
+            color: black;
+            padding: 10px 10px;
+            width: 10px;
+        }
+
+        td {
+            color: black;
+            border-top: 1px solid black;
+            padding: 10px 10px;
+            width: 10px;
+        }
+
+        tr:nth-child(2n) {
+            background: lightgrey;
+        }
+    </style>
 </head>
 
 <body>
@@ -49,7 +85,8 @@
                             <form class="header__form" method="get"
                                   action="${pageContext.request.contextPath}/controller">
                                 <button style="cursor: pointer" class="navigation__link" type="submit" value="LOGOUT"
-                                        name="command"/><fmt:message key="label.logout"/>
+                                        name="command"/>
+                                <fmt:message key="label.logout"/>
                                 </button>
                             </form>
                         </c:when>
@@ -76,8 +113,9 @@
             <form action="${pageContext.request.contextPath}/controller" method="post">
                 <ul class="aside__list">
                     <li class="aside__item">
-                        <button class="aside__button" type="submit" name="command" value="VIEW_ADMIN_PROFILE"><fmt:message
-                                key="label.your_info"/></button>
+                        <button class="aside__button" type="submit" name="command" value="VIEW_ADMIN_PROFILE">
+                            <fmt:message
+                                    key="label.your_info"/></button>
                     </li>
                     <li class="aside__item">
                         <button class="aside__button" type="submit" name="command"
@@ -109,27 +147,33 @@
         </div>
         <div class="aside-container">
             <div class="orders">
-                <ul class="orders__list">
-                    <li class="order__item">
-                        <fmt:message key="label.user_profile_login"/> ${user.login}
-                    </li>
-                    <li class="order__item">
-                        <fmt:message key="label.user_profile_email"/>${user.email}
-                    </li>
-                    <li class="order__item">
-                        <fmt:message key="label.user_profile_phone_number"/> ${user.phoneNumber}
-                    </li>
-                    <li class="order__item">
-                        <fmt:message key="label.user_first_name"/> ${user.firstName}
-                    </li>
-                    <li class="order__item">
-                        <fmt:message key="label.user_last_name"/> ${user.lastName}
-                    </li>
-                </ul>
+                <table>
+                    <c:set var="sum" scope="session" value="${0}"/>
+                    <tr>
+                        <th><fmt:message key="label.admin_order_info_image"/></th>
+                        <th><fmt:message key="label.admin_order_info_title"/></th>
+                        <th><fmt:message key="label.admin_order_info_quantity"/></th>
+                        <th><fmt:message key="label.total_price"/></th>
+                    </tr>
+                    <c:forEach items="${itemOrderList}" var="itemOrders" varStatus="status">
+                        <tr>
+                            <td><img src="data:image/jpg;base64,${itemOrders.position.positionImage}" width="50"
+                                     height="50"/></td>
+                            <td>${itemOrders.position.itemName}</td>
+                            <td>${itemOrders.quantity}</td>
+                            <td>
+                                <c:set var="quantity" scope="session" value="${itemOrders.quantity}"/>
+                                <c:set var="price" scope="session" value="${itemOrders.position.itemPrice}"/>
+                                <c:out value="${quantity * price}"/>
+                                <c:set var="sum" scope="session" value="${sum + (quantity * price)}"/>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </table>
+                <h1 style="text-align: left"><fmt:message key="label.admin_order_info_total_price"/> ${sum} BYN</h1>
             </div>
         </div>
     </div>
-
 </main>
 
 <footer class="footer">
