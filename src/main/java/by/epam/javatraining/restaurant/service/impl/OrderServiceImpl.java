@@ -66,7 +66,6 @@ public class OrderServiceImpl implements OrderService {
 
         try {
             orderList = dao.getAll();
-            LOGGER.warn("in service after get All");
         } catch (DAOException e) {
             LOGGER.error(e);
             throw new ServiceException(e);

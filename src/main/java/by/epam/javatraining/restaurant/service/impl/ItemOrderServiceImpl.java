@@ -9,6 +9,7 @@ import by.epam.javatraining.restaurant.exception.ServiceException;
 import by.epam.javatraining.restaurant.service.ItemOrderService;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+import java.util.List;
 import java.util.Map;
 
 public class ItemOrderServiceImpl implements ItemOrderService {
@@ -43,5 +44,19 @@ public class ItemOrderServiceImpl implements ItemOrderService {
                 throw new ServiceException(e);
             }
         }
+    }
+
+    @Override
+    public List<ItemOrder> getItemOrdersByOrderId(int orderId) throws ServiceException {
+        List<ItemOrder> itemOrderList;
+
+        try {
+            itemOrderList = dao.getItemOrdersByOrderId(orderId);
+        } catch (DAOException e) {
+            LOGGER.error(e);
+            throw new ServiceException(e);
+        }
+
+        return itemOrderList;
     }
 }
