@@ -16,7 +16,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/orders.css">
-    <title>profile</title>
+    <title>user orders</title>
     <style type="text/css">
         table {
             font-family: "Lato", Verdana, sans-serif;
@@ -29,23 +29,20 @@
             table-layout: fixed;
             margin-top: 10%;
             margin-bottom: 10%;
-            margin-right: 5%;
         }
-
-        /*.col {*/
-        /*    width: ;*/
-        /*}*/
 
         th {
             font-weight: normal;
             color: black;
             padding: 10px 10px;
+            width: 10px;
         }
 
         td {
             color: black;
             border-top: 1px solid black;
             padding: 10px 10px;
+            width: 10px;
         }
 
         tr:nth-child(2n) {
@@ -147,46 +144,72 @@
         <div class="aside-container">
             <div class="aside-container">
                 <div class="orders">
-                    <table  align="left">
+                    <table>
                         <tr>
-                            <th width="5px"><fmt:message key="label.just_id"/></th>
-                            <th><fmt:message key="label.user_profile_login"/></th>
-                            <th><fmt:message key="label.user_profile_email"/></th>
-                            <th><fmt:message key="label.user_profile_phone_number"/></th>
-                            <th><fmt:message key="label.user_first_name"/></th>
-                            <th><fmt:message key="label.user_last_name"/></th>
-                            <th width="10px"><fmt:message key="label.user_role_id"/></th>
-                            <th><fmt:message key="label.admin_users_all_orders"/></th>
+                            <th><fmt:message key="label.order_id"/></th>
+                            <th><fmt:message key="label.date"/></th>
+                            <th><fmt:message key="label.total_price"/></th>
+                            <th><fmt:message key="label.user_id"/></th>
+                            <th><fmt:message key="label.status"/></th>
+                            <th><fmt:message key="label.admin_confirm_order"/></th>
+                            <th><fmt:message key="label.admin_button_info"/></th>
                             <th><fmt:message key="label.admin_button_delete"/></th>
                         </tr>
-                        <c:forEach items="${userList}" var="users" varStatus="status">
+                        <c:forEach items="${orderList}" var="orders" varStatus="status">
                             <tr>
-                                <td width="5px">${users.userId}</td>
-                                <td>${users.login}</td>
-                                <td>${users.email}</td>
-                                <td>${users.phoneNumber}</td>
-                                <td>${users.firstName}</td>
-                                <td>${users.lastName}</td>
-                                <td width="10px">${users.role.roleId}</td>
+                                <td>${orders.orderId}</td>
+                                <td>${orders.orderDate}</td>
+                                <td>${orders.totalPrice}</td>
+                                <td>${orders.customerId}</td>
+                                <td>
+                                    <c:if test="${orders.orderStatusId == 1}">
+                                        <fmt:message key="label.order_status_unprocessed"/>
+                                    </c:if>
+                                    <c:if test="${orders.orderStatusId == 2}">
+                                        <fmt:message key="label.order_status_processed"/>
+                                    </c:if>
+                                </td>
                                 <td>
                                     <form method="post"
-                                          action="${pageContext.request.contextPath}/controller?id=${users.userId}">
+                                          action="${pageContext.request.contextPath}/controller?id=${orders.orderId}">
                                         <div class="product__content">
-                                            <button style="background: darkslategray; position: relative;left: 50%;transform: translate(-50%, 0);"
+                                            <c:if test="${orders.orderStatusId == 1}">
+                                                <button style="position: relative;left: 50%;transform: translate(-50%, 0);"
+                                                        class="button__accept_admin" type="submit" name="command"
+                                                        value="PROCESS_USER_ORDER">
+                                                    <fmt:message key="label.admin_confirm_order"/>
+                                                </button>
+                                            </c:if>
+                                            <c:if test="${orders.orderStatusId == 2}">
+                                                <button disabled
+                                                        style="background: grey;position: relative;left: 50%;transform: translate(-50%, 0);"
+                                                        class="button__accept_admin" type="submit" name="command"
+                                                        value="PROCESS_USER_ORDER">
+                                                    <fmt:message key="label.admin_confirm_order"/>
+                                                </button>
+                                            </c:if>
+                                        </div>
+                                    </form>
+                                </td>
+                                <td>
+                                    <form method="post"
+                                          action="${pageContext.request.contextPath}/controller?id=${orders.orderId}">
+                                        <div class="product__content">
+                                            <button style="background: darkblue;position: relative;left: 50%;transform: translate(-50%, 0);"
                                                     class="button__accept_admin" type="submit" name="command"
-                                                    value="VIEW_USER_ORDERS_BY_ADMIN">
-                                                <fmt:message key="label.admin_users_all_orders"/>
+                                                    value="VIEW_ORDER_INFO">
+                                                <fmt:message key="label.admin_button_info"/>
                                             </button>
                                         </div>
                                     </form>
                                 </td>
                                 <td>
                                     <form method="post"
-                                          action="${pageContext.request.contextPath}/controller?id=${users.userId}">
+                                          action="${pageContext.request.contextPath}/controller?id=${orders.orderId}&userId=${orders.customerId}">
                                         <div class="product__content">
                                             <button style="background: red; position: relative;left: 50%;transform: translate(-50%, 0);"
                                                     class="button__accept_admin" type="submit" name="command"
-                                                    value="PROCESS_USER_ORDER">
+                                                    value="DELETE_USER_ORDER_BY_ADMIN_INFO_PAGE">
                                                 <fmt:message key="label.admin_button_delete"/>
                                             </button>
                                         </div>

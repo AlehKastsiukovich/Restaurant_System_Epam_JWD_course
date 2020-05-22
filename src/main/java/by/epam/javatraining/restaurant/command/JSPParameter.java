@@ -22,7 +22,8 @@ public enum JSPParameter {
     UNCONFIRMED_ORDERS("unconfirmedOrderList"),
     ALL_USERS_ORDERS("allUsersOrders"),
     ALL_USERS("userList"),
-    ITEM_ORDER_LIST("itemOrderList");
+    ITEM_ORDER_LIST("itemOrderList"),
+    USER_ID("userId");
 
     private String value;
 

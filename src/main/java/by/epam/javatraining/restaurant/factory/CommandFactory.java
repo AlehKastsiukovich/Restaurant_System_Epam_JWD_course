@@ -30,6 +30,8 @@ public class CommandFactory {
         commands.put(CommandName.ENTER_FIND_ORDER_PAGE, new FindOrderByAdminCommand());
         commands.put(CommandName.VIEW_ORDER_INFO, new ViewOrderInfoByAdminCommand());
         commands.put(CommandName.DELETE_ORDER, new DeleteOrderByAdminCommand());
+        commands.put(CommandName.VIEW_USER_ORDERS_BY_ADMIN, new ViewUserOrdersByAdminCommand());
+        commands.put(CommandName.DELETE_USER_ORDER_BY_ADMIN_INFO_PAGE, new DeleteOrderFromUserOrdersByAdminCommand());
     }
 
     private static class CommandFactoryHolder {
