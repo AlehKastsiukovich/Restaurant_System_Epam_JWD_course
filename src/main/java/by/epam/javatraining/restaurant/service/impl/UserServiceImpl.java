@@ -137,6 +137,16 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
+    @Override
+    public void deleteUserById(int userId) throws ServiceException {
+        try {
+            dao.deleteUserById(userId);
+        } catch (DAOException e) {
+            LOGGER.error(e);
+            throw new ServiceException(e);
+        }
+    }
+
     private boolean isLoginExist(String login) throws ServiceException {
         User user;
 
