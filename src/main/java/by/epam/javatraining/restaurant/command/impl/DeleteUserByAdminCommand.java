@@ -23,7 +23,7 @@ public class DeleteUserByAdminCommand implements Command {
         List<User> userList = null;
 
         try {
-            service.(userId);
+            service.deleteUserById(userId);
             userList = service.getAllUsers();
         } catch (ServiceException e) {
             LOGGER.error(e);
