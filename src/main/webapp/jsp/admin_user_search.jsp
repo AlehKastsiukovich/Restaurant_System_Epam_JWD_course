@@ -210,7 +210,7 @@
                         <td width="10px">${requestUserId.role.roleId}</td>
                         <td>
                             <form method="post"
-                                  action="${pageContext.request.contextPath}/controller?id=${users.userId}">
+                                  action="${pageContext.request.contextPath}/controller?id=${requestUserId.userId}">
                                 <div class="product__content">
                                     <c:if test="${requestUserId != null}">
                                     <button style="background: darkslategray; position: relative;left: 50%;transform: translate(-50%, 0);"
@@ -231,19 +231,19 @@
                         </td>
                         <td>
                             <form method="post"
-                                  action="${pageContext.request.contextPath}/controller?id=${users.userId}">
+                                  action="${pageContext.request.contextPath}/controller?id=${requestUserId.userId}">
                                 <div class="product__content">
                                     <c:if test="${requestUserId != null}">
                                     <button style="background: red; position: relative;left: 50%;transform: translate(-50%, 0);"
                                             class="button__accept_admin" type="submit" name="command"
-                                            value="DELETE_USER">
+                                            value="DELETE_USER_BY_ID_SEARCH_PAGE">
                                         <fmt:message key="label.admin_button_delete"/>
                                     </button>
                                     </c:if>
                                     <c:if test="${requestUserId == null}">
                                         <button disabled style="background: red; position: relative;left: 50%;transform: translate(-50%, 0);"
                                                 class="button__accept_admin" type="submit" name="command"
-                                                value="DELETE_USER">
+                                                value="DELETE_USER_BY_ID_SEARCH_PAGE">
                                             <fmt:message key="label.admin_button_delete"/>
                                         </button>
                                     </c:if>

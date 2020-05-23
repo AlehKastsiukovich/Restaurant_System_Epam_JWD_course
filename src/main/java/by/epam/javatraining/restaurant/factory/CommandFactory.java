@@ -34,6 +34,7 @@ public class CommandFactory {
         commands.put(CommandName.DELETE_USER_ORDER_BY_ADMIN_INFO_PAGE, new DeleteOrderFromUserOrdersByAdminCommand());
         commands.put(CommandName.DELETE_USER, new DeleteUserByAdminCommand());
         commands.put(CommandName.FIND_USER_BY_ID, new FindUserByIdCommand());
+        commands.put(CommandName.DELETE_USER_BY_ID_SEARCH_PAGE, new DeleteUserByAdminOnUserSearchPageCommand());
     }
 
     private static class CommandFactoryHolder {
