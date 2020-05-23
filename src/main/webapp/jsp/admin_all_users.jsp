@@ -186,7 +186,7 @@
                                         <div class="product__content">
                                             <button style="background: red; position: relative;left: 50%;transform: translate(-50%, 0);"
                                                     class="button__accept_admin" type="submit" name="command"
-                                                    value="PROCESS_USER_ORDER">
+                                                    value="DELETE_USER">
                                                 <fmt:message key="label.admin_button_delete"/>
                                             </button>
                                         </div>

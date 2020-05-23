@@ -23,4 +23,6 @@ public interface UserDAO extends ModelDAO<User> {
     User readByLogin(String login) throws DAOException;
 
     User readByEmail(String email) throws DAOException;
+
+    void deleteUserById(int userId) throws DAOException;
 }

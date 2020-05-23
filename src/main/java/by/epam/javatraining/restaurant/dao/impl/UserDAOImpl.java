@@ -100,6 +100,19 @@ public class UserDAOImpl implements UserDAO {
     }
 
     @Override
+    public void deleteUserById(int userId) throws DAOException {
+        try (Connection connection = pool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(SQLQuery.DELETE_USER_BY_ID.getValue())) {
+            statement.setInt(1, userId);
+            statement.executeUpdate();
+
+        } catch (SQLException e) {
+            LOGGER.error(DAO_ISSUES_MESSAGE, e);
+            throw new DAOException(e);
+        }
+    }
+
+    @Override
     public void create(User user) throws DAOException {
         try (Connection connection = pool.getConnection();
              PreparedStatement statement = connection.prepareStatement(SQLQuery.CREATE_USER.getValue())) {

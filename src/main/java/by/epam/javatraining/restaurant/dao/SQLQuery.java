@@ -14,6 +14,7 @@ public enum SQLQuery {
             + " on user.role_id = r.id"),
     DELETE_USER("delete from user where user_id = (?) and login = (?) "
             + "and password = (?)"),
+    DELETE_USER_BY_ID("delete from user where user_id = (?)"),
     CREATE_USER("insert into user (login, password, email, "
             + "phone_number, first_name, last_name, role_id) values ((?), (?), (?), (?), (?), (?), (?))"),
     UPDATE_USER("update user set password = (?), email = (?), phone_number = (?) "
