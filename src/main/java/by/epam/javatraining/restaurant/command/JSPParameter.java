@@ -26,7 +26,8 @@ public enum JSPParameter {
     USER_ID("userId"),
     USER_ID_REQUEST("requestUserId"),
     LOGIN_ERROR("loginError"),
-    USER_SEARCH_MESSAGE("searchMessage");
+    USER_SEARCH_MESSAGE("searchMessage"),
+    USER_SEARCH_PARAMETER("userParameter");
 
     private String value;
 

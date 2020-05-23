@@ -15,17 +15,25 @@ import javax.servlet.http.HttpServletResponse;
 public class FindUserByIdCommand implements Command {
     private static final Logger LOGGER = LogManager.getLogger(FindUserByIdCommand.class);
     private static final String EMPTY_USER_MESSAGE = "User with this id does not exist";
+    private static final String WRONG_NUMBER_MESSAGE = "Not a number";
+    private static final String NUMBER_REGEX = "-?\\d+(\\.\\d+)?";
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        int userId =Integer.parseInt(request.getParameter("userParameter"));
-        UserService service = ServiceFactory.INSTANCE.getUserService();
+        int userId;
         User user = null;
+        UserService service = ServiceFactory.INSTANCE.getUserService();
 
-        try {
-            user = service.getUserById(userId);
-        } catch (ServiceException e) {
-            LOGGER.error(e);
+        if (isNumeric(request.getParameter(JSPParameter.USER_SEARCH_PARAMETER.getValue()))) {
+            userId = Integer.parseInt(request.getParameter(JSPParameter.USER_SEARCH_PARAMETER.getValue()));
+
+            try {
+                user = service.getUserById(userId);
+            } catch (ServiceException e) {
+                LOGGER.error(e);
+            }
+        } else {
+            request.setAttribute(JSPParameter.USER_SEARCH_MESSAGE.getValue(), WRONG_NUMBER_MESSAGE);
         }
 
         if (user == null) {
@@ -35,5 +43,9 @@ public class FindUserByIdCommand implements Command {
         request.setAttribute(JSPParameter.USER_ID_REQUEST.getValue(), user);
 
         return PageType.ADMIN_USER_SEARCH.getValue();
+    }
+
+    private boolean isNumeric(String requestParameter) {
+        return requestParameter.matches(NUMBER_REGEX);
     }
 }
