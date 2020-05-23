@@ -36,6 +36,7 @@ public class CommandFactory {
         commands.put(CommandName.FIND_USER_BY_ID, new FindUserByIdCommand());
         commands.put(CommandName.DELETE_USER_BY_ID_SEARCH_PAGE, new DeleteUserByAdminOnUserSearchPageCommand());
         commands.put(CommandName.FIND_USER_BY_LOGIN, new FindUserByLoginCommand());
+        commands.put(CommandName.FIND_USER_BY_EMAIL, new FindUserByEmailCommand());
     }
 
     private static class CommandFactoryHolder {
