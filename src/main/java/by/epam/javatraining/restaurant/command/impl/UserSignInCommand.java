@@ -38,7 +38,7 @@ public class UserSignInCommand implements Command {
             session.setAttribute(JSPParameter.ROLE.getValue(), user.getRole().getRoleId());
             page = PageType.START_PAGE.getValue();
         } else {
-            request.setAttribute("loginError", LOGIN_ERROR_MESSAGE);
+            request.setAttribute(JSPParameter.LOGIN_ERROR.getValue(), LOGIN_ERROR_MESSAGE);
             page = PageType.SIGN_IN_PAGE.getValue();
         }
 

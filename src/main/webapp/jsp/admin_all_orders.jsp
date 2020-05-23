@@ -178,12 +178,12 @@
                                           action="${pageContext.request.contextPath}/controller?id=${orders.orderId}">
                                         <div class="product__content">
                                             <c:if test="${orders.orderStatusId == 1}">
-                                                <button style="position: relative;left: 50%;transform: translate(-50%, 0);"
-                                                        class="button__accept_admin" type="submit" name="command"
-                                                        value="PROCESS_USER_ORDER">
-                                                    <fmt:message key="label.admin_confirm_order"/>
-                                                </button>
-                                            </c:if>
+                                            <button style="position: relative;left: 50%;transform: translate(-50%, 0);"
+                                                    class="button__accept_admin" type="submit" name="command"
+                                                    value="PROCESS_USER_ORDER">
+                                                <fmt:message key="label.admin_confirm_order"/>
+                                            </button>
+                                        </c:if>
                                             <c:if test="${orders.orderStatusId == 2}">
                                                 <button disabled
                                                         style="background: grey;position: relative;left: 50%;transform: translate(-50%, 0);"

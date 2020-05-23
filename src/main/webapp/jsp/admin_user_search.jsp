@@ -23,7 +23,7 @@
             font-size: 13px;
             background: white;
             /*max-width: 180%;*/
-            width: 600px;
+            width: 900px;
             border-collapse: collapse;
             text-align: center;
             table-layout: fixed;
@@ -142,55 +142,119 @@
         </div>
         <div class="aside-container">
             <div class="orders">
-                <table>
-                    <tr>
-                        <th><fmt:message key="label.admin_find_by"/></th>
-                        <th width="10px"><fmt:message key="label.user_id"/></th>
-                        <th width="10px"><fmt:message key="label.login"/></th>
-                        <th width="10px"><fmt:message key="label.email"/></th>
-                    </tr>
+                <form method="post"
+                      action="${pageContext.request.contextPath}/controller">
+                    <table>
+                        <tr>
+                            <th><fmt:message key="label.admin_find_by"/></th>
+                            <th width="10px"><fmt:message key="label.user_id"/></th>
+                            <th width="10px"><fmt:message key="label.login"/></th>
+                            <th width="10px"><fmt:message key="label.email"/></th>
+                        </tr>
 
+                        <tr>
+                            <td style="padding-top: 0px"><input class="modal-body__input" type="text"
+                                                                name="userParameter"
+                                                                placeholder="<fmt:message key="label.admin_search_enter_parameter"/>">
+                            </td>
+                            <td width="10px">
+                                <div class="product__content">
+                                    <button style="position: relative;left: 50%;transform: translate(-50%, 0);"
+                                            class="button__accept_admin" type="submit" name="command"
+                                            value="FIND_USER_BY_ID">
+                                        <fmt:message key="label.admin_find"/>
+                                    </button>
+                                </div>
+                            </td>
+                            <td width="10px">
+                                <div class="product__content">
+                                    <button style="position: relative;left: 50%;transform: translate(-50%, 0);"
+                                            class="button__accept_admin" type="submit" name="command"
+                                            value="FIND_USER_BY_LOGIN">
+                                        <fmt:message key="label.admin_find"/>
+                                    </button>
+                                </div>
+                            </td>
+                            <td width="10px">
+                                <div class="product__content">
+                                    <button style="position: relative;left: 50%;transform: translate(-50%, 0);"
+                                            class="button__accept_admin" type="submit" name="command"
+                                            value="FIND_USER_BY_EMAIL">
+                                        <fmt:message key="label.admin_find"/>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+
+                <table align="left">
                     <tr>
-                        <td style="padding-top: 0px"><input class="modal-body__input" type="text" name="login"
-                                   placeholder="<fmt:message key="label.admin_search_enter_parameter"/>"></td>
-                        <td width="10px">
+                        <th width="5px"><fmt:message key="label.just_id"/></th>
+                        <th><fmt:message key="label.user_profile_login"/></th>
+                        <th><fmt:message key="label.user_profile_email"/></th>
+                        <th><fmt:message key="label.user_profile_phone_number"/></th>
+                        <th><fmt:message key="label.user_first_name"/></th>
+                        <th><fmt:message key="label.user_last_name"/></th>
+                        <th width="10px"><fmt:message key="label.user_role_id"/></th>
+                        <th><fmt:message key="label.admin_users_all_orders"/></th>
+                        <th><fmt:message key="label.admin_button_delete"/></th>
+                    </tr>
+                    <tr>
+                        <td width="5px">${requestUserId.userId}</td>
+                        <td>${requestUserId.login}</td>
+                        <td>${requestUserId.email}</td>
+                        <td>${requestUserId.phoneNumber}</td>
+                        <td>${requestUserId.firstName}</td>
+                        <td>${requestUserId.lastName}</td>
+                        <td width="10px">${requestUserId.role.roleId}</td>
+                        <td>
                             <form method="post"
-                                  action="${pageContext.request.contextPath}/controller?id=${orders.orderId}">
+                                  action="${pageContext.request.contextPath}/controller?id=${users.userId}">
                                 <div class="product__content">
-                                    <button style="position: relative;left: 50%;transform: translate(-50%, 0);"
+                                    <c:if test="${requestUserId != null}">
+                                    <button style="background: darkslategray; position: relative;left: 50%;transform: translate(-50%, 0);"
                                             class="button__accept_admin" type="submit" name="command"
-                                            value="PROCESS_USER_ORDER">
-                                        <fmt:message key="label.admin_find"/>
+                                            value="VIEW_USER_ORDERS_BY_ADMIN">
+                                        <fmt:message key="label.admin_users_all_orders"/>
                                     </button>
+                                    </c:if>
+                                    <c:if test="${requestUserId == null}">
+                                        <button disabled style="background: darkslategray; position: relative;left: 50%;transform: translate(-50%, 0);"
+                                                class="button__accept_admin" type="submit" name="command"
+                                                value="VIEW_USER_ORDERS_BY_ADMIN">
+                                            <fmt:message key="label.admin_users_all_orders"/>
+                                        </button>
+                                    </c:if>
                                 </div>
                             </form>
                         </td>
-                        <td width="10px">
+                        <td>
                             <form method="post"
-                                  action="${pageContext.request.contextPath}/controller?id=${orders.orderId}">
+                                  action="${pageContext.request.contextPath}/controller?id=${users.userId}">
                                 <div class="product__content">
-                                    <button style="position: relative;left: 50%;transform: translate(-50%, 0);"
+                                    <c:if test="${requestUserId != null}">
+                                    <button style="background: red; position: relative;left: 50%;transform: translate(-50%, 0);"
                                             class="button__accept_admin" type="submit" name="command"
-                                            value="PROCESS_USER_ORDER">
-                                        <fmt:message key="label.admin_find"/>
+                                            value="DELETE_USER">
+                                        <fmt:message key="label.admin_button_delete"/>
                                     </button>
-                                </div>
-                            </form>
-                        </td>
-                        <td width="10px">
-                            <form method="post"
-                                  action="${pageContext.request.contextPath}/controller?id=${orders.orderId}">
-                                <div class="product__content">
-                                    <button style="position: relative;left: 50%;transform: translate(-50%, 0);"
-                                            class="button__accept_admin" type="submit" name="command"
-                                            value="PROCESS_USER_ORDER">
-                                        <fmt:message key="label.admin_find"/>
-                                    </button>
+                                    </c:if>
+                                    <c:if test="${requestUserId == null}">
+                                        <button disabled style="background: red; position: relative;left: 50%;transform: translate(-50%, 0);"
+                                                class="button__accept_admin" type="submit" name="command"
+                                                value="DELETE_USER">
+                                            <fmt:message key="label.admin_button_delete"/>
+                                        </button>
+                                    </c:if>
                                 </div>
                             </form>
                         </td>
                     </tr>
                 </table>
+
+                <span style="font-size: 14px; color: red;">${searchMessage}</span>
+
             </div>
         </div>
     </div>

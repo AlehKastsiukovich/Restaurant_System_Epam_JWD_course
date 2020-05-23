@@ -33,6 +33,7 @@ public class CommandFactory {
         commands.put(CommandName.VIEW_USER_ORDERS_BY_ADMIN, new ViewUserOrdersByAdminCommand());
         commands.put(CommandName.DELETE_USER_ORDER_BY_ADMIN_INFO_PAGE, new DeleteOrderFromUserOrdersByAdminCommand());
         commands.put(CommandName.DELETE_USER, new DeleteUserByAdminCommand());
+        commands.put(CommandName.FIND_USER_BY_ID, new FindUserByIdCommand());
     }
 
     private static class CommandFactoryHolder {

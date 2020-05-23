@@ -23,7 +23,10 @@ public enum JSPParameter {
     ALL_USERS_ORDERS("allUsersOrders"),
     ALL_USERS("userList"),
     ITEM_ORDER_LIST("itemOrderList"),
-    USER_ID("userId");
+    USER_ID("userId"),
+    USER_ID_REQUEST("requestUserId"),
+    LOGIN_ERROR("loginError"),
+    USER_SEARCH_MESSAGE("searchMessage");
 
     private String value;
 
