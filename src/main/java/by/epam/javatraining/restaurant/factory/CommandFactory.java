@@ -39,6 +39,7 @@ public class CommandFactory {
         commands.put(CommandName.FIND_USER_BY_EMAIL, new FindUserByEmailCommand());
         commands.put(CommandName.PROCESS_USER_ORDER_ON_SEARCH_PAGE, new ConfirmUserOrderByAdminOnOrderSearchPageCommand());
         commands.put(CommandName.FIND_ORDER_BY_ID, new FindOrderByIdCommand());
+        commands.put(CommandName.FIND_ORDER_BY_USER_ID, new FindOrdersByUserIdCommand());
     }
 
     private static class CommandFactoryHolder {

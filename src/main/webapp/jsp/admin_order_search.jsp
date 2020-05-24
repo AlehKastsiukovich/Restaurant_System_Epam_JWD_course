@@ -169,7 +169,7 @@
                                 <div class="product__content">
                                     <button style="position: relative;left: 50%;transform: translate(-50%, 0);"
                                             class="button__accept_admin" type="submit" name="command"
-                                            value="PROCESS_USER_ORDER">
+                                            value="FIND_ORDER_BY_USER_ID">
                                         <fmt:message key="label.admin_find"/>
                                     </button>
                                 </div>
