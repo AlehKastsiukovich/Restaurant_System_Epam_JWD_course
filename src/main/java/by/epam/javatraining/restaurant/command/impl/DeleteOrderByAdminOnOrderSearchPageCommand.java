@@ -13,8 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
 
-public class DeleteOrderFromUserOrdersByAdminCommand implements Command {
-    private static final Logger LOGGER = LogManager.getLogger(DeleteOrderFromUserOrdersByAdminCommand.class);
+public class DeleteOrderByAdminOnOrderSearchPageCommand implements Command {
+    private static final Logger LOGGER = LogManager.getLogger(DeleteOrderByAdminOnOrderSearchPageCommand.class);
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
@@ -32,6 +32,6 @@ public class DeleteOrderFromUserOrdersByAdminCommand implements Command {
 
         request.setAttribute(JSPParameter.USER_ORDER_LIST.getValue(), orderList);
 
-        return PageType.ADMIN_USER_ORDERS.getValue();
+        return PageType.ADMIN_ORDER_SEARCH.getValue();
     }
 }

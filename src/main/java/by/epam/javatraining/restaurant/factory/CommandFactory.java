@@ -31,7 +31,7 @@ public class CommandFactory {
         commands.put(CommandName.VIEW_ORDER_INFO, new ViewOrderInfoByAdminCommand());
         commands.put(CommandName.DELETE_ORDER, new DeleteOrderByAdminCommand());
         commands.put(CommandName.VIEW_USER_ORDERS_BY_ADMIN, new ViewUserOrdersByAdminCommand());
-        commands.put(CommandName.DELETE_USER_ORDER_BY_ADMIN_INFO_PAGE, new DeleteOrderFromUserOrdersByAdminCommand());
+        commands.put(CommandName.DELETE_USER_ORDER_BY_ADMIN_INFO_PAGE, new DeleteOrderByAdminOnOrderSearchPageCommand());
         commands.put(CommandName.DELETE_USER, new DeleteUserByAdminCommand());
         commands.put(CommandName.FIND_USER_BY_ID, new FindUserByIdCommand());
         commands.put(CommandName.DELETE_USER_BY_ID_SEARCH_PAGE, new DeleteUserByAdminOnUserSearchPageCommand());
@@ -40,6 +40,7 @@ public class CommandFactory {
         commands.put(CommandName.PROCESS_USER_ORDER_ON_SEARCH_PAGE, new ConfirmUserOrderByAdminOnOrderSearchPageCommand());
         commands.put(CommandName.FIND_ORDER_BY_ID, new FindOrderByIdCommand());
         commands.put(CommandName.FIND_ORDER_BY_USER_ID, new FindOrdersByUserIdCommand());
+        commands.put(CommandName.DELETE_ORDER_ON_SEARCH_PAGE, new DeleteOrderByAdminOnOrderSearchPageCommand());
     }
 
     private static class CommandFactoryHolder {

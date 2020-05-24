@@ -240,11 +240,11 @@
                             </td>
                             <td>
                                 <form method="post"
-                                      action="${pageContext.request.contextPath}/controller?id=${orders.orderId}">
+                                      action="${pageContext.request.contextPath}/controller?id=${orders.orderId}&userId=${orders.customerId}">
                                     <div class="product__content">
                                         <button style="background: red; position: relative;left: 50%;transform: translate(-50%, 0);"
                                                 class="button__accept_admin" type="submit" name="command"
-                                                value="DELETE_ORDER">
+                                                value="DELETE_ORDER_ON_SEARCH_PAGE">
                                             <fmt:message key="label.admin_button_delete"/>
                                         </button>
                                     </div>

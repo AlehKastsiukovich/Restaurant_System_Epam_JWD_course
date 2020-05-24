@@ -12,6 +12,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
 
 public class ConfirmUserOrderByAdminOnOrderSearchPageCommand implements Command {
     private static final Logger LOGGER = LogManager.getLogger(ConfirmUserOrderByAdminOnOrderSearchPageCommand.class);
@@ -24,6 +25,7 @@ public class ConfirmUserOrderByAdminOnOrderSearchPageCommand implements Command 
         int orderId;
         Order order = null;
         OrderService service = ServiceFactory.INSTANCE.getOrderService();
+        List<Order> orderList = null;
 
         if (EnterParameterValidator.INSTANCE.isNumeric(request.getParameter(JSPParameter.ID.getValue()))) {
             orderId = Integer.parseInt(request.getParameter(JSPParameter.ID.getValue()));
