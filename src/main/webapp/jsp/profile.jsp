@@ -16,6 +16,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/orders.css">
+    <%@ taglib prefix="ctg" uri="customtags" %>
     <title>profile</title>
 </head>
 
@@ -85,6 +86,13 @@
                                 key="label.my_orders"/>
                         </button>
                     </li>
+                    <c:if test="${user.role.roleId == 1}">
+                        <li class="aside__item">
+                            <button class="aside__button" type="submit" name="command"
+                                    value="VIEW_USER_ORDERS">Administration
+                            </button>
+                        </li>
+                    </c:if>
                 </ul>
             </form>
         </div>
@@ -114,6 +122,9 @@
 </main>
 
 <footer class="footer">
+    <div style="color: white;text-align: center;padding-top: 10px">
+        <ctg:dev/>
+    </div>
     <div class="wrapper footer__wrapper">
     </div>
 </footer>

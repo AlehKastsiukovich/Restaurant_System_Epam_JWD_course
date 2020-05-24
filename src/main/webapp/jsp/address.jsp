@@ -18,6 +18,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/orders.css">
+    <%@ taglib prefix="ctg" uri="customtags" %>
     <title>address</title>
 </head>
 
@@ -97,6 +98,9 @@
 </main>
 
 <footer class="footer">
+    <div style="color: white;text-align: center;padding-top: 10px">
+        <ctg:dev/>
+    </div>
     <div class="wrapper footer__wrapper">
     </div>
 </footer>

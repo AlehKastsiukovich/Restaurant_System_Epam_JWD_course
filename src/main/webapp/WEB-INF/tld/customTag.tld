@@ -6,11 +6,11 @@
         version="2.1">
 
     <tlib-version>1.0</tlib-version>
-    <short-name>tag</short-name>
-    <uri>tld</uri>
+    <short-name>ctg</short-name>
+    <uri>customtags</uri>
 
     <tag>
-        <name>Developer</name>
+        <name>dev</name>
         <tag-class>by.epam.javatraining.restaurant.tag.CustomTagHandler</tag-class>
         <body-content>empty</body-content>
     </tag>

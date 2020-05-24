@@ -12,7 +12,7 @@ public class CustomTagHandler extends TagSupport {
 
     @Override
     public int doStartTag() throws JspException {
-        String message = "<b>Developed by Aleh Kastsiukovich 2020</b>";
+        String message = "<b>&#169; Aleh Kastsiukovich 2020</b>";
 
         try {
             JspWriter out = pageContext.getOut();
