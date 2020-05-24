@@ -186,6 +186,7 @@
                             </td>
                         </tr>
                     </table>
+                    <span style="font-size: 14px; color: red;">${searchMessage}</span>
                 </form>
 
                 <table align="left">
@@ -252,9 +253,6 @@
                         </td>
                     </tr>
                 </table>
-
-                <span style="font-size: 14px; color: red;">${searchMessage}</span>
-
             </div>
         </div>
     </div>

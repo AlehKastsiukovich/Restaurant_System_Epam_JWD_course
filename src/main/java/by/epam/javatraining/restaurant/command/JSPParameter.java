@@ -28,7 +28,8 @@ public enum JSPParameter {
     LOGIN_ERROR("loginError"),
     USER_SEARCH_MESSAGE("searchMessage"),
     USER_SEARCH_PARAMETER("userParameter"),
-    ORDER_SEARCH_MESSAGE("orderSearchMessage");
+    ORDER_SEARCH_MESSAGE("orderSearchMessage"),
+    ORDER_SEARCH_PARAMETER("orderParameter");
 
     private String value;
 

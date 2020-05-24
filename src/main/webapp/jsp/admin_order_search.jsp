@@ -142,19 +142,30 @@
         </div>
         <div class="aside-container">
             <div class="orders">
-                <table>
-                    <tr>
-                        <th><fmt:message key="label.admin_find_by"/></th>
-                        <th width="10px"><fmt:message key="label.order_id"/></th>
-                        <th width="10px"><fmt:message key="label.user_id"/></th>
-                    </tr>
+                <form method="post"
+                      action="${pageContext.request.contextPath}/controller">
+                    <table>
+                        <tr>
+                            <th><fmt:message key="label.admin_find_by"/></th>
+                            <th width="10px"><fmt:message key="label.order_id"/></th>
+                            <th width="10px"><fmt:message key="label.user_id"/></th>
+                        </tr>
 
-                    <tr>
-                        <td style="padding-top: 0px"><input class="modal-body__input" type="text" name="login"
-                                                            placeholder="<fmt:message key="label.admin_search_enter_parameter"/>"></td>
-                        <td width="10px">
-                            <form method="post"
-                                  action="${pageContext.request.contextPath}/controller?id=${orders.orderId}">
+                        <tr>
+                            <td style="padding-top: 0px"><input class="modal-body__input" type="text"
+                                                                name="orderParameter"
+                                                                placeholder="<fmt:message key="label.admin_search_enter_parameter"/>">
+                            </td>
+                            <td width="10px">
+                                <div class="product__content">
+                                    <button style="position: relative;left: 50%;transform: translate(-50%, 0);"
+                                            class="button__accept_admin" type="submit" name="command"
+                                            value="FIND_ORDER_BY_ID">
+                                        <fmt:message key="label.admin_find"/>
+                                    </button>
+                                </div>
+                            </td>
+                            <td width="10px">
                                 <div class="product__content">
                                     <button style="position: relative;left: 50%;transform: translate(-50%, 0);"
                                             class="button__accept_admin" type="submit" name="command"
@@ -162,22 +173,11 @@
                                         <fmt:message key="label.admin_find"/>
                                     </button>
                                 </div>
-                            </form>
-                        </td>
-                        <td width="10px">
-                            <form method="post"
-                                  action="${pageContext.request.contextPath}/controller?id=${orders.orderId}">
-                                <div class="product__content">
-                                    <button style="position: relative;left: 50%;transform: translate(-50%, 0);"
-                                            class="button__accept_admin" type="submit" name="command"
-                                            value="PROCESS_USER_ORDER">
-                                        <fmt:message key="label.admin_find"/>
-                                    </button>
-                                </div>
-                            </form>
-                        </td>
-                    </tr>
-                </table>
+                            </td>
+                        </tr>
+                    </table>
+                    <span style="font-size: 14px; color: red;">${orderSearchMessage}</span>
+                </form>
 
                 <table>
                     <tr>
@@ -190,7 +190,7 @@
                         <th><fmt:message key="label.admin_button_info"/></th>
                         <th><fmt:message key="label.admin_button_delete"/></th>
                     </tr>
-                    <c:forEach items="${allUsersOrders}" var="orders" varStatus="status">
+                    <c:forEach items="${orderList}" var="orders" varStatus="status">
                         <tr>
                             <td>${orders.orderId}</td>
                             <td>${orders.orderDate}</td>
@@ -211,7 +211,7 @@
                                         <c:if test="${orders.orderStatusId == 1}">
                                             <button style="position: relative;left: 50%;transform: translate(-50%, 0);"
                                                     class="button__accept_admin" type="submit" name="command"
-                                                    value="PROCESS_USER_ORDER">
+                                                    value="PROCESS_USER_ORDER_ON_SEARCH_PAGE">
                                                 <fmt:message key="label.admin_confirm_order"/>
                                             </button>
                                         </c:if>
@@ -219,7 +219,7 @@
                                             <button disabled
                                                     style="background: grey;position: relative;left: 50%;transform: translate(-50%, 0);"
                                                     class="button__accept_admin" type="submit" name="command"
-                                                    value="PROCESS_USER_ORDER">
+                                                    value="PROCESS_USER_ORDER_ON_SEARCH_PAGE">
                                                 <fmt:message key="label.admin_confirm_order"/>
                                             </button>
                                         </c:if>
@@ -253,7 +253,6 @@
                         </tr>
                     </c:forEach>
                 </table>
-
             </div>
         </div>
     </div>
