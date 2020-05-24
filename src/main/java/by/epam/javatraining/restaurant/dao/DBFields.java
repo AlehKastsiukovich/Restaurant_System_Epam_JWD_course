@@ -28,7 +28,6 @@ public enum DBFields {
     DB_ITEM_ORDER_ITEM_ID("item_id"),
     DB_ITEM_ORDER_QUANTITY("quantity");
 
-
     private String value;
 
     DBFields(String value) {

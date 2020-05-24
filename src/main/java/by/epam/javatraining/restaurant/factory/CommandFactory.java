@@ -60,7 +60,7 @@ public class CommandFactory {
         } else {
             command = new RedirectToStartPageCommand();
         }
-        System.out.println("Command is " + command.toString());
+
         return command;
     }
 }

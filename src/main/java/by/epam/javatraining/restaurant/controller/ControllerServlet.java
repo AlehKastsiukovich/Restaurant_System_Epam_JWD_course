@@ -32,20 +32,17 @@ public class ControllerServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        LOGGER.warn("get---------------------");
         handleRequest(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        LOGGER.warn("post---------------------");
         handleRequest(request, response);
     }
 
     private void handleRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        LOGGER.warn("handle---------------------");
         Command command = CommandFactory.getInstance().spotCommand(request);
         String page = command.execute(request, response);
         request.getRequestDispatcher(page).forward(request, response);

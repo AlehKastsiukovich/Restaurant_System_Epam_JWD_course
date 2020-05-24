@@ -12,8 +12,8 @@ import java.io.IOException;
 import java.util.List;
 
 @WebFilter(urlPatterns = "/*")
-public class CashFilter implements Filter {
-    private static final Logger LOGGER = LogManager.getLogger(CashFilter.class);
+public class PositionsCashFilter implements Filter {
+    private static final Logger LOGGER = LogManager.getLogger(PositionsCashFilter.class);
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
