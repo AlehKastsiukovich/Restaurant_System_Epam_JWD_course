@@ -89,7 +89,8 @@
                     <c:if test="${user.role.roleId == 1}">
                         <li class="aside__item">
                             <button class="aside__button" type="submit" name="command"
-                                    value="VIEW_USER_ORDERS">Administration
+                                    value="VIEW_ADMIN_PROFILE"><fmt:message
+                                    key="label.administration"/>
                             </button>
                         </li>
                     </c:if>
