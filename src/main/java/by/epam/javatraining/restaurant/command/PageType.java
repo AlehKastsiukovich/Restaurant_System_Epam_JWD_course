@@ -10,14 +10,14 @@ public enum PageType {
     PROFILE_PAGE("jsp/profile.jsp"),
     ADDRESS_FORM_PAGE("/jsp/address.jsp"),
     PROFILE_USER_ORDERS("/jsp/profile_user_orders.jsp"),
-    ADMIN_START_PAGE("/jsp/admin_start_page.jsp"),
-    ADMIN_UNCONFIRMED_ORDERS_PAGE("/jsp/admin_unconfirmed_orders.jsp"),
-    ADMIN_ALL_USERS_ORDERS("/jsp/admin_all_orders.jsp"),
-    ADMIN_ALL_USERS("/jsp/admin_all_users.jsp"),
-    ADMIN_USER_SEARCH("/jsp/admin_user_search.jsp"),
-    ADMIN_ORDER_SEARCH("/jsp/admin_order_search.jsp"),
-    ADMIN_ORDER_INFO("/jsp/admin_order_info.jsp"),
-    ADMIN_USER_ORDERS("/jsp/admin_user_orders.jsp");
+    ADMIN_START_PAGE("/jsp/admin/admin_start_page.jsp"),
+    ADMIN_UNCONFIRMED_ORDERS_PAGE("/jsp/admin/admin_unconfirmed_orders.jsp"),
+    ADMIN_ALL_USERS_ORDERS("/jsp/admin/admin_all_orders.jsp"),
+    ADMIN_ALL_USERS("/jsp/admin/admin_all_users.jsp"),
+    ADMIN_USER_SEARCH("/jsp/admin/admin_user_search.jsp"),
+    ADMIN_ORDER_SEARCH("/jsp/admin/admin_order_search.jsp"),
+    ADMIN_ORDER_INFO("/jsp/admin/admin_order_info.jsp"),
+    ADMIN_USER_ORDERS("/jsp/admin/admin_user_orders.jsp");
 
     private String value;
 
