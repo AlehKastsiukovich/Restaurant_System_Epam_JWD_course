@@ -2,6 +2,7 @@ package by.epam.javatraining.restaurant.builder;
 
 import by.epam.javatraining.restaurant.entity.Role;
 import by.epam.javatraining.restaurant.entity.User;
+import by.epam.javatraining.restaurant.util.PasswordHashGenerator;
 
 public class UserBuilder {
 
@@ -29,6 +30,12 @@ public class UserBuilder {
 
     public UserBuilder buildPassword(String password) {
         this.password = password;
+        return this;
+    }
+
+    public UserBuilder buildPasswordHash(String password) {
+        PasswordHashGenerator generator = PasswordHashGenerator.getInstance();
+        this.password = generator.encryptPassword(password);
         return this;
     }
 

@@ -55,7 +55,7 @@ function validatePhoneNumber() {
 }
 
 function validatePassword() {
-    var passwordRegex = /^[A-Za-z0-9_-]{6,30}$/;
+    var passwordRegex = /^[A-Za-z0-9_-]{6,100}$/;
     var password = document.getElementById('password').value;
     var repeatPassword = document.getElementById('password_repeat').value;
 

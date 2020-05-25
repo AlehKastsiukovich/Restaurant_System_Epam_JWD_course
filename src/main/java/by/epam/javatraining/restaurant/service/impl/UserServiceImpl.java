@@ -6,6 +6,7 @@ import by.epam.javatraining.restaurant.exception.DAOException;
 import by.epam.javatraining.restaurant.exception.ServiceException;
 import by.epam.javatraining.restaurant.factory.DAOFactoryImpl;
 import by.epam.javatraining.restaurant.service.UserService;
+import by.epam.javatraining.restaurant.util.PasswordHashGenerator;
 import by.epam.javatraining.restaurant.validator.UserValidator;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -58,6 +59,8 @@ public class UserServiceImpl implements UserService {
             LOGGER.warn("Email is used");
             throw new ServiceException("Can't register user with this email. Email is used!");
         }
+
+        encryptUserPassword(user);
 
         try {
             dao.create(user);
@@ -171,5 +174,10 @@ public class UserServiceImpl implements UserService {
         }
 
         return user != null;
+    }
+
+    private void encryptUserPassword(User user) {
+        PasswordHashGenerator generator = PasswordHashGenerator.getInstance();
+        user.setPassword(generator.encryptPassword(user.getPassword()));
     }
 }

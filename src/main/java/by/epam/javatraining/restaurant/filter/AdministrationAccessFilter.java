@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebFilter(urlPatterns = {"/jsp/admin/*", "/js/*", "/css/*", "/font/*"})
+@WebFilter(urlPatterns = {"/jsp/admin/*"})
 public class AdministrationAccessFilter implements Filter {
     private static final Logger LOGGER = LogManager.getLogger(AdministrationAccessFilter.class);
 

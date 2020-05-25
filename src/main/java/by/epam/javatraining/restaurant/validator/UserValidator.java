@@ -7,7 +7,7 @@ public enum UserValidator {
     INSTANCE;
 
     private static final String LOGIN_PATTERN = "^[A-Za-z0-9_-]{3,16}$";
-    private static final String PASSWORD_PATTERN = "^[A-Za-z0-9_-]{6,18}$";
+    private static final String PASSWORD_PATTERN = "^[A-Za-z0-9_-]{6,100}$";
     private static final String EMAIL_PATTERN = "^([a-z0-9_\\.-]+)@([a-z0-9_\\.-]+)\\.([a-z\\.]{2,6})$";
     private static final String PHONE_NUMBER_PATTERN = "^\\+375(17|29|33|44)[0-9]{7}$";
     private static final String FIRST_NAME_PATTERN = "^[A-Za-zА-ЯЁа-яё]{2,}$";
