@@ -12,42 +12,14 @@
 <!DOCTYPE html>
 <html lang="${language}">
 
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/orders.css">
     <%@ taglib prefix="ctg" uri="customtags" %>
-    <title>show_user_orders</title>
-    <style type="text/css">
-        table {
-            font-family: "Lato", Verdana, sans-serif;
-            font-size: 17px;
-            background: white;
-            max-width: 100%;
-            width: 100%;
-            border-collapse: collapse;
-            text-align: left;
-            /*margin: auto;*/
-            margin-top: 10%;
-        }
-
-        th {
-            font-weight: normal;
-            color: black;
-            padding: 10px 15px;
-        }
-
-        td {
-            color: black;
-            border-top: 1px solid black;
-            padding: 10px 15px;
-        }
-
-        tr:nth-child(2n) {
-            background: lightgrey;
-        }
-    </style>
+    <title>address</title>
 </head>
 
 <body>
@@ -62,7 +34,7 @@
             <ul class="navigation">
                 <li class="navigation__item"><a href="${pageContext.request.contextPath}/jsp/contacts.jsp"
                                                 class="navigation__link"><fmt:message key="label.contacts"/></a></li>
-                <li class="navigation__item"><a href="${pageContext.request.contextPath}/jsp/order.jsp"
+                <li class="navigation__item"><a href="${pageContext.request.contextPath}/jsp/customer/order.jsp"
                                                 class="navigation__link"><fmt:message key="label.cart"/></a></li>
                 <c:if test="${user.role.roleId == 2 || user.role.roleId == 1}">
                     <li class="navigation__item">
@@ -103,52 +75,26 @@
 </header>
 
 <main class="main">
-    <div class="wrapper aside__wrapper">
-        <div class="aside-menu">
-            <form action="${pageContext.request.contextPath}/controller" method="post">
-                <ul class="aside__list">
-                    <li class="aside__item">
-                        <button class="aside__button" type="submit" name="command" value="PROFILE"><fmt:message
-                                key="label.your_info"/></button>
-                    </li>
-                    <li class="aside__item">
-                        <button class="aside__button" type="submit" name="command"
-                                value="VIEW_USER_ORDERS"><fmt:message
-                                key="label.my_orders"/>
-                        </button>
-                    </li>
-                </ul>
-            </form>
-        </div>
-        <div class="aside-container">
-            <div class="orders">
-                <table>
-                    <tr>
-                        <th><fmt:message key="label.order_id"/></th>
-                        <th><fmt:message key="label.date"/></th>
-                        <th><fmt:message key="label.total_price"/></th>
-                        <th><fmt:message key="label.status"/></th>
-                    </tr>
-                    <c:forEach items="${orderList}" var="orders" varStatus="status">
-                        <tr>
-                            <td>${orders.orderId}</td>
-                            <td>${orders.orderDate}</td>
-                            <td>${orders.totalPrice}</td>
-                            <td>
-                                <c:if test="${orders.orderStatusId == 1}">
-                                    <fmt:message key="label.order_status_unprocessed"/>
-                                </c:if>
-                                <c:if test="${orders.orderStatusId == 2}">
-                                    <fmt:message key="label.order_status_processed"/>
-                                </c:if>
-                            </td>
-                        </tr>
-                    </c:forEach>
-                </table>
+    <div class="wrapper main__wrapper">
+        <div class="modal-window">
+            <div class="modal-header">
+                <h3 class="modal-title"><fmt:message key="label.enter_your_address"/></h3>
+            </div>
+            <div class="modal-body">
+                <form action="${pageContext.request.contextPath}/controller" method="post">
+                    <input class="modal-body__input" type="text" name="street"
+                           placeholder="<fmt:message key="label.street"/>">
+                    <input class="modal-body__input" type="text" name="build"
+                           placeholder="<fmt:message key="label.build_number"/>">
+                    <input class="modal-body__input" type="text" name="number"
+                           placeholder="<fmt:message key="label.apartment_number"/>">
+                    <button class="modal-body__input button-login" type="submit" name="command" value="CONFIRM_ORDER">
+                        <fmt:message key="label.confirm_order"/>
+                    </button>
+                </form>
             </div>
         </div>
     </div>
-
 </main>
 
 <footer class="footer">
@@ -160,4 +106,5 @@
 </footer>
 
 </body>
+
 </html>

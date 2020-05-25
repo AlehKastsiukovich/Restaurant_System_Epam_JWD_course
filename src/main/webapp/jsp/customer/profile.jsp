@@ -11,15 +11,13 @@
 
 <!DOCTYPE html>
 <html lang="${language}">
-
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/orders.css">
     <%@ taglib prefix="ctg" uri="customtags" %>
-    <title>address</title>
+    <title>profile</title>
 </head>
 
 <body>
@@ -34,7 +32,7 @@
             <ul class="navigation">
                 <li class="navigation__item"><a href="${pageContext.request.contextPath}/jsp/contacts.jsp"
                                                 class="navigation__link"><fmt:message key="label.contacts"/></a></li>
-                <li class="navigation__item"><a href="${pageContext.request.contextPath}/jsp/order.jsp"
+                <li class="navigation__item"><a href="${pageContext.request.contextPath}/jsp/customer/order.jsporder.jsp"
                                                 class="navigation__link"><fmt:message key="label.cart"/></a></li>
                 <c:if test="${user.role.roleId == 2 || user.role.roleId == 1}">
                     <li class="navigation__item">
@@ -52,8 +50,7 @@
                             <form class="header__form" method="get"
                                   action="${pageContext.request.contextPath}/controller">
                                 <button style="cursor: pointer" class="navigation__link" type="submit" value="LOGOUT"
-                                        name="command"/>
-                                <fmt:message key="label.logout"/>
+                                        name="command"/><fmt:message key="label.logout"/>
                                 </button>
                             </form>
                         </c:when>
@@ -75,26 +72,54 @@
 </header>
 
 <main class="main">
-    <div class="wrapper main__wrapper">
-        <div class="modal-window">
-            <div class="modal-header">
-                <h3 class="modal-title"><fmt:message key="label.enter_your_address"/></h3>
-            </div>
-            <div class="modal-body">
-                <form action="${pageContext.request.contextPath}/controller" method="post">
-                    <input class="modal-body__input" type="text" name="street"
-                           placeholder="<fmt:message key="label.street"/>">
-                    <input class="modal-body__input" type="text" name="build"
-                           placeholder="<fmt:message key="label.build_number"/>">
-                    <input class="modal-body__input" type="text" name="number"
-                           placeholder="<fmt:message key="label.apartment_number"/>">
-                    <button class="modal-body__input button-login" type="submit" name="command" value="CONFIRM_ORDER">
-                        <fmt:message key="label.confirm_order"/>
-                    </button>
-                </form>
+    <div class="wrapper aside__wrapper">
+        <div class="aside-menu">
+            <form action="${pageContext.request.contextPath}/controller" method="post">
+                <ul class="aside__list">
+                    <li class="aside__item">
+                        <button class="aside__button" type="submit" name="command" value="PROFILE"><fmt:message
+                                key="label.your_info"/></button>
+                    </li>
+                    <li class="aside__item">
+                        <button class="aside__button" type="submit" name="command"
+                                value="VIEW_USER_ORDERS"><fmt:message
+                                key="label.my_orders"/>
+                        </button>
+                    </li>
+                    <c:if test="${user.role.roleId == 1}">
+                        <li class="aside__item">
+                            <button class="aside__button" type="submit" name="command"
+                                    value="VIEW_ADMIN_PROFILE"><fmt:message
+                                    key="label.administration"/>
+                            </button>
+                        </li>
+                    </c:if>
+                </ul>
+            </form>
+        </div>
+        <div class="aside-container">
+            <div class="orders">
+                <ul class="orders__list">
+                    <li class="order__item">
+                        <fmt:message key="label.user_profile_login"/> ${user.login}
+                    </li>
+                    <li class="order__item">
+                        <fmt:message key="label.user_profile_email"/>${user.email}
+                    </li>
+                    <li class="order__item">
+                        <fmt:message key="label.user_profile_phone_number"/> ${user.phoneNumber}
+                    </li>
+                    <li class="order__item">
+                        <fmt:message key="label.user_first_name"/> ${user.firstName}
+                    </li>
+                    <li class="order__item">
+                        <fmt:message key="label.user_last_name"/> ${user.lastName}
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
+
 </main>
 
 <footer class="footer">
@@ -106,5 +131,4 @@
 </footer>
 
 </body>
-
 </html>

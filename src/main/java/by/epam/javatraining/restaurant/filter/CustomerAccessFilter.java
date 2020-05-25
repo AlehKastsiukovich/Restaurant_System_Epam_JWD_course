@@ -11,18 +11,18 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebFilter(urlPatterns = {"/jsp/admin/*", "/js/*", "/css/*", "/font/*"})
-public class AdministrationAccessFilter implements Filter {
-    private static final Logger LOGGER = LogManager.getLogger(AdministrationAccessFilter.class);
+@WebFilter(urlPatterns = "/jsp/customer/*")
+public class CustomerAccessFilter implements Filter {
+    private static final Logger LOGGER = LogManager.getLogger(CustomerAccessFilter.class);
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
         HttpSession session = req.getSession();
-        User user = (User)session.getAttribute(JSPParameter.USER.getValue());
+        User user = (User) session.getAttribute(JSPParameter.USER.getValue());
 
-        if (user == null || user.getRole().getRoleId() != 1) {
+        if (user == null) {
             request.getRequestDispatcher("/controller").forward(req, res);
         }
 

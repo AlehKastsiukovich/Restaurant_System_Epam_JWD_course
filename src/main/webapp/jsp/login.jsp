@@ -33,7 +33,7 @@
             <ul class="navigation">
                 <li class="navigation__item"><a href="#" class="navigation__link"><fmt:message
                         key="label.contacts"/></a></li>
-                <li class="navigation__item"><a href="${pageContext.request.contextPath}/jsp/order.jsp"
+                <li class="navigation__item"><a href="${pageContext.request.contextPath}/jsp/customer/order.jsp"
                                                 class="navigation__link"><fmt:message key="label.cart"/></a></li>
                 <li class="navigation__item"><a id="login" href="${pageContext.request.contextPath}/jsp/login.jsp"
                                                 class="navigation__link"><fmt:message key="label.sign_in"/></a></li>

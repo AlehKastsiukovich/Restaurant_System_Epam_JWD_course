@@ -68,7 +68,7 @@
             <ul class="navigation">
                 <li class="navigation__item"><a href="${pageContext.request.contextPath}/jsp/contacts.jsp"
                                                 class="navigation__link"><fmt:message key="label.contacts"/></a></li>
-                <li class="navigation__item"><a href="${pageContext.request.contextPath}/jsp/order.jsp"
+                <li class="navigation__item"><a href="${pageContext.request.contextPath}/jsp/customer/order.jsp"
                                                 class="navigation__link"><fmt:message key="label.cart"/></a></li>
                 <c:if test="${user.role.roleId == 2 || user.role.roleId == 1}">
                     <li class="navigation__item">
