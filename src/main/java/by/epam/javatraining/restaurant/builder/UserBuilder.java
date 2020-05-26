@@ -2,7 +2,6 @@ package by.epam.javatraining.restaurant.builder;
 
 import by.epam.javatraining.restaurant.entity.Role;
 import by.epam.javatraining.restaurant.entity.User;
-import by.epam.javatraining.restaurant.util.PasswordHashGenerator;
 
 public class UserBuilder {
 

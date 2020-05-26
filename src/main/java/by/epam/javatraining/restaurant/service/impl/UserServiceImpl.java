@@ -6,7 +6,7 @@ import by.epam.javatraining.restaurant.exception.DAOException;
 import by.epam.javatraining.restaurant.exception.ServiceException;
 import by.epam.javatraining.restaurant.factory.DAOFactoryImpl;
 import by.epam.javatraining.restaurant.service.UserService;
-import by.epam.javatraining.restaurant.util.PasswordHashGenerator;
+import by.epam.javatraining.restaurant.util.PasswordService;
 import by.epam.javatraining.restaurant.validator.UserValidator;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -35,6 +35,10 @@ public class UserServiceImpl implements UserService {
         if (UserValidator.INSTANCE.validateLogin(login) && UserValidator.INSTANCE.validatePassword(password)) {
             user = getUserByLogin(login);
 
+            if (user != null) {
+
+            }
+
             if (user == null || !password.equals(user.getPassword())) {
                 throw new ServiceException("Wrong password or user does not exist!");
             }
@@ -60,7 +64,7 @@ public class UserServiceImpl implements UserService {
             throw new ServiceException("Can't register user with this email. Email is used!");
         }
 
-        encryptUserPassword(user);
+        hashPassword(user);
 
         try {
             dao.create(user);
@@ -176,8 +180,14 @@ public class UserServiceImpl implements UserService {
         return user != null;
     }
 
-    private void encryptUserPassword(User user) {
-        PasswordHashGenerator generator = PasswordHashGenerator.getInstance();
-        user.setPassword(generator.encryptPassword(user.getPassword()));
+    private void hashPassword(User user) throws ServiceException {
+        if (user != null) {
+            try {
+                user.setPassword(PasswordService.getInstance().encryptPassword(user.getPassword()));
+            } catch (Exception e) {
+                LOGGER.error(e);
+                throw new ServiceException(e);
+            }
+        }
     }
 }
