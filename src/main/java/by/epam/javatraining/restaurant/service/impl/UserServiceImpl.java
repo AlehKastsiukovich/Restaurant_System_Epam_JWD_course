@@ -35,9 +35,7 @@ public class UserServiceImpl implements UserService {
         if (UserValidator.INSTANCE.validateLogin(login) && UserValidator.INSTANCE.validatePassword(password)) {
             user = getUserByLogin(login);
 
-            if (user != null) {
-
-            }
+            decryptHashedPassword(user);
 
             if (user == null || !password.equals(user.getPassword())) {
                 throw new ServiceException("Wrong password or user does not exist!");
@@ -184,6 +182,17 @@ public class UserServiceImpl implements UserService {
         if (user != null) {
             try {
                 user.setPassword(PasswordService.getInstance().encryptPassword(user.getPassword()));
+            } catch (Exception e) {
+                LOGGER.error(e);
+                throw new ServiceException(e);
+            }
+        }
+    }
+
+    private void decryptHashedPassword(User user) throws ServiceException {
+        if (user != null) {
+            try {
+                user.setPassword(PasswordService.getInstance().decryptPassword(user.getPassword()));
             } catch (Exception e) {
                 LOGGER.error(e);
                 throw new ServiceException(e);

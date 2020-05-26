@@ -32,12 +32,6 @@ public class UserBuilder {
         return this;
     }
 
-    public UserBuilder buildPasswordHash(String password) {
-        PasswordHashGenerator generator = PasswordHashGenerator.getInstance();
-        this.password = generator.encryptPassword(password);
-        return this;
-    }
-
     public UserBuilder buildEmail(String email) {
         this.email = email;
         return this;
