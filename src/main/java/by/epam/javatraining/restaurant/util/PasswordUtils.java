@@ -28,7 +28,7 @@ public class PasswordUtils {
         return PasswordUtilsHolder.INSTANCE;
     }
 
-    public static String generateSecuredPassword(String password) throws UtilException {
+    public String generateSecuredPassword(String password) throws UtilException {
         String securedPassword;
         byte[] securedPasswordBytes = hash(password.toCharArray());
         securedPassword = Base64.getEncoder().encodeToString(securedPasswordBytes);
@@ -36,13 +36,13 @@ public class PasswordUtils {
         return securedPassword;
     }
 
-    public static boolean verifyUserPassword(String providedPassword, String securedPassword) throws UtilException {
+    public boolean verifyUserPassword(String providedPassword, String securedPassword) throws UtilException {
         String newSecurePassword = generateSecuredPassword(providedPassword);
 
         return newSecurePassword.equalsIgnoreCase(securedPassword);
     }
 
-    private static byte[] hash(char[] password) throws UtilException {
+    private byte[] hash(char[] password) throws UtilException {
         PBEKeySpec spec = new PBEKeySpec(password, SALT, ITERATIONS, KEY_LENGTH);
         Arrays.fill(password, Character.MIN_VALUE);
 

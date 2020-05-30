@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
             user = getUserByLogin(login);
 
             try {
-                if (user == null || !PasswordUtils.verifyUserPassword(password, user.getPassword())) {
+                if (user == null || !PasswordUtils.getInstance().verifyUserPassword(password, user.getPassword())) {
                     throw new ServiceException("Wrong password or user does not exist!");
                 }
             } catch (UtilException e) {
@@ -183,7 +183,7 @@ public class UserServiceImpl implements UserService {
 
     private void hashPassword(User user) throws ServiceException {
         try {
-            user.setPassword(PasswordUtils.generateSecuredPassword(user.getPassword()));
+            user.setPassword(PasswordUtils.getInstance().generateSecuredPassword(user.getPassword()));
         } catch (UtilException e) {
             LOGGER.error(e);
             throw new ServiceException(e);
