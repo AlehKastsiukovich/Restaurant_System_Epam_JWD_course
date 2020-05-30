@@ -48,8 +48,8 @@ public class PasswordService {
 
     public String encryptPassword(String password) throws Exception {
         cipher.init(Cipher.ENCRYPT_MODE, key);
-        AlgorithmParameters params = cipher.getParameters();
-        bytesIV = params.getParameterSpec(IvParameterSpec.class).getIV();
+//        AlgorithmParameters params = cipher.getParameters();
+//        bytesIV = params.getParameterSpec(IvParameterSpec.class).getIV();
         
         byte[] utf8EncryptedPassword = cipher.doFinal(password.getBytes());
         String base64EncryptedPassword = new sun.misc.BASE64Encoder().encodeBuffer(utf8EncryptedPassword);
@@ -58,11 +58,14 @@ public class PasswordService {
     }
 
     public String decryptPassword(String base64EncryptedPassword) throws Exception {
-        cipher.init(Cipher.DECRYPT_MODE, key, new IvParameterSpec(bytesIV));
-        AlgorithmParameters params = cipher.getParameters();
-        bytesIV = params.getParameterSpec(IvParameterSpec.class).getIV();
-        
+        System.out.println("in method util");
+//        AlgorithmParameters params = cipher.getParameters();
+//        bytesIV = params.getParameterSpec(IvParameterSpec.class).getIV();
+        cipher.init(Cipher.DECRYPT_MODE, key);
+        System.out.println("after init");
+
         byte[] decryptedPassword = new sun.misc.BASE64Decoder().decodeBuffer(base64EncryptedPassword);
+        System.out.println("after decryptpass");
         byte[] utf8DecryptedPassword = cipher.doFinal(decryptedPassword);
         
         return new String(utf8DecryptedPassword, StandardCharsets.UTF_8);
@@ -74,5 +77,12 @@ public class PasswordService {
         random.nextBytes(salt);
 
         return salt;
+    }
+
+    public static void main(String[] args) throws Exception {
+        String pass = "123";
+        PasswordService service = PasswordService.getInstance();
+        service.encryptPassword(pass);
+        service.decryptPassword(pass);
     }
 }
