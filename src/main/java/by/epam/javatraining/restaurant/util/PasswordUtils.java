@@ -1,5 +1,6 @@
 package by.epam.javatraining.restaurant.util;
 
+import by.epam.javatraining.restaurant.exception.UtilException;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import java.security.NoSuchAlgorithmException;
@@ -16,21 +17,32 @@ public class PasswordUtils {
     private static final int KEY_LENGTH = 256;
     private static final byte[] SALT = {29, 49, -57, 117, -38, -26, -43, 118, -93, -117, 116, 45, 49, -99, 61, -72};
 
-    public static String generateSecuredPassword(String password) {
-        String securePassword;
-        byte[] securePasswordBytes = hash(password.toCharArray());
-        securePassword = Base64.getEncoder().encodeToString(securePasswordBytes);
-
-        return securePassword;
+    private PasswordUtils() {
     }
 
-    public static boolean verifyUserPassword(String providedPassword, String securedPassword) {
+    public static class PasswordUtilsHolder {
+        private static final PasswordUtils INSTANCE = new PasswordUtils();
+    }
+
+    public static PasswordUtils getInstance() {
+        return PasswordUtilsHolder.INSTANCE;
+    }
+
+    public static String generateSecuredPassword(String password) throws UtilException {
+        String securedPassword;
+        byte[] securedPasswordBytes = hash(password.toCharArray());
+        securedPassword = Base64.getEncoder().encodeToString(securedPasswordBytes);
+
+        return securedPassword;
+    }
+
+    public static boolean verifyUserPassword(String providedPassword, String securedPassword) throws UtilException {
         String newSecurePassword = generateSecuredPassword(providedPassword);
 
         return newSecurePassword.equalsIgnoreCase(securedPassword);
     }
 
-    private static byte[] hash(char[] password) {
+    private static byte[] hash(char[] password) throws UtilException {
         PBEKeySpec spec = new PBEKeySpec(password, SALT, ITERATIONS, KEY_LENGTH);
         Arrays.fill(password, Character.MIN_VALUE);
 
@@ -40,17 +52,9 @@ public class PasswordUtils {
             return keyFactory.generateSecret(spec).getEncoded();
         } catch (NoSuchAlgorithmException | InvalidKeySpecException e) {
             LOGGER.error(e);
-            throw new AssertionError(e);
+            throw new UtilException(e);
         } finally {
             spec.clearPassword();
         }
-    }
-
-    public static void main(String[] args) {
-        String myPass = "kaffka123";
-
-        String encode = PasswordUtils.generateSecuredPassword(myPass);
-
-        System.out.println(verifyUserPassword(myPass, encode));
     }
 }

@@ -4,9 +4,9 @@ import by.epam.javatraining.restaurant.dao.UserDAO;
 import by.epam.javatraining.restaurant.entity.User;
 import by.epam.javatraining.restaurant.exception.DAOException;
 import by.epam.javatraining.restaurant.exception.ServiceException;
+import by.epam.javatraining.restaurant.exception.UtilException;
 import by.epam.javatraining.restaurant.factory.DAOFactoryImpl;
 import by.epam.javatraining.restaurant.service.UserService;
-import by.epam.javatraining.restaurant.util.PasswordService;
 import by.epam.javatraining.restaurant.util.PasswordUtils;
 import by.epam.javatraining.restaurant.validator.UserValidator;
 import org.apache.log4j.LogManager;
@@ -36,8 +36,12 @@ public class UserServiceImpl implements UserService {
         if (UserValidator.INSTANCE.validateLogin(login) && UserValidator.INSTANCE.validatePassword(password)) {
             user = getUserByLogin(login);
 
-            if (user == null || !PasswordUtils.verifyUserPassword(password, user.getPassword())) {
-                throw new ServiceException("Wrong password or user does not exist!");
+            try {
+                if (user == null || !PasswordUtils.verifyUserPassword(password, user.getPassword())) {
+                    throw new ServiceException("Wrong password or user does not exist!");
+                }
+            } catch (UtilException e) {
+                throw new ServiceException(e);
             }
         }
 
@@ -61,7 +65,7 @@ public class UserServiceImpl implements UserService {
             throw new ServiceException("Can't register user with this email. Email is used!");
         }
 
-        user.setPassword(PasswordUtils.generateSecuredPassword(user.getPassword()));
+       hashPassword(user);
 
         try {
             dao.create(user);
@@ -178,28 +182,11 @@ public class UserServiceImpl implements UserService {
     }
 
     private void hashPassword(User user) throws ServiceException {
-        if (user != null) {
-            try {
-                user.setPassword(PasswordService.getInstance().encryptPassword(user.getPassword()));
-                System.out.println("1: " + user.getPassword());
-            } catch (Exception e) {
-                LOGGER.error(e);
-                throw new ServiceException(e);
-            }
-        }
-    }
-
-    private void decryptHashedPassword(User user) throws ServiceException {
-        System.out.println("in decrypt " + user);
-        if (user != null) {
-            try {
-                System.out.println("2: " + user.getPassword());
-                user.setPassword(PasswordService.getInstance().decryptPassword(user.getPassword()));
-                System.out.println("3: "+ user.getPassword());
-            } catch (Exception e) {
-                LOGGER.error(e);
-                throw new ServiceException(e);
-            }
+        try {
+            user.setPassword(PasswordUtils.generateSecuredPassword(user.getPassword()));
+        } catch (UtilException e) {
+            LOGGER.error(e);
+            throw new ServiceException(e);
         }
     }
 }
