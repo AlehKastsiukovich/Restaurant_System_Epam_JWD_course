@@ -23,7 +23,6 @@ public class ProcessUserOrderByAdminCommand implements Command {
 
         try {
             Order order = service.getOrderById(orderId);
-            LOGGER.warn(order);
             order.setOrderStatusId(CONFIRMED_ORDER_STATUS_ID);
             service.updateOrder(order);
         } catch (ServiceException e) {

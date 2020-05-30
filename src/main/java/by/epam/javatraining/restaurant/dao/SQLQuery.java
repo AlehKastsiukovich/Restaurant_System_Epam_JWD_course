@@ -31,7 +31,7 @@ public enum SQLQuery {
     UPDATE_ORDER("update `order` set total_price = (?), order_status = (?)"
             + " where order_id = (?)"),
     GET_ALL_ORDERS("select * from `order` inner join delivery_address da"
-            + " on `order`.id_delivery_address = da.delivery_address_id"),
+            + " on `order`.id_delivery_address = da.delivery_address_id order by order_id desc"),
     DELETE_ORDER("delete from `order` where order_id = (?) and customer_id = (?)"),
     READ_ORDER_BY_ID("select * from `order` inner join delivery_address da"
             + " on id_delivery_address = da.delivery_address_id where order_id = (?)"),

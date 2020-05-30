@@ -26,7 +26,6 @@ public class ViewUnconfirmedOrdersCommand implements Command {
 
         try {
             orderList = service.getAllOrders();
-            LOGGER.warn("in command after get all");
             unconfirmedOrderList = getUnconfirmedOrdersList(orderList);
         } catch (ServiceException e) {
             LOGGER.error(e);
