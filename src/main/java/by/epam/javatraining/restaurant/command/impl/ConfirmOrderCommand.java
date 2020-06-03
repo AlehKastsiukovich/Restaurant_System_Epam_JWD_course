@@ -44,7 +44,7 @@ public class ConfirmOrderCommand implements Command {
                 LOGGER.error(e);
             }
 
-            return PageType.START_PAGE.getValue();
+            return PageType.SUCCESSFUL_ORDER.getValue();
         }
 
         return PageType.ADDRESS_FORM_PAGE.getValue();

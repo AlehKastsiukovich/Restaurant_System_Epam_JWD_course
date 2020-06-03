@@ -30,7 +30,7 @@ public class UserRegistrationCommand implements Command {
             return PageType.REGISTRATION_PAGE.getValue();
         }
 
-        return PageType.START_PAGE.getValue();
+        return PageType.SUCCESSFUL_REGISTRATION_MESSAGE.getValue();
     }
 
     private User createUserFromRegistrationForm(HttpServletRequest request) {
