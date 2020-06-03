@@ -20,7 +20,7 @@ public enum PageType {
     ADMIN_ORDER_SEARCH("/jsp/admin/admin_order_search.jsp"),
     ADMIN_ORDER_INFO("/jsp/admin/admin_order_info.jsp"),
     ADMIN_USER_ORDERS("/jsp/admin/admin_user_orders.jsp"),
-    SUCCESSFUL_REGISTRATION_MESSAGE("/jsp/order_successful.jsp"),
+    SUCCESSFUL_REGISTRATION_MESSAGE("/jsp/registration_successful.jsp"),
     SUCCESSFUL_ORDER("/jsp/customer/order_successful.jsp");
 
     private String value;

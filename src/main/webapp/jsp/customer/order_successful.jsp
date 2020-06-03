@@ -76,11 +76,12 @@
     <div class="success_message">
         <div class="success_message_p">
             <p>
-                YOUR ORDER COMPLETED SUCCESSFULLY!<br />
+                <fmt:message key="label.success_order"/><br />
             </p>
             <p style="padding-top: 30px">
                 <a style="color: grey; text-align: center; margin-left: 110px"
-                   href="${pageContext.request.contextPath}/jsp/start_page.jsp">Return to homepage!</a>
+                   href="${pageContext.request.contextPath}/jsp/start_page.jsp"> <fmt:message
+                        key="label.return_homepage"/></a>
             </p>
         </div>
     </div>
