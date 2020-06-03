@@ -60,7 +60,7 @@
                            placeholder="<fmt:message key="label.username"/>">
                     <input class="modal-body__input" type="password" name="password"
                            placeholder="<fmt:message key="label.password"/>">
-                    <span style="font-size: 12px; color: red;">${loginError}</span>
+                    <span style="font-size: 12px; color: red">${loginError}</span>
                     <button class="modal-body__input button-login" type="submit" name="command" value="SIGN_IN">
                         <fmt:message key="label.login"/>
                     </button>

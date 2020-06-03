@@ -19,12 +19,11 @@ public class UserSignInCommand implements Command {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
-        String page = null;
         User user = null;
         String login = request.getParameter(JSPParameter.LOGIN.getValue());
         String password = request.getParameter(JSPParameter.PASSWORD.getValue());
-
         UserService service = ServiceFactory.INSTANCE.getUserService();
+
         try {
             user = service.signIn(login, password);
         } catch (ServiceException e) {
@@ -36,12 +35,10 @@ public class UserSignInCommand implements Command {
         if (user != null) {
             session.setAttribute(JSPParameter.USER.getValue(), user);
             session.setAttribute(JSPParameter.ROLE.getValue(), user.getRole().getRoleId());
-            page = PageType.START_PAGE.getValue();
+            return PageType.START_PAGE.getValue();
         } else {
-            request.setAttribute(JSPParameter.LOGIN_ERROR.getValue(), LOGIN_ERROR_MESSAGE);
-            page = PageType.SIGN_IN_PAGE.getValue();
+            session.setAttribute(JSPParameter.LOGIN_ERROR.getValue(), LOGIN_ERROR_MESSAGE);
+            return PageType.SIGN_IN_PAGE.getValue();
         }
-
-        return page;
     }
 }

@@ -12,6 +12,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 public class UserRegistrationCommand implements Command {
     private static final Logger LOGGER = LogManager.getLogger(UserRegistrationCommand.class);
@@ -20,12 +21,13 @@ public class UserRegistrationCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         User user = createUserFromRegistrationForm(request);
-
+        HttpSession session = request.getSession();
         UserService service = ServiceFactory.INSTANCE.getUserService();
+
         try {
             service.registerUser(user);
         } catch (ServiceException e) {
-            request.setAttribute("registrationError", e.getMessage());
+            session.setAttribute(JSPParameter.REGISTRATION_ERROR.getValue(), e.getMessage());
             LOGGER.error(e);
             return PageType.REGISTRATION_PAGE.getValue();
         }
