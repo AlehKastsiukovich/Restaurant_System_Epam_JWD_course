@@ -19,7 +19,7 @@ public interface UserDAO extends ModelDAO<User> {
      *
      * Add {@link User} to data source
      *
-     * @param user {@link User} that must be added to data source
+     * @param user {@link User} to be added to data source
      * @throws DAOException if a data source access error occurs
      */
     @Override
