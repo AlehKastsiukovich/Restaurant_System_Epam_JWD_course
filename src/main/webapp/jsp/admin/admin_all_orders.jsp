@@ -23,7 +23,6 @@
             font-family: "Lato", Verdana, sans-serif;
             font-size: 13px;
             background: white;
-            /*max-width: 180%;*/
             width: 900px;
             border-collapse: collapse;
             text-align: center;
@@ -31,10 +30,6 @@
             margin-top: 10%;
             margin-bottom: 10%;
         }
-
-        /*.col {*/
-        /*    width: ;*/
-        /*}*/
 
         th {
             font-weight: normal;
@@ -111,7 +106,7 @@
 <main class="main">
     <div class="wrapper aside__wrapper">
         <div class="aside-menu">
-            <form action="${pageContext.request.contextPath}/controller" method="post">
+            <form action="${pageContext.request.contextPath}/controller" method="get">
                 <ul class="aside__list">
                     <li class="aside__item">
                         <button class="aside__button" type="submit" name="command" value="VIEW_ADMIN_PROFILE">

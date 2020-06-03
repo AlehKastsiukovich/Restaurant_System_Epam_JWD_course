@@ -11,13 +11,14 @@
 
 <!DOCTYPE html>
 <html lang="${language}">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/orders.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/styles.css">
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/orders.css">
     <%@ taglib prefix="ctg" uri="customtags" %>
-    <title>profile</title>
+    <title>success</title>
 </head>
 
 <body>
@@ -25,14 +26,14 @@
     <div class="wrapper header__wrapper">
         <div class="header__logo-line">
             <a href="${pageContext.request.contextPath}/jsp/start_page.jsp" class="logo">
-                <h1 class="logo__text"><fmt:message key="label.restaurant"/></h1>
+                <h1 class="logo__text" id="restaurant"><fmt:message key="label.restaurant"/></h1>
             </a>
         </div>
         <div class="header__navigation">
             <ul class="navigation">
                 <li class="navigation__item"><a href="${pageContext.request.contextPath}/jsp/contacts.jsp"
                                                 class="navigation__link"><fmt:message key="label.contacts"/></a></li>
-                <li class="navigation__item"><a href="${pageContext.request.contextPath}/jsp/customer/order.jsporder.jsp"
+                <li class="navigation__item"><a href="${pageContext.request.contextPath}/jsp/customer/order.jsp"
                                                 class="navigation__link"><fmt:message key="label.cart"/></a></li>
                 <c:if test="${user.role.roleId == 2 || user.role.roleId == 1}">
                     <li class="navigation__item">
@@ -72,54 +73,17 @@
 </header>
 
 <main class="main">
-    <div class="wrapper aside__wrapper">
-        <div class="aside-menu">
-            <form action="${pageContext.request.contextPath}/controller" method="get">
-                <ul class="aside__list">
-                    <li class="aside__item">
-                        <button class="aside__button" type="submit" name="command" value="PROFILE"><fmt:message
-                                key="label.your_info"/></button>
-                    </li>
-                    <li class="aside__item">
-                        <button class="aside__button" type="submit" name="command"
-                                value="VIEW_USER_ORDERS"><fmt:message
-                                key="label.my_orders"/>
-                        </button>
-                    </li>
-                    <c:if test="${user.role.roleId == 1}">
-                        <li class="aside__item">
-                            <button class="aside__button" type="submit" name="command"
-                                    value="VIEW_ADMIN_PROFILE"><fmt:message
-                                    key="label.administration"/>
-                            </button>
-                        </li>
-                    </c:if>
-                </ul>
-            </form>
-        </div>
-        <div class="aside-container">
-            <div class="orders">
-                <ul class="orders__list">
-                    <li class="order__item">
-                        <fmt:message key="label.user_profile_login"/> ${user.login}
-                    </li>
-                    <li class="order__item">
-                        <fmt:message key="label.user_profile_email"/>${user.email}
-                    </li>
-                    <li class="order__item">
-                        <fmt:message key="label.user_profile_phone_number"/> ${user.phoneNumber}
-                    </li>
-                    <li class="order__item">
-                        <fmt:message key="label.user_first_name"/> ${user.firstName}
-                    </li>
-                    <li class="order__item">
-                        <fmt:message key="label.user_last_name"/> ${user.lastName}
-                    </li>
-                </ul>
-            </div>
+    <div class="success_message">
+        <div class="success_message_p">
+            <p>
+                REGISTRATION COMPLETED SUCCESSFULLY!<br />
+            </p>
+            <p style="padding-top: 30px">
+                <a style="color: grey; text-align: center; margin-left: 110px"
+                   href="${pageContext.request.contextPath}/jsp/start_page.jsp">Return to homepage!</a>
+            </p>
         </div>
     </div>
-
 </main>
 
 <footer class="footer">
@@ -130,5 +94,9 @@
     </div>
 </footer>
 
+<script>
+    <%@include file="/js/index.js" %>
+</script>
 </body>
+
 </html>

@@ -11,7 +11,7 @@ public enum SQLQuery {
             + " on user.role_id = r.id"
             + " where user.email = ?"),
     GET_ALL_USERS("select * from user inner join user_role r"
-            + " on user.role_id = r.id"),
+            + " on user.role_id = r.id order by user_id desc"),
     DELETE_USER("delete from user where user_id = (?) and login = (?) "
             + "and password = (?)"),
     DELETE_USER_BY_ID("delete from user where user_id = (?)"),

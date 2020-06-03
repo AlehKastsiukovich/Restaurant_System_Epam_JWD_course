@@ -156,6 +156,22 @@ img {
   line-height: 39px;
 }
 
+.success_message {
+  color: black;
+  height: 10em;
+  position: relative;
+}
+
+.success_message_p {
+  color: black;
+  font-size: 200%;
+  position: absolute;
+  top: 250%;
+  left: 50%;
+  margin: 0 -50% 0 0;
+  transform: translate(-50%, -50%)
+}
+
 /* ASIDE */
 
 .aside__wrapper {

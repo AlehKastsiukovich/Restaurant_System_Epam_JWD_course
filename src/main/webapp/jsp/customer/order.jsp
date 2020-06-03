@@ -94,7 +94,7 @@
                     </li>
                 </c:forEach>
             </ul>
-            <form action="${pageContext.request.contextPath}/controller" method="get">
+            <form action="${pageContext.request.contextPath}/controller" method="post">
                 <button style="position: relative;left: 50%;transform: translate(-50%, 0);" class="confirm-button"
                         type="submit" name="command" value="CREATE_ORDER"><fmt:message key="label.order"/>
                 </button>
