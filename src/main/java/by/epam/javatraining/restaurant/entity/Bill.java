@@ -1,5 +1,6 @@
 package by.epam.javatraining.restaurant.entity;
 
+import by.epam.javatraining.restaurant.builder.BillBuilder;
 import java.util.Date;
 import java.util.Objects;
 
@@ -8,9 +9,12 @@ public class Bill {
     private Order order;
     private User admin;
     private Date billDate;
-    private PaymentType paymentType;
 
-    public Bill() {
+    public Bill(BillBuilder billBuilder) {
+        billId = billBuilder.getBillId();
+        order = billBuilder.getOrder();
+        admin = billBuilder.getAdmin();
+        billDate = billBuilder.getBillDate();
     }
 
     public int getBillId() {
@@ -45,14 +49,6 @@ public class Bill {
         this.billDate = billDate;
     }
 
-    public PaymentType getPaymentType() {
-        return paymentType;
-    }
-
-    public void setPaymentType(PaymentType paymentType) {
-        this.paymentType = paymentType;
-    }
-
     @Override
     public int hashCode() {
         int hash = 7;
@@ -60,7 +56,6 @@ public class Bill {
         hash = 31 * hash + (order == null ? 0 : order.hashCode());
         hash = 31 * hash + (admin == null ? 0 : admin.hashCode());
         hash = 31 * hash + (billDate == null ? 0 : billDate.hashCode());
-        hash = 31 * hash + (paymentType == null ? 0 : paymentType.hashCode());
 
         return hash;
     }
@@ -73,8 +68,7 @@ public class Bill {
         return billId == bill.billId &&
                 Objects.equals(order, bill.order) &&
                 Objects.equals(admin, bill.admin) &&
-                Objects.equals(billDate, bill.billDate) &&
-                paymentType == bill.paymentType;
+                Objects.equals(billDate, bill.billDate);
     }
 
     @Override
@@ -84,7 +78,6 @@ public class Bill {
                 ", orderId = " + order.getOrderId() +
                 ", admin = " + admin.getUserId() +
                 ", date = " + billDate +
-                ", paymentType = " + paymentType.getValue() +
                 ']';
     }
 }
