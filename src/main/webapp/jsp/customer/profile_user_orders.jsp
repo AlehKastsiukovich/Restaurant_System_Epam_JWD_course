@@ -28,7 +28,6 @@
             width: 100%;
             border-collapse: collapse;
             text-align: left;
-            /*margin: auto;*/
             margin-top: 10%;
         }
 
