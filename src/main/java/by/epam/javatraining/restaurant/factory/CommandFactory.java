@@ -55,6 +55,7 @@ public class CommandFactory {
         Command command;
 
         String commandName = request.getParameter(JSPParameter.COMMAND.getValue());
+        System.out.println(commandName);
         if (commandName != null) {
             command = commands.get(CommandName.valueOf(request.getParameter(JSPParameter.COMMAND.getValue())));
         } else {

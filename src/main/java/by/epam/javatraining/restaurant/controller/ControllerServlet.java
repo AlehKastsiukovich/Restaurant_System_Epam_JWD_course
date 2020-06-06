@@ -42,6 +42,7 @@ public class ControllerServlet extends HttpServlet {
             throws ServletException, IOException {
         Command command = CommandFactory.getInstance().spotCommand(request);
         String page = command.execute(request, response);
-        response.sendRedirect(request.getContextPath() + page);
+//        response.sendRedirect(request.getContextPath() + page);
+        request.getRequestDispatcher(page).forward(request, response);
     }
 }

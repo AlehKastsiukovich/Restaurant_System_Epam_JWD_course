@@ -117,6 +117,14 @@
                                 key="label.my_orders"/>
                         </button>
                     </li>
+                    <c:if test="${user.role.roleId == 1}">
+                        <li class="aside__item">
+                            <button class="aside__button" type="submit" name="command"
+                                    value="VIEW_ADMIN_PROFILE"><fmt:message
+                                    key="label.administration"/>
+                            </button>
+                        </li>
+                    </c:if>
                 </ul>
             </form>
         </div>

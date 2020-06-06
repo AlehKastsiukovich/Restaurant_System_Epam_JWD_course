@@ -18,7 +18,6 @@ public class ProcessUserOrderByAdminCommand implements Command {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) {
         int orderId = Integer.parseInt(request.getParameter(JSPParameter.ID.getValue()));
-
         OrderService service = ServiceFactory.INSTANCE.getOrderService();
 
         try {

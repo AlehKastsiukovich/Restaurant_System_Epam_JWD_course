@@ -31,7 +31,7 @@ public enum SQLQuery {
     UPDATE_ORDER("update `order` set total_price = (?), order_status = (?)"
             + " where order_id = (?)"),
     GET_ALL_ORDERS("select * from `order` inner join delivery_address da"
-            + " on `order`.id_delivery_address = da.delivery_address_id order by order_id desc"),
+            + " on `order`.id_delivery_address = da.delivery_address_id"),
     DELETE_ORDER("delete from `order` where order_id = (?) and customer_id = (?)"),
     READ_ORDER_BY_ID("select * from `order` inner join delivery_address da"
             + " on id_delivery_address = da.delivery_address_id where order_id = (?)"),
@@ -55,7 +55,7 @@ public enum SQLQuery {
     GET_ALL_ITEM_ORDERS("select * from item_order"),
     READ_ITEM_ORDER_BY_ORDER_ID_AND_POSITION_ID("select * from item_order where order_id = (?) and item_id = (?)"),
     UPDATE_ITEM_ORDER("select * from item_order where order_id = (?) and item_id = (?)"),
-    GET_ALL_ORDERS_BY_USER_ID("select * from `order` where customer_id = (?)"),
+    GET_ALL_ORDERS_BY_USER_ID("select * from `order` where customer_id = (?) ORDER BY order_id desc"),
     GET_ITEM_ORDERS_BY_ORDER_ID("select * from item_order where order_id = (?)"),
     DELETE_ORDER_BY_ORDER_ID("delete `order` from `order` inner join item_order i"
             + " on `order`.order_id = i.order_id where `order`.order_id = (?)");

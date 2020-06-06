@@ -110,7 +110,7 @@
 <main class="main">
     <div class="wrapper aside__wrapper">
         <div class="aside-menu">
-            <form action="${pageContext.request.contextPath}/controller" method="post">
+            <form action="${pageContext.request.contextPath}/controller" method="get">
                 <ul class="aside__list">
                     <li class="aside__item">
                         <button class="aside__button" type="submit" name="command" value="VIEW_ADMIN_PROFILE">
