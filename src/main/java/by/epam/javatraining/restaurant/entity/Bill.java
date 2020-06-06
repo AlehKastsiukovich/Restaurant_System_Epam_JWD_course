@@ -73,11 +73,11 @@ public class Bill {
 
     @Override
     public String toString() {
-        return "Bill[" +
-                "id =" + billId +
-                ", orderId = " + order.getOrderId() +
-                ", admin = " + admin.getUserId() +
-                ", date = " + billDate +
-                ']';
+        return  "Order ID: " + order.getOrderId() + "\n" +
+                "Administrator: " + admin.getFirstName() + "\n" +
+                "Date: " + billDate + "\n" +
+                "Total sum: " + order.getTotalPrice() + "\n" +
+                "Delivery address: " + order.getDeliveryAddress().getStreet() + " "
+                + order.getDeliveryAddress().getBuildNumber() + "-" + order.getDeliveryAddress().getApartmentNumber();
     }
 }

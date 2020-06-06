@@ -66,7 +66,7 @@ public class DeliveryAddress {
 
     @Override
     public String toString() {
-        return "DeliveryAddress[" +
+        return "[" +
                 "deliveryAddressId = " + deliveryAddressId +
                 ", buildNumber = " + buildNumber +
                 ", apartmentNumber = " + apartmentNumber +
