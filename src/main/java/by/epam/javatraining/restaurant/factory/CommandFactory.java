@@ -55,13 +55,20 @@ public class CommandFactory {
         Command command;
 
         String commandName = request.getParameter(JSPParameter.COMMAND.getValue());
-        System.out.println(commandName);
         if (commandName != null) {
+            checkMethodType(commandName, request);
             command = commands.get(CommandName.valueOf(request.getParameter(JSPParameter.COMMAND.getValue())));
         } else {
             command = new RedirectToStartPageCommand();
         }
 
         return command;
+    }
+
+    private void checkMethodType(String commandName, HttpServletRequest request) {
+        if (commandName.equals(JSPParameter.CONFIRM_ORDER.getValue())
+                || commandName.equals(JSPParameter.REGISTRATION.getValue())) {
+            request.setAttribute(JSPParameter.REQUEST_TYPE.getValue(), JSPParameter.POST.getValue());
+        }
     }
 }

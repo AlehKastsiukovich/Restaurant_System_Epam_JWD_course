@@ -30,7 +30,11 @@ public enum JSPParameter {
     USER_SEARCH_MESSAGE("searchMessage"),
     USER_SEARCH_PARAMETER("userParameter"),
     ORDER_SEARCH_MESSAGE("orderSearchMessage"),
-    ORDER_SEARCH_PARAMETER("orderParameter");
+    ORDER_SEARCH_PARAMETER("orderParameter"),
+    CONFIRM_ORDER("CONFIRM_ORDER"),
+    REGISTRATION("REGISTRATION"),
+    REQUEST_TYPE("requestType"),
+    POST(" POST");
 
     private String value;
 

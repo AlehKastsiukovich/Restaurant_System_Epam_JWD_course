@@ -1,6 +1,7 @@
 package by.epam.javatraining.restaurant.controller;
 
 import by.epam.javatraining.restaurant.command.Command;
+import by.epam.javatraining.restaurant.command.JSPParameter;
 import by.epam.javatraining.restaurant.exception.PositionInitializeException;
 import by.epam.javatraining.restaurant.factory.CommandFactory;
 import by.epam.javatraining.restaurant.pool.ConnectionPool;
@@ -19,7 +20,7 @@ public class ControllerServlet extends HttpServlet {
     private static Logger LOGGER = LogManager.getLogger(ControllerServlet.class);
 
     @Override
-    public void init() throws ServletException {
+    public void init() {
         ConnectionPool.getInstance().initializeConnectionPool();
         PositionCash cash = PositionCash.getInstance();
         try {
@@ -32,17 +33,30 @@ public class ControllerServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Command command = CommandFactory.getInstance().spotCommand(request);
-        String page = command.execute(request, response);
-        request.getRequestDispatcher(page).forward(request, response);
+        handleRequest(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        handleRequest(request, response);
+    }
+
+    private void handleRequest(HttpServletRequest request, HttpServletResponse response)
+            throws IOException, ServletException {
         Command command = CommandFactory.getInstance().spotCommand(request);
         String page = command.execute(request, response);
-//        response.sendRedirect(request.getContextPath() + page);
-        request.getRequestDispatcher(page).forward(request, response);
+        String requestAttribute = (String) request.getAttribute(JSPParameter.REQUEST_TYPE.getValue());
+        chooseResponseType(requestAttribute, page, request, response);
+    }
+
+    private void chooseResponseType
+            (String requestAttribute, String page, HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        if (requestAttribute == null) {
+            request.getRequestDispatcher(page).forward(request, response);
+        } else {
+            response.sendRedirect(request.getContextPath() + page);
+        }
     }
 }
